@@ -1,13 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta http-equiv="X-UA-Compatible" content="ie=edge">
- <title>Document</title>
- <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <title>Proba</title>
 </head>
+
 <body>
- <h1>Proba</h1>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-lightn bg-light">
+    <!-- Left elements -->
+    <div class="d-flex ps-3">
+      <a class="navbar-brand " href="#">
+        <img src="./logo.png" heigh="auto" width="50%" alt="Store">
+      </a>
+    </div>
+    <!-- Left elements -->
+    <div class="container-fluid justify-content-between">
+      <!-- Center elements -->
+      <div class="navbar-nav flex-row d-none d-md-flex ps-4">
+        <form class="input-group  w-auto my-auto d-none d-sm-flex">
+          <input autocomplete="off" type="search" class="form-control rounded input-lg" placeholder="Search"
+            style="min-width: 125px;" size="80" />
+          <button type="button" class="btn btn-secondary">Search</button>
+        </form>
+      </div>
+      <!-- Center elements -->
+
+      <!-- Right elements -->
+      <ul class="navbar-nav flex-row">
+        <li class="nav-item ">
+          <a href="#" class="btn btn-outline-primary">
+            <span class="fa fa-shopping-basket"></span> Shopping Cart
+          </a>
+        </li>
+        <li class="nav-item ps-2">
+          <a href="#" class="btn btn-outline-primary">
+            <span class="fa fa-user"></span> My Account
+          </a>
+        </li>
+      </ul>
+      <!-- Right elements -->
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Carusel Advert -->
+  <div id="carouselExampleIndicators" class="carousel slide advert" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner advert-img">
+      <div class="carousel-item active">
+        <img src="./reklama3.webp" class="d-block w-100" alt="advert">
+      </div>
+      <div class="carousel-item">
+        <img src="./reklama1.jpg" class="d-block w-100" alt="advert">
+      </div>
+      <div class="carousel-item">
+        <img src="./reklama2.jpg" class="d-block w-100" alt="advert">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+  <!-- Carusel Advert -->
+
+
+
+
+  <main>
+    <div class="card--list">
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+      <div class="card card--style">
+        <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Lenovo IdeaPad 3-15 </h5>
+          <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+            <li>
+              CPU: Intel Core i5
+            </li>
+            <li>
+              Memory: 8gb
+            </li>
+            <li>
+              Graphics: Zintegrowane
+            </li>
+            <li>
+          </ul>
+          <div class="d-flex justify-content-between align-items-center px-3">
+            <div>
+              1200$
+            </div>
+            <button type="button" class="btn btn-outline-success w-50"> Buy </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-light text-center">
+    <div class="container p-4">
+      <div class="row">
+        <div class="col">
+          <h5 class="text-uppercase">About us</h5>
+          <p>
+            Our store is a leading seller of laptops in the world market.
+            We have been in business for 20 years.
+            We offer high quality products at very good prices.
+          </p>
+        </div>
+        <div class="col">
+          <h5 class="text-uppercase">Contact</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              store@store.pl
+            </li>
+            <li>
+              +48 123456789
+            </li>
+            <li>
+              Wrocław
+            </li>
+            <li>
+              ul. Niejstniejąca 12
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright: keszinaj and bartacc
+    </div>
+  </footer>
+
+
+
 </body>
+
 </html>
