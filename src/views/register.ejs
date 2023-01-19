@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Proba</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-lightn bg-light">
+        <!-- Left elements -->
+        <div class="ps-3">
+            <a class="navbar-brand " href="#">
+                <img src="./logo.png" heigh="auto" width="50%" alt="Store">
+            </a>
+        </div>
+       
+    </nav>
+    <!-- Navbar -->
+
+
+
+    <main class="py-4">
+        <section class="gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                  <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                      <form>
+          
+                        <div class="row">
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <input type="text" id="firstName" class="form-control form-control-lg" />
+                              <label class="form-label" for="firstName">First Name</label>
+                            </div>
+          
+                          </div>
+                          <div class="col-md-6 mb-4">
+          
+                            <div class="form-outline">
+                              <input type="text" id="lastName" class="form-control form-control-lg" />
+                              <label class="form-label" for="lastName">Last Name</label>
+                            </div>
+          
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                <input type="email" id="emailAddress" class="form-control form-control-lg" />
+                                <label class="form-label" for="emailAddress">Email</label>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
+                                <label class="form-label" for="phoneNumber">Phone Number</label>
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                <input type="password" id="password" class="form-control form-control-lg" />
+                                <label class="form-label" for="password">Password</label>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4 pb-2">
+            
+                              <div class="form-outline">
+                                <input type="password" id="password_repeat" class="form-control form-control-lg" />
+                                <label class="form-label" for="password_repeat">Repeat Password</label>
+                              </div>
+            
+                            </div>
+                          </div>
+          
+                        <div class="row">
+                          <div class="col-md-6 mb-4 d-flex align-items-center">
+          
+                            <div class="form-outline datepicker w-100">
+                              <input type="date" class="form-control form-control-lg" id="birthdayDate" />
+                              <label for="birthdayDate" class="form-label">Birthday</label>
+                            </div>
+          
+                          </div>
+                          <div class="col-md-6 mb-4">
+          
+                            <h6 class="mb-2 pb-1">Gender: </h6>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                                value="option1" checked />
+                              <label class="form-check-label" for="femaleGender">Female</label>
+                            </div>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                                value="option2" />
+                              <label class="form-check-label" for="maleGender">Male</label>
+                            </div>
+          
+                            <div class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                                value="option3" />
+                              <label class="form-check-label" for="otherGender">Other</label>
+                            </div>
+          
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                <input type="text" id="street_and_num" class="form-control form-control-lg" />
+                                <label class="form-label" for="street_and_num">Street and number</label>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                <input type="text" id="city" class="form-control form-control-lg" />
+                                <label class="form-label" for="city">City</label>
+                              </div>
+            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                <input type="text" id="zipcode" class="form-control form-control-lg" />
+                                <label class="form-label" for="zipcode">Zip-Code</label>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6 mb-4">
+            
+                              <div class="form-outline">
+                                <input type="text" id="country" class="form-control form-control-lg" />
+                                <label class="form-label" for="country">Country</label>
+                              </div>
+            
+                            </div>
+                          </div>
+                        
+          
+                       
+          
+                        
+          
+                        <div class="mt-4 pt-2">
+                          <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                        </div>
+          
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        
+     
+
+    </main>
+    <footer class="bg-light text-center">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col">
+                    <h5 class="text-uppercase">About us</h5>
+                    <p>
+                        Our store is a leading seller of laptops in the world market.
+                        We have been in business for 20 years.
+                        We offer high quality products at very good prices.
+                    </p>
+                </div>
+                <div class="col">
+                    <h5 class="text-uppercase">Contact</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            store@store.pl
+                        </li>
+                        <li>
+                            +48 123456789
+                        </li>
+                        <li>
+                            Wrocław
+                        </li>
+                        <li>
+                            ul. Niejstniejąca 12
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Copyright: keszinaj and bartacc
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>
