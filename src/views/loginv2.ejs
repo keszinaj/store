@@ -15,7 +15,7 @@
     <title>Proba</title>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-lightn bg-light">
         <!-- Left elements -->
@@ -24,39 +24,47 @@
                 <img src="./logo.png" heigh="auto" width="50%" alt="Store">
             </a>
         </div>
-       
+
     </nav>
     <!-- Navbar -->
 
 
 
     <main>
-        <div class="login__main__page">
-            <h1 style="text-align: center; padding-top:1.5rem; padding-bottom:4rem;">Sign in</h1>
-            <form class="login__main__input">
-                <div class="login__main__line">
-                    <label for="login" class="login__main__login_label fs-3">Login:</label>
-                    <input id="login" name="login" class="form-control-lg " required minlength="2" />
-                </div>
-                <div class="login__main__line">
-                    <label for="password" class="fs-3">Password:</label>
-                    <input id="password" name="surname" class="form-control-lg "/>
-                </div>
-                <div class="login__main__input login__main__line">
-                    <button type="submit"  class="btn-lg btn  btn-outline-primary" style="width:40%">Login</button>
+        <form class="py-5 ">
+            <div class="container py-5 h-100" style="width: 30%;">
+                <div class="row justify-content-center align-items-center p-5 card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                        <input type="email" id="form2Example1" class="form-control" />
+                        <label class="form-label" for="form2Example1">Email address</label>
+                    </div>
 
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                        <input type="password" id="form2Example2" class="form-control" />
+                        <label class="form-label" for="form2Example2">Password</label>
+                    </div>
+
+                   
+
+                    <!-- Submit button -->
+                    <button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>Not a member? <a href="#!">Register</a></p>
+
+                    </div>
                 </div>
-            </form>
-            <div style="text-align: center;"">
-                Don’t have an account? Register <a href="#">here</a>
             </div>
+        </form>
 
-        </div>
-        
-     
+
+
 
     </main>
-    <footer class="bg-light text-center">
+    <footer class="footer mt-auto pt-3 bg-light text-center">
         <div class="container p-4">
             <div class="row">
                 <div class="col">
