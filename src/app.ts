@@ -6,7 +6,7 @@ app.set('views', './src/views');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req: Request, res) => {
-    res.render('index');
+    res.render('landing_page');
 });
 
 app.get('/item', (req: Request, res) => {
