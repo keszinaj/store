@@ -1,0 +1,28 @@
+ <!-- Left navbar -->
+ <% let active_tab = ['','','',''];
+  if(active === 3){active_tab[active]="active_denger"}
+  else {active_tab[active]= "active" } %>
+ <div class="col-md-4">
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="card-header" style="background-color: white;">
+                <h5 class="mb-2">Options</h5>
+            </div>
+            <ul class="nav nav-pills nav-fill flex-column mt-3">
+                <li class="nav-item my-1">
+                    <a class="nav-link <%= active_tab[0] %>" href="/account">Profile Settings</a>
+                </li>
+                <li class="nav-item my-1">
+                    <a class="nav-link <%= active_tab[1] %>" href="/account/changepassword">Change Password</a>
+                </li>
+                <li class="nav-item my-1">
+                    <a class="nav-link  <%= active_tab[2] %>" href="/account/history">My History</a>
+                </li>
+                <li class="nav-item my-1">
+                    <a class="nav-link link-danger <%= active_tab[3] %>"  href="/account/delete">Delete account</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Left navbar -->

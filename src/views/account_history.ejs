@@ -6,31 +6,8 @@
                 <h3>My Account</h3>
             </div>
             <div class="row d-flex justify-content-center my-4">
-                <!-- Left navbar -->
-                <div class="col-md-4">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="card-header" style="background-color: white;">
-                                <h5 class="mb-2">Options</h5>
-                            </div>
-                            <ul class="nav nav-pills nav-fill flex-column mt-3">
-                                <li class="nav-item my-1">
-                                    <a class="nav-link" href="/account">Profile Settings</a>
-                                </li>
-                                <li class="nav-item my-1">
-                                    <a class="nav-link" href="/account/changepassword">Change Password</a>
-                                </li>
-                                <li class="nav-item my-1">
-                                    <a class="nav-link active" href="/account/history">My History</a>
-                                </li>
-                                <li class="nav-item my-1">
-                                    <a class="nav-link link-danger" href="/account/delete">Delete account</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Left navbar -->
+               
+                <%- include('account_options',  {active: 2})  %>
 
                 <div class="col-md-8">
                     <div class="card mb-4">
