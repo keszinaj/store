@@ -1,0 +1,77 @@
+<%- include('./head_v2') %>
+<main>
+    <div class="p-5">
+      <table class="table bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Order number</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Items</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <!--One Item-->
+          <tr>
+            <td>
+
+              <p class="mb-1">21374202137420</p>
+
+            </td>
+            <td>
+              <p class="mb-1">Jan Kowalskir</p>
+            </td>
+            <td>
+              <p class="mb-1">12/12/2023</p>
+            </td>
+            <td>
+              <span class="badge rounded-pill bg-primary">1</span>
+            </td>
+            <td>
+              <span class="badge bg-warning text-dark">Pending</span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-outline-primary px-4">Go</button>
+            </td>
+          </tr>
+          <!-- One Item -->
+          <!--One Item-->
+          <tr>
+            <td>
+
+              <p class="mb-1">99998178120738</p>
+
+            </td>
+            <td>
+              <p class="mb-1">Jan Michał</p>
+            </td>
+            <td>
+              <p class="mb-1">16/12/2023</p>
+            </td>
+            <td>
+              <span class="badge rounded-pill bg-primary">3</span>
+            </td>
+            <td>
+              <span class="badge bg-success">Done</span>
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm btn-outline-primary px-4">Go</button>
+            </td>
+          </tr>
+          <!-- One Item -->
+
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-center px-2 m-2">
+      <a href="#" class="btn btn-primary disabled mx-5 px-5">Prev</a>
+      <a href="#" class="btn btn-primary disabled mx-5 px-5">Next</a>
+
+    </div>
+
+  </main>
+<%- include('./footer') %>

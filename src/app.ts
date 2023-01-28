@@ -84,6 +84,46 @@ app.get('/account/delete', (req: Request, res) => {
 
 
 
+app.get('/admin', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/landing_page');
+});
+
+app.get('/admin/users', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/list_of_users');
+});
+app.get('/admin/user/:id', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/user');
+});
+app.get('/admin/orders', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/orders');
+});
+
+app.get("/admin/orders/:id",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/oneorder');
+});
+
+app.get('/admin/products', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/store_resources');
+});
+
+app.get("/admin/product/:id",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/show_item');
+});
+
+app.get("/admin/product/:id/edit",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/show_item');
+});
 /* 
    For security reasons.
    Handle unmapped addresses

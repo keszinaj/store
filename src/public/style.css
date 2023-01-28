@@ -106,3 +106,10 @@
   background-color:red !important; 
   color:white !important;
 }
+
+
+.my-card-img-top {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  }
