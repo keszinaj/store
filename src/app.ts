@@ -113,16 +113,20 @@ app.get('/admin/products', (req: Request, res) => {
     res.render('admin/store_resources');
 });
 
-app.get("/admin/product/:id",(req, res) => {
+app.get("/admin/products/:id",(req, res) => {
     let id:string = req.params.id;
     //for example purpose
     res.render('admin/show_item');
 });
 
-app.get("/admin/product/:id/edit",(req, res) => {
+app.get("/admin/products/edit/:id",(req, res) => {
     let id:string = req.params.id;
     //for example purpose
-    res.render('admin/show_item');
+    res.render('admin/edit_item');
+});
+
+app.get("/admin/products/new",(req, res) => {
+    res.render('admin/new_item');
 });
 /* 
    For security reasons.
