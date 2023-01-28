@@ -1,0 +1,108 @@
+.mainNavbar{
+    display: flex;
+    flex-direction: row; 
+}
+.navbar-brand{
+    display:inline;
+    width: fit-content;
+  height: fit-content;
+}
+.navbar-search{
+    display:inline;
+    width: fit-content;
+  height: fit-content;
+}
+.navbar-buttons{
+    display:inline;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+
+
+.advert{
+  margin-top: 2%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+.advert-img{
+  border-radius: 30px;
+}
+.card--style{
+  width: 18rem;
+  margin: 3%
+}
+.card--list{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  flex-wrap: wrap;
+
+}
+.one_item_card{
+  display: flex;
+  flex-wrap: wrap;
+}
+.one_item_name
+{
+  margin-right: 40%;
+}
+.one_item_top{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.one_item_card_components{
+  width: 40%;
+}
+.one_item_buy_card{
+  width: 50%;
+  margin-left: 5%;
+  text-align: left;
+  
+}
+.one_item_more_info{
+  margin-right: 5%;
+  margin-left: 5%;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 2%;
+  border-top: 1px;
+  border-bottom: 0.2px;
+  padding-bottom: 5%;
+  margin-bottom: 5%;
+  border-left: 0px;
+  border-right: 0px;
+  border-color: rgb(124, 124, 124);
+  border-style:solid;
+}
+.login__main__page{
+  margin: auto;
+  width: 50%;
+  padding: 1%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  border-width: 2px;
+  border-style:solid;
+  border-color: black;
+  border-radius: 10px;
+}
+.login__main__input{
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  margin-bottom: 0rem;
+}
+.login__main__line{
+  padding-bottom: 1.5rem;
+}
+.login__main__login_label{
+  padding-left: 3rem;
+
+}
+
+.active_denger{
+  background-color:red !important; 
+  color:white !important;
+}
