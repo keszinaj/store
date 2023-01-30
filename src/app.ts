@@ -113,6 +113,10 @@ app.get('/admin/products', (req: Request, res) => {
     res.render('admin/store_resources');
 });
 
+app.get("/admin/products/new",(req, res) => {
+    res.render('admin/new_item');
+});
+
 app.get("/admin/products/:id",(req, res) => {
     let id:string = req.params.id;
     //for example purpose
@@ -125,9 +129,7 @@ app.get("/admin/products/edit/:id",(req, res) => {
     res.render('admin/edit_item');
 });
 
-app.get("/admin/products/new",(req, res) => {
-    res.render('admin/new_item');
-});
+
 /* 
    For security reasons.
    Handle unmapped addresses
