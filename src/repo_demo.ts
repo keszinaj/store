@@ -1,7 +1,6 @@
-//ts-node moje.ts
-
-console.log("ala");
-
+/**
+ * defined types
+ */
 interface Person{
     ID: number;
     Name: string;
@@ -17,6 +16,7 @@ interface Person{
     Postal_Code: string;
     OrderIDs: number[];
 }
+
 interface Product{
     ID: number;
     Name: string;
@@ -24,10 +24,11 @@ interface Product{
     Memory: string;
     Graphics: string;
     Price: number;
-    Number_available: number; //????? liczba sztuk dostępnych chyba może być przydatna
+    Number_available: number; 
     Photo_Path: string;
     Details: string;
 }
+
 interface Order{
     ID: number;
     UserID: number;
@@ -35,11 +36,13 @@ interface Order{
     OrderPlacementDate: Date;
     Status: number;
 }
+
 interface Basket{
     ID: number;
     UserID: number;
     ProductIDs: number[];
 }
+
 interface Settings{
     number_of_users: number;
     number_of_products: number;
@@ -48,6 +51,10 @@ interface Settings{
     admin_login: string;
     admin_psw: string;
 }
+
+/**
+ * Fake database
+ */
 let users: Person[]=[
     {
         ID: 1,
@@ -262,6 +269,7 @@ let baskets:Basket[]=[
         ProductIDs: [3, 4],
     }
 ]
+
 let settings:Settings ={
     number_of_users: 3,
     number_of_products: 8,
@@ -270,12 +278,24 @@ let settings:Settings ={
     admin_login: "admin",
     admin_psw: "admin",
 }
+
+/**
+ * Function shows all settings
+ */
 export function showSettings(){
     return settings;
 }
+
+/**
+ * Function shows all users
+ */
 export function getAllUsers():Person[]{
     return users;
 }
+
+/**
+ * Function shows one user by ID
+ */
 export function getUserbyId(id:number):Person|null{
     const res =  users.find(u => u.ID === id);
     if(res !== undefined)
@@ -287,12 +307,29 @@ export function getUserbyId(id:number):Person|null{
         return null;
     }
 }
+
+/**
+ * Function adds new user to db
+ */
 export function pushNewUser(u:Person){
     users.push(u)
     settings.number_of_users += 1;
 }
 
-//jak nowy basket to tu sprawdzamy i dodajemy czy jak jest nowy użytkownik to dodajemy od razu
+/**
+ * Function edits user data
+ */
+export function editUser(new_user:Person){
+    let index = users.findIndex(u => u.ID === new_user.ID)
+    if(index !== -1)
+    {
+        users[index]=new_user;
+    }
+}
+
+/**
+ * function shows the basket belonging to the user(ID)
+ */
 export function getBasketbyUserID(id:number):Basket|null{
     const res =  baskets.find(u => u.UserID === id);
     if(res !== undefined)
@@ -303,29 +340,61 @@ export function getBasketbyUserID(id:number):Basket|null{
     {
         return null;
     }
-
 }
+
+/**
+ * Function edits basket
+ */
+export function editBasket(new_basket:Basket){
+    let index = baskets.findIndex(b => b.ID === new_basket.ID)
+    if(index !== -1)
+    {
+        baskets[index]=new_basket;
+    }
+}
+
+/**
+ * Function adds new basket
+ */
 export function pushNewBasket(b:Basket)
 {
     baskets.push(b);
     settings.number_of_baskets += 1;
 }
 
+/**
+ * Function returns all orders from db
+ */
 export function getAllOrders():Order[]{
     return orders;
 }
+
+/**
+ * Function returns user data
+ */
 export function getOrdersbyUserID(id: number):Order[]{
     return orders.filter(o => o.UserID === id)
 }
+
+/**
+ * Function adds order to db
+ */
 export function pushNewOrder(o: Order){
     orders.push(o);
     settings.number_of_orders += 1
 }
 
+/**
+ * Function returns all products from db
+ */
 export function getAllProducts(): Product[]
 {
     return products;
 }
+
+/**
+ * Function returns one product(by id) from db
+ */
 export function getProductbyID(id:number):Product|null{
     const res =  products.find(u => u.ID === id);
     if(res !== undefined)
@@ -337,7 +406,22 @@ export function getProductbyID(id:number):Product|null{
         return null;
     }
 }
+
+/**
+ * Function adds one new product to db.
+ */
 export function pushNewProduct(prod: Product){
     products.push(prod);
     settings.number_of_products+=1;
+}
+
+/**
+ * Function adds one new product to db.
+ */
+export function editProduct(prod: Product){
+    let index = products.findIndex(p => p.ID === prod.ID)
+    if(index !== -1)
+    {
+        products[index]=prod;
+    }
 }
