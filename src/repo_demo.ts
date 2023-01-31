@@ -1,3 +1,7 @@
+//ts-node moje.ts
+
+console.log("ala");
+
 interface Person{
     ID: number;
     Name: string;
@@ -35,6 +39,14 @@ interface Basket{
     ID: number;
     UserID: number;
     ProductIDs: number[];
+}
+interface Settings{
+    number_of_users: number;
+    number_of_products: number;
+    number_of_orders: number;
+    number_of_baskets: number;
+    admin_login: string;
+    admin_psw: string;
 }
 let users: Person[]=[
     {
@@ -201,3 +213,131 @@ let products: Product[]=[
         Browse, work, play, learn and binge watch anywhere on a high-res 10.5” PixelSense™ touchscreen with adjustable Kickstand. Our most portable Surface PC is optimised for note-taking, sketching and touch with Windows 11, and is an outstanding 2-in-1 value that can replace both your tablet and laptop. Available with optional LTE Advanced1 for hassle-free connectivity.`
     },
 ]
+
+let orders:Order[]=[
+    {
+        ID: 1,
+        UserID: 1,
+        ProductIDs: [1, 2, 4],
+        OrderPlacementDate: new Date("2022-01-16"),
+        Status: 0,
+    },
+    {
+        ID: 2,
+        UserID: 2,
+        ProductIDs: [3, 5, 6],
+        OrderPlacementDate: new Date("2022-12-16"),
+        Status: 1,
+    },
+    {
+        ID: 3,
+        UserID: 3,
+        ProductIDs: [7,8],
+        OrderPlacementDate: new Date("2023-01-12"),
+        Status: 0,
+    },
+    {
+        ID: 4,
+        UserID: 1,
+        ProductIDs: [1, 2, 4, 8],
+        OrderPlacementDate: new Date("2023-01-16"),
+        Status: 0,
+    },
+]
+
+let baskets:Basket[]=[
+    {
+        ID: 1,
+        UserID: 1,
+        ProductIDs: [1, 2, 3, 4],
+    },
+    {
+        ID: 2,
+        UserID: 2,
+        ProductIDs: [5, 6, 7, 8],
+    },
+    {
+        ID: 3,
+        UserID: 3,
+        ProductIDs: [3, 4],
+    }
+]
+let settings:Settings ={
+    number_of_users: 3,
+    number_of_products: 8,
+    number_of_orders: 4,
+    number_of_baskets: 3,
+    admin_login: "admin",
+    admin_psw: "admin",
+}
+export function showSettings(){
+    return settings;
+}
+export function getAllUsers():Person[]{
+    return users;
+}
+export function getUserbyId(id:number):Person|null{
+    const res =  users.find(u => u.ID === id);
+    if(res !== undefined)
+    {
+        return res;
+    }
+    else
+    {
+        return null;
+    }
+}
+export function pushNewUser(u:Person){
+    users.push(u)
+    settings.number_of_users += 1;
+}
+
+//jak nowy basket to tu sprawdzamy i dodajemy czy jak jest nowy użytkownik to dodajemy od razu
+export function getBasketbyUserID(id:number):Basket|null{
+    const res =  baskets.find(u => u.UserID === id);
+    if(res !== undefined)
+    {
+        return res;
+    }
+    else
+    {
+        return null;
+    }
+
+}
+export function pushNewBasket(b:Basket)
+{
+    baskets.push(b);
+    settings.number_of_baskets += 1;
+}
+
+export function getAllOrders():Order[]{
+    return orders;
+}
+export function getOrdersbyUserID(id: number):Order[]{
+    return orders.filter(o => o.UserID === id)
+}
+export function pushNewOrder(o: Order){
+    orders.push(o);
+    settings.number_of_orders += 1
+}
+
+export function getAllProducts(): Product[]
+{
+    return products;
+}
+export function getProductbyID(id:number):Product|null{
+    const res =  products.find(u => u.ID === id);
+    if(res !== undefined)
+    {
+        return res;
+    }
+    else
+    {
+        return null;
+    }
+}
+export function pushNewProduct(prod: Product){
+    products.push(prod);
+    settings.number_of_products+=1;
+}
