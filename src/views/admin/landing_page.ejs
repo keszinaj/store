@@ -1,0 +1,34 @@
+<%- include('./head_v2') %>
+<main>
+
+    <div class="card--list my-5">
+      <div class="card w-25 text-center">
+        <img class="my-card-img-top" src="./dostawy.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Orders</h5>
+          <p class="card-text">view list of placed/opened orders</p>
+          <a href="/admin/orders" class="btn btn-outline-secondary btn-lg px-5">View</a>
+        </div>
+      </div>
+
+      <div class="card mx-5 w-25 text-center">
+        <img class="my-card-img-top" src="./klienci.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Customer accounts</h5>
+          <p class="card-text">view list of users </p>
+          <a href="/admin/users" class="btn btn-outline-secondary btn-lg px-5">View</a>
+        </div>
+      </div>
+
+      <div class="card w-25 text-center">
+        <img class="my-card-img-top" src="./towar.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Store resources</h5>
+          <p class="card-text">adding/modifying/deleting products in the store</p>
+          <a href="/admin/products" class="btn btn-outline-secondary btn-lg px-5">View</a>
+        </div>
+      </div>
+    </div>
+    
+  </main>
+<%- include('./footer') %>

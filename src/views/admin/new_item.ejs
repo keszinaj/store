@@ -1,0 +1,54 @@
+<%- include('./head_v1') %>
+<main>
+    <div class="d-flex justify-content-center my-5 bg-white py-4">
+        <h3>New item</h3>
+    </div>
+
+    <hr class="mx-5" />
+    <div class="d-flex justify-content-center my-5 bg-white py-4">
+        <form class="w-50">
+            <div class="mb-3 mt-3">
+                <label for="formFileLg" class="form-label">Large file input example</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" />
+
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="name" class="form-label">
+                    <h5>Name:</h5>
+                </label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <h5>Components</h5>
+            <div class="mb-3 mt-3">
+                <label for="cpu" class="form-label">CPU:</label>
+                <input type="text" class="form-control" id="cpu" name="cpu">
+            </div>
+            <div class="mb-3">
+                <label for="memory" class="form-label">Memory:</label>
+                <input type="text" class="form-control" id="memory" name="memory">
+            </div>
+            <div class="mb-3">
+                <label for="graphics" class="form-label">Graphics:</label>
+                <input type="text" class="form-control" id="graphics" name="graphics">
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">
+                    <h5>Price:</h5>
+                </label>
+                <input type="number" class="form-control" id="price"  name="price">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="addText" class="form-label">
+                    <h5>Additional text:</h5>
+                </label>
+                <textarea type="text" class="form-control" id="addText" name="addText" rows="6"></textarea>
+            </div>
+            <div class="d-flex justify-content-center my-5 bg-white py-4">
+                <button type="button" class="btn btn-outline-success w-25 mx-1 btn-lg mx-4"> Add </button>
+                <button type="button" class="btn btn-outline-primary w-25 mx-1 btn-lg"> Preview </button>
+            </div>
+        </form>
+    </div>
+</main>
+<%- include('./footer') %>

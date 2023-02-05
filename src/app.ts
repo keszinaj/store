@@ -8,18 +8,18 @@ app.set('views', './src/views');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', (req: Request, res) => {
-    res.render('landing_page');
+    res.render('user/landing_page');
 });
 
 app.get("/product/:id",(req, res) => {
     let id:string = req.params.id;
     //for example purpose
-    res.render('oneitem');
+    res.render('user/oneitem');
 });
 
 app.get('/basket', (req: Request, res) => {
     //for examle purpose
-    res.render('cart');
+    res.render('user/cart');
 });
 
 app.post('/basket', (req: Request, res) => {
@@ -36,52 +36,98 @@ app.post('/basket', (req: Request, res) => {
         }
         else if(checkaddress === 'savedaddress')
         {
-            res.redirect('checkout');
+            res.redirect('/checkout');
         }
     }
     else{
-        res.render('cart');
+        res.render('user/cart');
     }
 });
 
 app.get('/basket/newaddress', (req: Request, res) => {
     //for examle purpose
-    res.render('other_adress');
+    res.render('user/other_adress');
 });
 app.get('/checkout', (req: Request, res) => {
     //for examle purpose
-    res.render('bought');
+    res.render('user/bought');
 });
 app.get('/login', (req: Request, res) => {
     //for examle purpose
-    res.render('login');
+    res.render('user/login');
 });
 
 app.get('/register', (req: Request, res) => {
     //for examle purpose
-    res.render('register');
+    res.render('user/register');
 });
 
 app.get('/account', (req: Request, res) => {
     //for examle purpose
-    res.render('account_settings');
+    res.render('user/account_settings');
 });
 
 app.get('/account/changepassword', (req: Request, res) => {
     //for examle purpose
-    res.render('account_change_password');
+    res.render('user/account_change_password');
 });
 
 app.get('/account/history', (req: Request, res) => {
     //for examle purpose
-    res.render('account_history');
+    res.render('user/account_history');
 });
 
 app.get('/account/delete', (req: Request, res) => {
     //for examle purpose
-    res.render('account_delete');
+    res.render('user/account_delete');
 });
 
+
+
+app.get('/admin', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/landing_page');
+});
+
+app.get('/admin/users', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/list_of_users');
+});
+app.get('/admin/user/:id', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/user');
+});
+app.get('/admin/orders', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/orders');
+});
+
+app.get("/admin/orders/:id",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/oneorder');
+});
+
+app.get('/admin/products', (req: Request, res) => {
+    //for examle purpose
+    res.render('admin/store_resources');
+});
+
+app.get("/admin/products/new",(req, res) => {
+    res.render('admin/new_item');
+});
+
+app.get("/admin/products/:id",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/show_item');
+});
+
+app.get("/admin/products/edit/:id",(req, res) => {
+    let id:string = req.params.id;
+    //for example purpose
+    res.render('admin/edit_item');
+});
 
 
 /* 
@@ -89,7 +135,7 @@ app.get('/account/delete', (req: Request, res) => {
    Handle unmapped addresses
 */
 app.use((req,res,next) => {
-    res.render('404.ejs');
+    res.render('user/404.ejs');
 });
    
 
