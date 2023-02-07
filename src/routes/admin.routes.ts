@@ -15,7 +15,7 @@ router.get('/user/:id', (req, res) => {
     //for examle purpose
     res.render('admin/user');
 });
-router.get('/admin/orders', (req, res) => {
+router.get('/orders', (req, res) => {
     //for examle purpose
     res.render('admin/orders');
 });
