@@ -1,0 +1,59 @@
+const argon2 = require('argon2');
+import {getUserbyEmail} from '../models/repo_demo';
+
+export function getLogin(req, res)
+{
+  if(req.session.logged !== true)
+  {
+    res.render('user/login')
+  }
+  else{
+    res.render('user/landing_page')
+
+  }
+  
+  
+}
+export async function login_user(req, res){
+    //check if email is valid
+    let email = req.body.login;
+    var re = /\S+@\S+\.\S+/;
+
+    if(re.test(email))
+    {
+        let user = getUserbyEmail(email)
+        if(user !== null)
+        {
+            let psw_input = req.body.password; 
+            let h_psw = user.Password_Hash;
+            
+            if (await argon2.verify(h_psw, psw_input)) {
+                //setting logged user data
+                (req as any).session.logged = true; 
+                (req as any).session.uid = user.ID; 
+
+                res.render('user/landing_page', {top_message: `<div class="alert alert-success text-center mx-5 my-2" role="alert">
+                Correct login. Welcome!
+              </div>`});
+              } 
+            else{
+                res.render('user/login', { error_message: "Wrong password" });
+            }
+        }
+        else{
+            res.render('user/login', { error_message: "User doesn't exist" });
+        }
+    }
+    else{
+        res.render('user/login', { error_message: "Bad mail" });
+    }
+}
+
+export function logout_user(req, res)
+{
+    req.session.destroy(function(err) {
+        console.log("Wylogowano");
+        // cannot access session here
+      })
+        res.redirect('/')
+}
