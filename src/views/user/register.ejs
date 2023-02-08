@@ -1,150 +1,297 @@
 <%- include('./navbar_v2') %>
 
-<main class="py-4">
-    <section class="gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-              <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                <div class="card-body p-4 p-md-5">
-                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                  <form>
-      
-                    <div class="row">
-                      <div class="col-md-6 mb-4">
-      
-                        <div class="form-outline">
-                          <input type="text" id="firstName" class="form-control form-control-lg" />
-                          <label class="form-label" for="firstName">First Name</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4">
-      
-                        <div class="form-outline">
-                          <input type="text" id="lastName" class="form-control form-control-lg" />
-                          <label class="form-label" for="lastName">Last Name</label>
-                        </div>
-      
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-4 pb-2">
-        
-                          <div class="form-outline">
-                            <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                            <label class="form-label" for="emailAddress">Email</label>
-                          </div>
-        
-                        </div>
-                        <div class="col-md-6 mb-4 pb-2">
-        
-                          <div class="form-outline">
-                            <input type="tel" id="phoneNumber" class="form-control form-control-lg" />
-                            <label class="form-label" for="phoneNumber">Phone Number</label>
-                          </div>
-        
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6 mb-4 pb-2">
-        
-                          <div class="form-outline">
-                            <input type="password" id="password" class="form-control form-control-lg" />
-                            <label class="form-label" for="password">Password</label>
-                          </div>
-        
-                        </div>
-                        <div class="col-md-6 mb-4 pb-2">
-        
-                          <div class="form-outline">
-                            <input type="password" id="password_repeat" class="form-control form-control-lg" />
-                            <label class="form-label" for="password_repeat">Repeat Password</label>
-                          </div>
-        
-                        </div>
-                      </div>
-      
-                    <div class="row">
-                      <div class="col-md-6 mb-4 d-flex align-items-center">
-      
-                        <div class="form-outline datepicker w-100">
-                          <input type="date" class="form-control form-control-lg" id="birthdayDate" />
-                          <label for="birthdayDate" class="form-label">Birthday</label>
-                        </div>
-      
-                      </div>
-                      <div class="col-md-6 mb-4">
-      
-                        <h6 class="mb-2 pb-1">Gender: </h6>
-      
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
-                            value="option1" checked />
-                          <label class="form-check-label" for="femaleGender">Female</label>
-                        </div>
-      
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
-                            value="option2" />
-                          <label class="form-check-label" for="maleGender">Male</label>
-                        </div>
-      
-                        <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
-                            value="option3" />
-                          <label class="form-check-label" for="otherGender">Other</label>
-                        </div>
-      
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-        
-                          <div class="form-outline">
-                            <input type="text" id="street_and_num" class="form-control form-control-lg" />
-                            <label class="form-label" for="street_and_num">Street and number</label>
-                          </div>
-        
-                        </div>
-                        <div class="col-md-6 mb-4">
-        
-                          <div class="form-outline">
-                            <input type="text" id="city" class="form-control form-control-lg" />
-                            <label class="form-label" for="city">City</label>
-                          </div>
-        
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-        
-                          <div class="form-outline">
-                            <input type="text" id="zipcode" class="form-control form-control-lg" />
-                            <label class="form-label" for="zipcode">Zip-Code</label>
-                          </div>
-        
-                        </div>
-                        <div class="col-md-6 mb-4">
-        
-                          <div class="form-outline">
-                            <input type="text" id="country" class="form-control form-control-lg" />
-                            <label class="form-label" for="country">Country</label>
-                          </div>
-        
-                        </div>
-                      </div>
-
-                    <div class="mt-4 pt-2">
-                      <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                    </div>
-      
-                  </form>
+<main class="py-4" id="main">
+  <section class="gradient-custom">
+      <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                <div class="row">
+                  <p class="" id="formerror"></p>
                 </div>
+                <form id="register_form">
+    
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+    
+                      <div class="form-outline">
+                        <input type="text" id="firstName" required class="form-control form-control-lg" />
+                        <label class="form-label" for="firstName">First Name</label>
+                      </div>
+    
+                    </div>
+                    <div class="col-md-6 mb-4">
+    
+                      <div class="form-outline">
+                        <input type="text" id="lastName" required class="form-control form-control-lg" />
+                        <label class="form-label" for="lastName">Last Name</label>
+                      </div>
+    
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+      
+                        <div class="form-outline">
+                          <input type="email" id="emailAddress" required class="form-control form-control-lg" />
+                          <label class="form-label" for="emailAddress">Email</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+      
+                        <div class="form-outline">
+                          <input type="tel" id="phoneNumber"  required class="form-control form-control-lg" />
+                          <label class="form-label" for="phoneNumber">Phone Number</label>
+                        </div>
+      
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-6 mb-4 pb-2">
+      
+                        <div class="form-outline">
+                          <input type="password" id="password" required class="form-control form-control-lg" />
+                          <label class="form-label" for="password">Password</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6 mb-4 pb-2">
+      
+                        <div class="form-outline">
+                          <input type="password" id="password_repeat" required class="form-control form-control-lg" />
+                          <label class="form-label" for="password_repeat">Repeat Password</label>
+                        </div>
+      
+                      </div>
+                    </div>
+                    
+    
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+    
+                      <div class="form-outline datepicker w-100">
+                        <input type="date" class="form-control form-control-lg" required id="birthdayDate" />
+                        <label for="birthdayDate" class="form-label">Birthday</label>
+                      </div>
+    
+                    </div>
+                    <div class="col-md-6 mb-4">
+    
+                      <h6 class="mb-2 pb-1">Gender: </h6>
+    
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                          value="option1" checked />
+                        <label class="form-check-label" for="femaleGender">Female</label>
+                      </div>
+    
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                          value="option2" />
+                        <label class="form-check-label" for="maleGender">Male</label>
+                      </div>
+    
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                          value="option3" />
+                        <label class="form-check-label" for="otherGender">Other</label>
+                      </div>
+    
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6 mb-4">
+      
+                        <div class="form-outline">
+                          <input type="text" id="street_and_num"  required class="form-control form-control-lg" />
+                          <label class="form-label" for="street_and_num">Street and number</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6 mb-4">
+      
+                        <div class="form-outline">
+                          <input type="text" id="city" required class="form-control form-control-lg" />
+                          <label class="form-label" for="city">City</label>
+                        </div>
+      
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+      
+                        <div class="form-outline">
+                          <input type="text" id="zipcode"  required class="form-control form-control-lg" />
+                          <label class="form-label" for="zipcode">Zip-Code</label>
+                        </div>
+      
+                      </div>
+                      <div class="col-md-6 mb-4">
+      
+                        <div class="form-outline">
+                          <input type="text" id="country" required class="form-control form-control-lg" />
+                          <label class="form-label" for="country">Country</label>
+                        </div>
+      
+                      </div>
+                    </div>
+
+                  <div class="mt-4 pt-2">
+                    <input class="btn btn-primary btn-lg" type="submit" id="submit_btn" value="Submit" />
+                  </div>
+    
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 </main>
+<script>
+  const submit_bt = document.getElementById("submit_btn");
+const fname = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const mail = document.getElementById("emailAddress");
+const phone = document.getElementById("phoneNumber");
+const birthday = document.getElementById("birthdayDate");
+const street_and_num = document.getElementById("street_and_num");
+const city = document.getElementById("city");
+const zip = document.getElementById("zipcode");
+const country = document.getElementById("country");
+const password = document.getElementById("password");
+const password_repeat = document.getElementById("password_repeat");
+const formerror = document.getElementById("formerror");
+const main = document.getElementById("main");
+function createRequestData(){
+let data = Array.from(document.querySelectorAll('#firstName, #lastName, #emailAddress, #password, #phoneNumber, #birthdayDate, #city, #zipcode, #street_and_num, #country'))
+data = data.reduce((acc, input) => ({...acc, [input.id]: input.value}), {})
+if(document.getElementById('femaleGender').checked){ data["gender"]= 0 }
+else if(document.getElementById('maleGender').checked){ data["gender"]= 1 }
+else{data["gender"]= 2}
+return data;
+}
+
+function validate(){
+if(fname.value==='' || fname.value.length > 500){
+  fname.value='';
+  return("Real name is required");
+}
+else if(lastName.value==='' || fname.value.length > 500){
+  lastName.value='';
+  return("Real surname is required");
+}
+else if(mail.value==='' || /\S+@\S+\.\S+/.test(mail.value) === false){
+  mail.value='';
+  return("Real email is required");
+}
+else if(phone.value===''){
+  phone.value='';
+  return("Real phone number is required");
+}
+else if(birthday.value===''){
+  return("Birthday is required");
+}
+else if(street_and_num.value===''){
+  return("Street and number is required");
+}
+else if(city.value===''){
+  return("City is required");
+}
+else if(zip.value===''){
+  return("Zip Code is required");
+}
+else if(country.value===''){
+  return("Country is required");
+}
+let psw = password.value;
+let pswr = password_repeat.value;
+if(psw !== pswr){
+  return('Passwords differ')
+}else if (psw.length < 6) {
+  return('Password is too short. Min. 6 chars.')
+} else if (psw.length > 50) {
+  return('Password is too long. Max. 50 chars.')
+} else if (/\d/.test(psw) === false) {
+  return('Password must have a number.')
+} else if (/(.*[A-Z].*)/.test(psw) === false ||  /(.*[a-z].*)/.test(psw) === false) {
+  return('Password must have an uppercase and lowercase letter.')
+} else if (/(?=.*\W)/.test(psw) === false ) {
+  return('Passwords must have one special character')      
+}
+return "OK";
+}
+async function postFormDataAsJson( url, formData) {
+
+console.log(formData)
+const formDataJsonString = JSON.stringify(formData);
+
+const fetchOptions = {
+
+method: "POST",
+headers: {
+"Content-Type": "application/json",   
+'Accept': 'application/json'  
+},
+
+body: formDataJsonString,
+};
+
+console.log("aklsfjg");
+const response = await fetch(url, fetchOptions);
+console.log("aklsfjg")
+let jsresponse = await response.json()
+console.log(jsresponse.errors);
+console.log("aklsfjg");
+if (!response.ok) {
+const errorMessage = await response.text();
+throw new Error(errorMessage);
+} 
+if(jsresponse.errors.length === 0)
+  {
+    main.innerHTML=`
+  <div class="container d-flex align-items-center justify-content-center my-5 py-5">
+      <div class="rounded border border-success text-center p-5 m-5">
+          <h2>Successful registrations.</h2><br> Click "Login" to log in or "Store" to return to the store.
+          <br>
+          <button type="button" class="btn btn-outline-primary m-3">Store</button>
+          <button type="button" class="btn btn-outline-success m-3">Login</button>
+      </div>
+  </div>
+  `
+  }
+  else{
+    let msg = '';
+    jsresponse.errors.forEach(er => msg = msg + er.msg + " <br> " );
+    console.log("msg")
+    console.log(msg)
+    formerror.innerHTML = msg
+    formerror.classList.add("alert-danger", "alert", "text-center");
+  }
+
+}
+
+submit_bt.addEventListener("click", function(e) {
+e.preventDefault();
+let validate_error = validate();
+window.scrollTo({ top: 0, behavior: 'smooth' })
+if(validate_error !== "OK")
+{
+  formerror.innerHTML= validate_error
+  formerror.classList.add("alert-danger", "alert", "text-center");
+}
+else{
+  formerror.innerHTML= `Sending data`
+  data = createRequestData()
+  postFormDataAsJson('/register', data);
+ 
+
+} 
+});
+
+  </script>
 <%- include('./footer') %>
