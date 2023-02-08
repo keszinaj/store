@@ -61,7 +61,7 @@ let users: Person[]=[
         Name: "Jan",
         Surname: "Kowalski",
         Email: "jankowal@gmail.com",
-        Password_Hash: "f2e855df3714a08a8988754a20ef660e9c8f2652f405df4992c9a194e3fb2b6c", //olamakotea
+        Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "123456789",
         Birthday:  new Date("1999-01-16"),
         Gender: 1,
@@ -76,7 +76,7 @@ let users: Person[]=[
         Name: "Pawel",
         Surname: "Michalski",
         Email: "pawmichal@gmail.com",
-        Password_Hash: "abe31fe1a2113e7e8bf174164515802806d388cf4f394cceace7341a182271ab", //haslo
+        Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "123456789",
         Birthday:  new Date("1990-01-21"),
         Gender: 1,
@@ -91,7 +91,7 @@ let users: Person[]=[
         Name: "Maja",
         Surname: "Grzywach",
         Email: "majkagrzywa@gmail.com",
-        Password_Hash: "a15f8ae07675bfb96e084bfb4f52fb2c22091061aae86e0eb76a55f4e52dd74e",//haslo123
+        Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "987654321",
         Birthday:  new Date("1999-01-16"),
         Gender: 0,
@@ -307,6 +307,21 @@ export function getUserbyId(id:number):Person|null{
         return null;
     }
 }
+/**
+ * Function finds user by email
+ */
+export function getUserbyEmail(mail:string):Person|null{
+    const res =  users.find(u => u.Email === mail);
+    if(res !== undefined)
+    {
+        return res;
+    }
+    else
+    {
+        return null;
+    }
+}
+
 
 /**
  * Function adds new user to db

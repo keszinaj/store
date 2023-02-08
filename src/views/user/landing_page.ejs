@@ -1,4 +1,12 @@
-<%- include('./navbar_v1') %>
+<% if ( locals.logged ) { %>
+  <%- include('./navbar_v1') %>
+<% } else{ %>
+  <%- include('./navbar_v3') %>
+<% }%>
+
+<% if ( locals.top_message ) { %>
+  <%- locals.top_message %>
+<% } %>
   <!-- Carusel Advert -->
   <div id="carouselExampleIndicators" class="carousel slide advert" data-bs-ride="carousel">
     <div class="carousel-indicators">
