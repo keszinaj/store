@@ -54,10 +54,8 @@ router.get('/checkout',  authorize, (req, res) => {
 router.get('/login', getLogin);
 router.post('/login', login_user);
 
-router.get('/register', (req, res) => {
-    res.render('user/register');
-});
-router.post('/register',json, userValidationRules(),  register);
+router.get('/register', (req, res) => {res.render('user/register');});
+router.post('/register', json, userValidationRules(),  register);
 
 router.get('/account', authorize, (req, res) => {
     //for examle purpose

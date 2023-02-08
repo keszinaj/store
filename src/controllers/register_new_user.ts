@@ -1,6 +1,8 @@
 const {validationResult } = require('express-validator');
 const argon2 = require('argon2');
 import {pushNewUser} from '../models/repo_demo' 
+
+//creating new user and addding to DB
 async function register_user(data)
 {
     console.log(data);
@@ -28,7 +30,7 @@ async function register_user(data)
 
 }
 function register(req, res){
-    console.log("ala")
+    //validation
     const errors = validationResult(req);
     if (errors.isEmpty()) {
         register_user(req.body);
