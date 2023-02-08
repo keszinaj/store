@@ -13,7 +13,7 @@ export async function login_user(req, res){
         res.redirect('/admin')
     }
     else{
-        res.render('admin/admin_login', { error_message: "Wrong password" });
+        res.render('admin/admin_login', { error_message: "Wrong password or login" });
     }
     
 }
