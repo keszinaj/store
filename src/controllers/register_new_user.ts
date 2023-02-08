@@ -5,7 +5,6 @@ import {pushNewUser} from '../models/repo_demo'
 //creating new user and addding to DB
 async function register_user(data)
 {
-    console.log(data);
     const psw = await argon2.hash(data.password);
     let id = Math.floor(Math.random() * 1000000) //to TRZEBA pewnie zmeinic na cos lepszego
     let bd = new Date(data.birthdayDate)
@@ -23,7 +22,8 @@ async function register_user(data)
         City: data.city,
         Street: data.street_and_num,
         Postal_Code: data.zipcode,
-        OrderIDs: []
+        OrderIDs: [],
+        basket: []
     }
     pushNewUser(new_user);
 
