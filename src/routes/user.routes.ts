@@ -1,7 +1,10 @@
 import express from 'express';
 import authorize from '../middlewares/authorize';
+import register from '../controllers/register_new_user'
+import {userValidationRules} from '../middlewares/user_data_validation_rules'
 const router = express.Router();
 import {login_user, getLogin} from '../controllers/handle_login';
+var json = express.json()
 router.get('/', (req, res) => {
     res.render('user/landing_page');
 });
@@ -51,11 +54,10 @@ router.get('/checkout',  authorize, (req, res) => {
 router.get('/login', getLogin);
 router.post('/login', login_user);
 
-
 router.get('/register', (req, res) => {
-    //for examle purpose
     res.render('user/register');
 });
+router.post('/register',json, userValidationRules(),  register);
 
 router.get('/account', authorize, (req, res) => {
     //for examle purpose

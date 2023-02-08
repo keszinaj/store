@@ -1,6 +1,8 @@
-const { check, body, validationResult } = require('express-validator');
+const { check, body } = require('express-validator');
+import { mailexist} from '../models/repo_demo'
 
-const userValidationRules = () => {
+
+export const userValidationRules = () => {
     return [
     
      body('password')
@@ -23,14 +25,14 @@ const userValidationRules = () => {
     .isEmail()
     .withMessage("Provide valid email")
     .trim()
-    .escape(),
-    //sprawdz czy email juz istnieje w bazie danych
-   // .custom(value => {
-   //     return User.findUserByEmail(value).then(user => {
-   //       if (user) {
-    //        return Promise.reject('E-mail already in use');
-    //      }
-   //     })
+    .escape()
+    .custom(value => {
+        return mailexist(value).then(user => {
+          if (user) {
+           return Promise.reject('E-mail already in use');
+          }
+       })
+    }),
         
     body("firstName")
     .notEmpty()

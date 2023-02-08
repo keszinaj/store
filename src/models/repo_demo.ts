@@ -322,6 +322,24 @@ export function getUserbyEmail(mail:string):Person|null{
     }
 }
 
+export const mailexist = function (mail) {
+    return new Promise(function (resolve, reject) {
+  
+        const res =  users.find(u => u.Email === mail);
+        let odp;
+        if(res !== undefined)
+        {
+            odp = true
+        }
+        else
+        {
+            odp = false
+        }   
+        resolve(odp);
+      
+    });
+  };
+
 
 /**
  * Function adds new user to db
