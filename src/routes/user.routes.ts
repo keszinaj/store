@@ -1,16 +1,12 @@
 import express from 'express';
 import authorize from '../middlewares/authorize';
 const router = express.Router();
-import {login_user, getLogin} from '../controllers/handle_login';
-router.get('/', (req, res) => {
-    res.render('user/landing_page');
-});
+import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
+import {getLandingPage} from '../controllers/landing_page'
+import {getProductDetails} from '../controllers/product_details'
+router.get('/', getLandingPage);
 
-router.get("/product/:id",(req, res) => {
-    let id:string = req.params.id;
-    //for example purpose
-    res.render('user/oneitem');
-});
+router.get("/product/:id", getProductDetails);
 
 router.get('/basket', authorize,  (req, res) => {
     //for examle purpose
@@ -49,8 +45,8 @@ router.get('/checkout',  authorize, (req, res) => {
 });
 
 router.get('/login', getLogin);
-router.post('/login', login_user);
-
+router.post('/login', loginUser);
+router.get('/logout', logoutUser);
 
 router.get('/register', (req, res) => {
     //for examle purpose
