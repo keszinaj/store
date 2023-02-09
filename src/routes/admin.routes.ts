@@ -8,7 +8,7 @@ router.get('/login', (req, res) => {
     res.render('admin/admin_login');
 });
 router.post('/login', login_user);
-router.get('/',authorize, authorize, (req, res) => {
+router.get('/',authorize, (req, res) => {
     //for examle purpose
     res.render('admin/landing_page');
 });
