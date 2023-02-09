@@ -3,18 +3,18 @@ import {getUserbyEmail} from '../models/repo_demo';
 
 export function getLogin(req, res)
 {
-  if(req.session.logged !== true)
+  if(req.session.logged === true)
   {
-    res.render('user/login')
+    res.render('user/landing_page', {logged: true})
   }
   else{
-    res.render('user/landing_page')
+    res.render('user/login')
 
   }
   
   
 }
-export async function login_user(req, res){
+export async function loginUser(req, res){
     //check if email is valid
     let email = req.body.login;
     var re = /\S+@\S+\.\S+/;
@@ -34,7 +34,7 @@ export async function login_user(req, res){
 
                 res.render('user/landing_page', {top_message: `<div class="alert alert-success text-center mx-5 my-2" role="alert">
                 Correct login. Welcome!
-              </div>`});
+              </div>`, logged: true});
               } 
             else{
                 res.render('user/login', { error_message: "Wrong password" });
@@ -49,11 +49,8 @@ export async function login_user(req, res){
     }
 }
 
-export function logout_user(req, res)
+export function logoutUser(req, res)
 {
-    req.session.destroy(function(err) {
-        console.log("Wylogowano");
-        // cannot access session here
-      })
-        res.redirect('/')
+    req.session.destroy()
+    res.redirect('/')
 }

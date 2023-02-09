@@ -3,17 +3,17 @@ import authorize from '../middlewares/authorize';
 import register from '../controllers/register_new_user'
 import {userValidationRules} from '../middlewares/user_data_validation_rules'
 const router = express.Router();
-import {login_user, getLogin} from '../controllers/handle_login';
-var json = express.json()
-router.get('/', (req, res) => {
-    res.render('user/landing_page');
-});
 
-router.get("/product/:id",(req, res) => {
-    let id:string = req.params.id;
-    //for example purpose
-    res.render('user/oneitem');
-});
+import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
+import {getLandingPage} from '../controllers/landing_page'
+import {getProductDetails} from '../controllers/product_details'
+
+var json = express.json()
+
+router.get('/', getLandingPage);
+
+
+router.get("/product/:id", getProductDetails);
 
 router.get('/basket', authorize,  (req, res) => {
     //for examle purpose
@@ -52,10 +52,13 @@ router.get('/checkout',  authorize, (req, res) => {
 });
 
 router.get('/login', getLogin);
-router.post('/login', login_user);
+router.post('/login', loginUser);
 
-router.get('/register', (req, res) => {res.render('user/register');});
+router.get('/logout', logoutUser);
+
+outer.get('/register', (req, res) => {res.render('user/register');});
 router.post('/register', json, userValidationRules(),  register);
+
 
 router.get('/account', authorize, (req, res) => {
     //for examle purpose
