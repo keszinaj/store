@@ -1,5 +1,5 @@
 <%- include('./head_v1') %>
-<main>
+  <main>
     <div class="p-5">
       <table class="table bg-white">
         <thead class="bg-light">
@@ -15,55 +15,33 @@
         <tbody>
 
 
-          <!--One Item-->
-          <tr>
-            <td>
+          <% orders.forEach(order=> { %>
+            <tr>
+              <%- include('./partial/table_row', {content: order.ID}) %>
+                <%- include('./partial/table_row', {content: order.username}) %>
+                  <%- include('./partial/table_row', {content: order.OrderPlacementDate.toUTCString()}) %>
 
-              <p class="mb-1">21374202137420</p>
-
-            </td>
-            <td>
-              <p class="mb-1">Jan Kowalskir</p>
-            </td>
-            <td>
-              <p class="mb-1">12/12/2023</p>
-            </td>
-            <td>
-              <span class="badge rounded-pill bg-primary">1</span>
-            </td>
-            <td>
-              <span class="badge bg-warning text-dark">Pending</span>
-            </td>
-            <td>
-              <a href="/admin/orders/1" class="btn btn-sm btn-outline-primary px-4">Go</a>
-            </td>
-          </tr>
-          <!-- One Item -->
-          <!--One Item-->
-          <tr>
-            <td>
-
-              <p class="mb-1">99998178120738</p>
-
-            </td>
-            <td>
-              <p class="mb-1">Jan Michał</p>
-            </td>
-            <td>
-              <p class="mb-1">16/12/2023</p>
-            </td>
-            <td>
-              <span class="badge rounded-pill bg-primary">3</span>
-            </td>
-            <td>
-              <span class="badge bg-success">Done</span>
-            </td>
-            <td>
-              <a href="/admin/orders/1" class="btn btn-sm btn-outline-primary px-4">Go</a>
-            </td>
-          </tr>
-          <!-- One Item -->
-
+                    <td>
+                      <span class="badge rounded-pill bg-primary">
+                        <%= order.ProductIDs.length %>
+                      </span>
+                    </td>
+                    <% let status=order.Status %>
+                      <% if (status==0 ) { %>
+                        <td>
+                          <span class="badge bg-warning text-dark">Pending</span>
+                        </td>
+                        <% } else { %>
+                          <td>
+                            <span class="badge bg-success">Done</span>
+                          </td>
+                          <% } %>
+                            <td>
+                              <% let ref='/admin/orders/' + order.OrderNumber %>
+                                <a href="<%=ref %>" class="btn btn-sm btn-outline-primary px-4">Go</a>
+                            </td>
+            </tr>
+            <% }) %>
         </tbody>
       </table>
     </div>
@@ -74,4 +52,4 @@
     </div>
 
   </main>
-<%- include('./footer') %>
+  <%- include('./footer') %>
