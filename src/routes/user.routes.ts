@@ -56,7 +56,7 @@ router.post('/login', loginUser);
 
 router.get('/logout', logoutUser);
 
-outer.get('/register', (req, res) => {res.render('user/register');});
+router.get('/register', (req, res) => {res.render('user/register');});
 router.post('/register', json, userValidationRules(),  register);
 
 

@@ -62,7 +62,7 @@ export const userValidationRules = () => {
 
     check("birthdayDate")
     .notEmpty()
-    .withMessage('Birthdat is empty')
+    .withMessage('Birthday is empty')
     .isLength({ max: 500 })
     .withMessage('Birthday too long')
     .isDate()
