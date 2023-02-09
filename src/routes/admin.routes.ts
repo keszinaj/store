@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllProducts, getProductbyID } from '../models/repo_demo';
+import { getAllProducts, getProductbyID, getAllUsers } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
@@ -15,8 +15,8 @@ router.get('/', authorize, (req, res) => {
 });
 
 router.get('/users', authorize, (req, res) => {
-    //for examle purpose
-    res.render('admin/list_of_users');
+    const users = getAllUsers();
+    res.render('admin/list_of_users', { users: users });
 });
 router.get('/user/:id', authorize, (req, res) => {
     //for examle purpose
