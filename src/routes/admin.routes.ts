@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllProducts, getProductbyID, getAllUsers } from '../models/repo_demo';
+import { getAllOrders, getProductbyID, getUserbyId, getAllProducts, getAllUsers } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
@@ -23,8 +23,17 @@ router.get('/user/:id', authorize, (req, res) => {
     res.render('admin/user');
 });
 router.get('/orders', authorize, (req, res) => {
-    //for examle purpose
-    res.render('admin/orders');
+    const orders = getAllOrders();
+    const renderData =
+        orders.map(order => {
+            const user = getUserbyId(order.UserID);
+            const username = user ? user.Name + " " + user.Surname : 'unknown';
+            return {
+                ...order,
+                username: username
+            }
+        });
+    res.render('admin/orders', { orders: renderData });
 });
 
 router.get("/orders/:id", authorize, (req, res) => {
