@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getAllUsers, getAllOrders } from '../models/repo_demo';
+import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
@@ -62,8 +62,24 @@ router.get('/orders', authorize, (req, res) => {
 
 router.get("/orders/:id", authorize, (req, res) => {
     let id: string = req.params.id;
-    //for example purpose
-    res.render('admin/oneorder');
+    const orderID = parseInt(id);
+    if (isNaN(orderID)) {
+        res.status(400).send('Invalid order ID');
+        return;
+    }
+    const order = getOrderByID(orderID);
+    if (!order) {
+        res.status(404).send('Order not found');
+        return;
+    }
+    const user = getUserbyId(order.UserID);
+    const products = order.ProductIDs.map(id => getProductbyID(id));
+    if (products.some(p => !p)) {
+        res.status(500).send('Order contains invalid product ID');
+        return;
+    }
+    const totalAmount = products.reduce((sum, p) => sum + p!.Price, 0);
+    res.render('admin/oneorder', { order: order, user: user, products: products, totalAmount: totalAmount });
 });
 
 router.get('/products', authorize, (req, res) => {
