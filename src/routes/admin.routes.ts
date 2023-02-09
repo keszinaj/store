@@ -117,8 +117,17 @@ router.get("/products/:id", authorize, (req, res) => {
 
 router.get("/products/edit/:id", authorize, (req, res) => {
     let id: string = req.params.id;
-    //for example purpose
-    res.render('admin/edit_item');
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    const product = getProductbyID(productID);
+    if (!product) {
+        res.status(404).send('Product not found');
+        return;
+    }
+    res.render('admin/edit_item', { product: product });
 });
 
 router.get("/products/delete/:id", authorize, (req, res) => {
