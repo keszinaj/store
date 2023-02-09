@@ -7,6 +7,7 @@ const router = express.Router();
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
+import {addToCart} from '../controllers/landing_page'
 
 const json = express.json()
 
@@ -15,6 +16,7 @@ router.get('/', getLandingPage);
 
 router.get("/product/:id", getProductDetails);
 
+router.post("/addtobasket", authorize, json, addToCart);
 router.get('/basket', authorize,  (req, res) => {
     //for examle purpose
     res.render('user/cart');

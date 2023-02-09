@@ -258,9 +258,9 @@ let settings:Settings ={
     number_of_products: 8,
     number_of_orders: 4,
     admin_login: "admin",
-    admin_psw: "$argon2i$v=19$m=16,t=2,p=1$YXdkdGZneGM$mjr3iMKplxjkI6867RVLmg",
+    admin_psw: "admin",
 }
-export function get_admin()
+export function getAdmin()
 {
     return {
         login: settings.admin_login,

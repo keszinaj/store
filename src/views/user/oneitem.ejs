@@ -3,6 +3,8 @@
   <% } else{ %>
     <%- include('./navbar_v3') %>
   <% }%>
+
+<div id="frontinfo"></div>
 <main>
     <div class="one_item_top">
         <div>
@@ -40,7 +42,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit" class="btn px-5 mx-2 my-5 btn-outline-success btn-lg">Buy</button>
+                        <button type="submit" id="buy-btn" class="btn px-5 mx-2 my-5 btn-outline-success btn-lg" value="1">Buy</button>
                     </form>
                     <div class="text-muted">
                         
@@ -94,4 +96,5 @@
     </div>
   
 </main>
+<script type="text/javascript" src="/js/one_item_scripts.js"></script>
 <%- include('./footer') %>
