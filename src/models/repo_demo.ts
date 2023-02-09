@@ -358,6 +358,21 @@ export function getAllOrders():Order[]{
 }
 
 /**
+ * Function returns all orders from db
+ */
+export function getOrderByID(id:number):Order|null{
+    const res =  orders.find(o => o.ID === id);
+    if(res !== undefined)
+    {
+        return res;
+    }
+    else
+    {
+        return null;
+    }
+}
+
+/**
  * Function returns user data
  */
 export function getOrdersbyUserID(id: number):Order[]{
