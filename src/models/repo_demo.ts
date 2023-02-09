@@ -171,7 +171,7 @@ let products: Product[]=[
         Graphics: "AMD Radeon™ Graphics",
         Price: 820,
         Number_available: 100,
-        Photo_Path: "/",
+        Photo_Path: "/Dell_Inspiron_3525",
         Details: `Runs smooth. Looks sharp
 
         Power up: Featuring AMD Ryzen 5000 Series Mobile Processors with Radeon Graphics, experience lightning-fast responsiveness and hyper-efficient battery life that keeps you productive, anywhere.Keeps its cool
