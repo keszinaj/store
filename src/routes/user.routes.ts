@@ -8,7 +8,7 @@ import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
 
-var json = express.json()
+const json = express.json()
 
 router.get('/', getLandingPage);
 
