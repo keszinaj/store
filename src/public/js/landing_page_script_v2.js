@@ -1,5 +1,13 @@
 //potem to trzeba będzei połączyc z landing_page_script z innego PR
 const items_view = document.getElementById("items");
+const btn_next = document.getElementById("next");
+const btn_prev = document.getElementById("prev");
+
+//global scope
+let allIDs = [] //list of all available item
+let ip = 0; //first item on list
+let ni = 3; //number of items per page
+
 
 async function downloadAllIDs(){
     const response = await fetch('/allproducts');
@@ -11,6 +19,25 @@ async function downloadInfoData(tab){
     const response = await fetch(url);
     const data = await response.json();
     return data;
+}
+function setButtons(){
+    if(ip > 0 && btn_prev.classList.contains("disabled"))
+    {
+        btn_prev.classList.remove("disabled")
+    }
+    else if(ip === 0 && !btn_prev.classList.contains("disabled"))
+    {
+        btn_prev.classList.add("disabled")
+    }
+    if(allIDs.length > ip + ni && btn_next.classList.contains("disabled"))
+    {
+        btn_next.classList.remove("disabled")
+    }
+    else if(!btn_next.classList.contains("disabled"))
+    {
+        btn_next.classList.add("disabled")
+    }
+
 }
 function printProducts(data){
     let html_view = data.map(e=>{
@@ -42,17 +69,32 @@ function printProducts(data){
         `
     })
     items_view.innerHTML= html_view;
+    setButtons();
 
 }
-window.onload = async function() {
-    let ip = 0;
-    let ik = 3;
-    let allIDs = await downloadAllIDs();
-    console.log(allIDs)
-    const amountOfIds = allIDs.length
-    let takeInfo = allIDs.slice(ip, ik);
+async function downloadAndPrintData(){
+    let takeInfo = allIDs.slice(ip, ip+ni);
     let infoData = await downloadInfoData(takeInfo)
     console.log(infoData)
     printProducts(infoData.prod)
+}
+window.onload = async function() {
+    allIDs = await downloadAllIDs();
+    console.log(allIDs)
+    await downloadAndPrintData()
   };
 
+btn_next.addEventListener('click', async e => {
+    e.preventDefault();
+    ip += ni;
+    await downloadAndPrintData();
+
+    console.log("al")
+})
+
+
+ btn_prev.addEventListener('click', async e => {
+    e.preventDefault();
+    ip -= ni;
+    await downloadAndPrintData();
+})
