@@ -2,9 +2,12 @@ import express from 'express';
 import authorize from '../middlewares/authorize';
 const router = express.Router();
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
-import {getLandingPage} from '../controllers/landing_page'
+import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
+
 router.get('/', getLandingPage);
+router.get('/allproducts', sendAllProductsIDs);
+router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 
 router.get("/product/:id", getProductDetails);
 
