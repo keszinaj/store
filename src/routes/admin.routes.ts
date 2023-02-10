@@ -1,4 +1,5 @@
 import express from 'express';
+import { getProductbyID } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import {login_user} from '../controllers/admin_login' 
@@ -43,8 +44,18 @@ router.get("/products/new", authorize, (req, res) => {
 
 router.get("/products/:id", authorize, (req, res) => {
     let id:string = req.params.id;
-    //for example purpose
-    res.render('admin/show_item');
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    const product = getProductbyID(productID);
+    if (!product) {
+        res.status(404).send('Product not found');
+        return;
+    }
+
+    res.render('admin/show_item', {product: product});
 });
 
 router.get("/products/edit/:id", authorize,(req, res) => {
