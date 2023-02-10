@@ -1,5 +1,5 @@
 const argon2 = require('argon2');
-import {getUserbyEmail} from '../models/repo_demo';
+import {getUserbyEmail} from '../dbUtils/repo_demo';
 
 export function getLogin(req, res)
 {

@@ -1,5 +1,5 @@
 const { check, body } = require('express-validator');
-import { mailexist} from '../models/repo_demo'
+import { mailexist} from '../dbUtils/repo_demo'
 
 /**
  * validation rules

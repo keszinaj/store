@@ -6,7 +6,7 @@ const adminRouter = require('./routes/admin.routes');
 const sessions = require('express-session');
 
 import session_settings from './config/session_setup';
-import {syncDb, testConnectionToDb} from "./config/dbConnection";
+import {syncDb, testConnectionToDb} from "./dbUtils/dbConnection";
 
 const app = express();
 

@@ -1,6 +1,6 @@
 const {validationResult } = require('express-validator');
 const argon2 = require('argon2');
-import {pushNewUser} from '../models/repo_demo' 
+import {pushNewUser} from '../dbUtils/repo_demo'
 
 //creating new user and addding to DB
 async function registerUser(data)

@@ -10,7 +10,7 @@
 2. `# createdb shopDB`
 3. `# psql shopDB`
 4. `shopDB=# \password postgres` and type new password when prompted.
-`dbConnection.ts` file assumes password is `postgres`.
+`dbConfig.ts` file assumes password is `postgres`.
 
 #### 3. Actual tables in this database will be created by javascript code when running the project for the first time.
 
