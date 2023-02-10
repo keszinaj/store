@@ -3,6 +3,11 @@ import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrde
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
+import { addNewProduct } from '../controllers/add_product';
+import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
+const json = express.json()
+
+
 
 router.get('/login', (req, res) => {
     //for examle purpose
@@ -91,6 +96,8 @@ router.get('/products', authorize, (req, res) => {
 router.get("/products/new", authorize, (req, res) => {
     res.render('admin/new_item');
 });
+
+router.post("/products/new", authorize, json, newProductValidationRules(), addNewProduct);
 
 router.get("/products/:id", authorize, (req, res) => {
     let id: string = req.params.id;

@@ -433,3 +433,14 @@ export function editProduct(prod: Product){
         products[index]=prod;
     }
 }
+
+export function generateProductID():number{
+    let id = 0;
+    products.forEach(p => {
+        if(p.ID > id)
+        {
+            id = p.ID;
+        }
+    });
+    return id+1;
+}
