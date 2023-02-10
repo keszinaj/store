@@ -1,5 +1,5 @@
-import { reshape } from "mathjs";
 import {getAllProductsIDs, getUserbyId, getProductbyID} from '../models/repo_demo';
+
 export function getLandingPage(req, res)
 {
   if(req.session.logged === true)
@@ -11,12 +11,12 @@ export function getLandingPage(req, res)
 
   }
 }
+
 export function sendAllProductsIDs(req, res){
   let allids: Number[]= [];
   allids = getAllProductsIDs()
   res.status(200).json({ids: allids})
 }
-
 
 export function sendProductsPartilaInfo(req, res){
   let tab_of_ids = JSON.parse(req.params.arg).split("_")
@@ -37,6 +37,5 @@ export function sendProductsPartilaInfo(req, res){
     }
 
   })
-  console.log(tab_of_pd);
   res.status(200).json({prod: tab_of_pd})
 }
