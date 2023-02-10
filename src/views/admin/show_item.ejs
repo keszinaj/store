@@ -3,7 +3,16 @@
         <div class="d-flex justify-content-center my-5 sticky-top bg-white py-4">
             <h4 class="mx-4">Action: </h4>
             <a href="/admin/products/edit/<%= product.ID %>" class="btn btn-outline-success w-25 mx-1 btn-lg mx-4"> Edit </a>
-            <button type="button" class="btn btn-outline-danger w-25 mx-1 btn-lg"> Delete </button>
+            <button type="button" class="btn btn-outline-danger w-25 mx-1 btn-lg" name="delete-btn-<%= product.ID %>"> Delete </button>
+            <script>
+                var btn = document.getElementsByName("delete-btn-<%= product.ID %>")[0];
+                btn.addEventListener('click', function() {
+                    var result = confirm("Want to delete?");
+                    if (result) {
+                        window.location.href = "/admin/products/delete/<%= product.ID %>";
+                    }
+                });
+            </script>
         </div>
         <hr class="mx-5" />
         <div class="one_item_top">

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders } from '../models/repo_demo';
+import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders, deleteProduct } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
@@ -120,4 +120,18 @@ router.get("/products/edit/:id", authorize, (req, res) => {
     //for example purpose
     res.render('admin/edit_item');
 });
+
+router.get("/products/delete/:id", authorize, (req, res) => {
+    let id: string = req.params.id;
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    deleteProduct(productID);
+    res.redirect('/admin/products');
+});
+
+
+
 module.exports = router 
