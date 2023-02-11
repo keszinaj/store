@@ -394,7 +394,12 @@ export function getAllProducts(): Product[]
 {
     return products;
 }
-
+export function getAllProductsIDs(): Number[]
+{
+    let ids: Number[] = []
+    products.forEach(e => ids.push(e.ID))
+    return ids;
+}
 /**
  * Function returns one product(by id) from db
  */
