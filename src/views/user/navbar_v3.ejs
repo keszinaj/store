@@ -12,6 +12,7 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/style.css" type="text/css">
+    <script type="text/javascript" src="/js/search_item.js" defer></script>
     <title>Store</title>
 </head>
 
@@ -27,11 +28,11 @@
         <div class="container-fluid justify-content-between">
 
             <!-- Search Bar -->
-            <div class="navbar-nav flex-row d-none d-md-flex ps-4">
-                <form class="input-group  w-auto my-auto d-none d-sm-flex">
-                    <input autocomplete="off" type="search" class="form-control rounded input-lg" placeholder="Search"
-                        style="min-width: 125px;" size="80" />
-                    <button type="button" class="btn btn-secondary">Search</button>
+            <div class="navbar-nav flex-row d-none d-md-flex ps-4" >
+                <form class="input-group  w-auto my-auto d-none d-sm-flex" method="get" action="/search">
+                    <input autocomplete="off" type="search" class="form-control rounded input-lg" id="searchinput" placeholder="Search"
+                        style="min-width: 125px;" size="80" name="search"/>
+                    <input type="submit" class="btn btn-secondary" id="searchbutton" value="Search">
                 </form>
             </div>
             <!-- Search Bar  -->

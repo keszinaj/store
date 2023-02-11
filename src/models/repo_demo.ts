@@ -414,7 +414,14 @@ export function getProductbyID(id:number):Product|null{
         return null;
     }
 }
-
+/**
+ * function takes a partial name and looks for it in Products DB
+ */
+export function serchByName(s:string):Product[]{
+    s = s.toLowerCase();
+    const result = products.filter(p => p.Name.toLowerCase().includes(s));
+    return result;
+}
 /**
  * Function adds one new product to db.
  */
