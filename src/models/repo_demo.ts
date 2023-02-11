@@ -405,7 +405,7 @@ export function getProductbyID(id: number): Product | null {
 }
 
 /**
- * Function adds one new product to db.
+ * Function edits product data
  */
 export function pushNewProduct(prod: Product) {
     products.push(prod);
