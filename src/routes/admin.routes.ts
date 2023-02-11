@@ -1,8 +1,8 @@
 import express from 'express';
-import { getAllProducts, getProductbyID, getAllUsers } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
+import {getAllProducts, getAllUsers, getProductById} from "../dbUtils/dbQueries";
 
 router.get('/login', (req, res) => {
     //for examle purpose
@@ -14,8 +14,8 @@ router.get('/', authorize, (req, res) => {
     res.render('admin/landing_page');
 });
 
-router.get('/users', authorize, (req, res) => {
-    const users = getAllUsers();
+router.get('/users', authorize, async (req, res) => {
+    const users = await getAllUsers();
     res.render('admin/list_of_users', { users: users });
 });
 router.get('/user/:id', authorize, (req, res) => {
@@ -33,8 +33,8 @@ router.get("/orders/:id", authorize, (req, res) => {
     res.render('admin/oneorder');
 });
 
-router.get('/products', authorize, (req, res) => {
-    const products = getAllProducts();
+router.get('/products', authorize, async (req, res) => {
+    const products = await getAllProducts();
 
     res.render('admin/store_resources', { products: products });
 });
@@ -43,14 +43,14 @@ router.get("/products/new", authorize, (req, res) => {
     res.render('admin/new_item');
 });
 
-router.get("/products/:id", authorize, (req, res) => {
+router.get("/products/:id", authorize, async (req, res) => {
     let id: string = req.params.id;
     const productID = parseInt(id);
     if (isNaN(productID)) {
         res.status(400).send('Invalid product ID');
         return;
     }
-    const product = getProductbyID(productID);
+    const product = await getProductById(productID);
     if (!product) {
         res.status(404).send('Product not found');
         return;
