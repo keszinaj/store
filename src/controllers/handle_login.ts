@@ -1,5 +1,6 @@
+import {getUserByEmail} from "../dbUtils/dbQueries";
+
 const argon2 = require('argon2');
-import {getUserbyEmail} from '../dbUtils/repo_demo';
 
 export function getLogin(req, res)
 {
@@ -21,16 +22,16 @@ export async function loginUser(req, res){
 
     if(re.test(email))
     {
-        let user = getUserbyEmail(email)
+        let user = await getUserByEmail(email)
         if(user !== null)
         {
             let psw_input = req.body.password; 
-            let h_psw = user.Password_Hash;
+            let h_psw = user.passwordHash;
             
             if (await argon2.verify(h_psw, psw_input)) {
                 //setting logged user data
                 (req as any).session.logged = true; 
-                (req as any).session.uid = user.ID; 
+                (req as any).session.uid = user.id;
 
                 res.render('user/landing_page', {top_message: `<div class="alert alert-success text-center mx-5 my-2" role="alert">
                 Correct login. Welcome!

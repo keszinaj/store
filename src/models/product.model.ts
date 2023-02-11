@@ -18,7 +18,7 @@ export class Product extends Model {
     @Column
     graphics: string;
 
-    @Column(DataType.DECIMAL(2))
+    @Column
     price: number;
 
     @Column
@@ -27,7 +27,7 @@ export class Product extends Model {
     @Column
     photoPath: string;
 
-    @Column
+    @Column(DataType.TEXT) //TEXT datatype has unlimited length
     details: string;
 
     @BelongsToMany(() => User, () => BasketRelation)

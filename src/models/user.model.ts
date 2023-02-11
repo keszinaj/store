@@ -48,8 +48,8 @@ export class User extends Model {
 }
 
 export enum Gender {
-    Male,
-    Female,
-    Other
+    Female = 0,
+    Male = 1,
+    Other = 2
 }
 

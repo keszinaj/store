@@ -1,33 +1,28 @@
+import {Gender, User} from "../models/user.model";
+
 const {validationResult } = require('express-validator');
 const argon2 = require('argon2');
-import {pushNewUser} from '../dbUtils/repo_demo'
+import {saveUser} from "../dbUtils/dbQueries";
 
 //creating new user and addding to DB
-async function registerUser(data)
-{
-    const psw = await argon2.hash(data.password);
-    let id = Math.floor(Math.random() * 1000000) //to TRZEBA pewnie zmeinic na cos lepszego
-    let bd = new Date(data.birthdayDate)
-    let gender = data.gender
-    let new_user = {
-        ID: id,
-        Name: data.firstName,
-        Surname: data.lastName,
-        Email: data.emailAddress,
-        Password_Hash: psw,
-        Phone_number: data.phoneNumber,
-        Birthday: bd,
-        Gender: gender,
-        Country: data.country,
-        City: data.city,
-        Street: data.street_and_num,
-        Postal_Code: data.zipcode,
-        OrderIDs: [],
-        basket: []
-    }
-    pushNewUser(new_user);
+async function registerUser(data) {
+    const passwordHash = await argon2.hash(data.password);
 
+    let newUser = User.build({
+        name: data.firstName,
+        surname: data.lastName,
+        email: data.emailAddress,
+        passwordHash: passwordHash,
+        phoneNumber: data.phoneNumber,
+        birthday: new Date(data.birthdayDate),
+        gender: data.gender,
+        country: data.country,
+        city: data.city,
+        street: data.street_and_num,
+        postalCode: data.zipcode
+    });
 
+    await saveUser(newUser);
 }
 async function register(req, res){
     //validation
@@ -37,9 +32,6 @@ async function register(req, res){
       }
     res.status(201).json({ errors: errors.array() }); //201 abysmy nie
 }
-
-
-
 
 
 export default register;

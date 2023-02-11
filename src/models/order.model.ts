@@ -20,6 +20,6 @@ export class Order extends Model {
 }
 
 export enum OrderStatus {
-    Pending,
-    Finished
+    Pending = 0,
+    Finished = 1
 }
