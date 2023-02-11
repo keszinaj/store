@@ -7,6 +7,9 @@ const details = document.getElementById("details");
 const price = document.getElementById("price");
 const formerror = document.getElementById("formerror");
 const main = document.getElementById("main");
+//get product ID from url path
+const productID = window.location.pathname.split("/")[4];
+
 
 // TODO: Dodać obsluge zdjec
 
@@ -61,20 +64,15 @@ async function postFormDataAsJson(url, formData) {
     throw new Error(errorMessage);
   }
   if (jsresponse.errors.length === 0) {
-    main.innerHTML = `
-    <div class="alert alert-success text-center" role="alert">
-    <h4 class="alert-heading">Success!</h4>
-    <p>Product has been added to database</p>
-    <hr>
-    <a href="/admin/products/new" class="btn btn-primary">Add another product</a>
-    <a href="/admin/products" class="btn btn-primary">Go to products</a>
-    </div>
-    `
+    formerror.innerHTML = "Edit successful";
+    formerror.classList = [];
+    formerror.classList.add("alert-success", "alert", "text-center");
   }
   else {
     let msg = '';
     jsresponse.errors.forEach(er => msg = msg + er.msg + " <br> ");
-    formerror.innerHTML = msg
+    formerror.innerHTML = msg;
+    formerror.classList = [];
     formerror.classList.add("alert-danger", "alert", "text-center");
   }
 
@@ -90,10 +88,11 @@ submit_bt.addEventListener("click", function (e) {
     formerror.classList.add("alert-danger", "alert", "text-center");
   }
   else {
-    formerror.innerHTML = `Sending data`
+    formerror.innerHTML = `Sending data`;
+    formerror.classList = [];
     formerror.classList.add("alert-info", "alert", "text-center");
     let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details'))
-    data = data.reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
-    postFormDataAsJson('/admin/products/new', data);
+    data = data.reduce((acc, input) => ({ ...acc, [input.id]: input.value }), { productID: parseInt(productID) });
+    postFormDataAsJson('/admin/products/edit/' + productID, data);
   }
 });

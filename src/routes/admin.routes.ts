@@ -1,5 +1,6 @@
 import express from 'express';
 import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders, deleteProduct } from '../models/repo_demo';
+import { editProduct } from '../controllers/edit_product';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
@@ -129,6 +130,7 @@ router.get("/products/delete/:id", authorize, (req, res) => {
     res.redirect('/admin/products');
 });
 
+router.post('/products/edit/:id', authorize, json, newProductValidationRules(), editProduct);
 
 
 module.exports = router 
