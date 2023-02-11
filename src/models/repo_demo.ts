@@ -15,6 +15,7 @@ interface Person{
     Street: string;
     Postal_Code: string;
     OrderIDs: number[];
+    basket: number[];
 }
 
 interface Product{
@@ -37,17 +38,12 @@ interface Order{
     Status: number;
 }
 
-interface Basket{
-    ID: number;
-    UserID: number;
-    ProductIDs: number[];
-}
+
 
 interface Settings{
     number_of_users: number;
     number_of_products: number;
     number_of_orders: number;
-    number_of_baskets: number;
     admin_login: string;
     admin_psw: string;
 }
@@ -69,7 +65,8 @@ let users: Person[]=[
         City: "Gdansk",
         Street: "Warszawska 28",
         Postal_Code: "00-123",
-        OrderIDs: []
+        OrderIDs: [],
+        basket: []
     },
     {
         ID: 2,
@@ -84,7 +81,8 @@ let users: Person[]=[
         City: "Bialystok",
         Street: "Powstancow 28",
         Postal_Code: "01-111",
-        OrderIDs: []
+        OrderIDs: [],
+        basket: []
     },
     {
         ID: 3,
@@ -99,7 +97,8 @@ let users: Person[]=[
         City: "Olsztyn",
         Street: "Szczepanskiego 18",
         Postal_Code: "00-000",
-        OrderIDs: []
+        OrderIDs: [],
+        basket: []
     },  
 ]
 
@@ -172,7 +171,7 @@ let products: Product[]=[
         Graphics: "AMD Radeon™ Graphics",
         Price: 820,
         Number_available: 100,
-        Photo_Path: "/",
+        Photo_Path: "/Dell_Inspiron_3525",
         Details: `Runs smooth. Looks sharp
 
         Power up: Featuring AMD Ryzen 5000 Series Mobile Processors with Radeon Graphics, experience lightning-fast responsiveness and hyper-efficient battery life that keeps you productive, anywhere.Keeps its cool
@@ -252,29 +251,12 @@ let orders:Order[]=[
     },
 ]
 
-let baskets:Basket[]=[
-    {
-        ID: 1,
-        UserID: 1,
-        ProductIDs: [1, 2, 3, 4],
-    },
-    {
-        ID: 2,
-        UserID: 2,
-        ProductIDs: [5, 6, 7, 8],
-    },
-    {
-        ID: 3,
-        UserID: 3,
-        ProductIDs: [3, 4],
-    }
-]
+
 
 let settings:Settings ={
     number_of_users: 3,
     number_of_products: 8,
     number_of_orders: 4,
-    number_of_baskets: 3,
     admin_login: "admin",
     admin_psw: "$argon2i$v=19$m=16,t=2,p=1$YXdkdGZneGM$mjr3iMKplxjkI6867RVLmg",
 }
@@ -328,6 +310,24 @@ export function getUserbyEmail(mail:string):Person|null{
     }
 }
 
+export const mailexist = function (mail) {
+    return new Promise(function (resolve, reject) {
+  
+        const res =  users.find(u => u.Email === mail);
+        let odp;
+        if(res !== undefined)
+        {
+            odp = true
+        }
+        else
+        {
+            odp = false
+        }   
+        resolve(odp);
+      
+    });
+  };
+
 
 /**
  * Function adds new user to db
@@ -348,40 +348,7 @@ export function editUser(new_user:Person){
     }
 }
 
-/**
- * function shows the basket belonging to the user(ID)
- */
-export function getBasketbyUserID(id:number):Basket|null{
-    const res =  baskets.find(u => u.UserID === id);
-    if(res !== undefined)
-    {
-        return res;
-    }
-    else
-    {
-        return null;
-    }
-}
 
-/**
- * Function edits basket
- */
-export function editBasket(new_basket:Basket){
-    let index = baskets.findIndex(b => b.ID === new_basket.ID)
-    if(index !== -1)
-    {
-        baskets[index]=new_basket;
-    }
-}
-
-/**
- * Function adds new basket
- */
-export function pushNewBasket(b:Basket)
-{
-    baskets.push(b);
-    settings.number_of_baskets += 1;
-}
 
 /**
  * Function returns all orders from db

@@ -1,40 +1,75 @@
 import express from 'express';
+import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getAllUsers, getAllOrders } from '../models/repo_demo';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
-import {login_user} from '../controllers/admin_login' 
+import { login_user } from '../controllers/admin_login'
 
 router.get('/login', (req, res) => {
     //for examle purpose
     res.render('admin/admin_login');
 });
 router.post('/login', login_user);
-router.get('/',authorize, (req, res) => {
+router.get('/', authorize, (req, res) => {
     //for examle purpose
     res.render('admin/landing_page');
 });
 
 router.get('/users', authorize, (req, res) => {
-    //for examle purpose
-    res.render('admin/list_of_users');
+    const users = getAllUsers();
+    res.render('admin/list_of_users', { users: users });
 });
 router.get('/user/:id', authorize, (req, res) => {
-    //for examle purpose
-    res.render('admin/user');
+    let id: string = req.params.id;
+    const userID = parseInt(id);
+    if (isNaN(userID)) {
+        res.status(400).send('Invalid user ID');
+        return;
+    }
+    const user = getUserbyId(userID);
+    if (!user) {
+        res.status(404).send('User not found');
+        return;
+    }
+    const orders = getOrdersbyUserID(userID);
+    const ordersWIthProducts = orders.map(order => {
+        const products = order.ProductIDs.map(productID => {
+            return getProductbyID(productID);
+        });
+        if (products.some(product => !product)) {
+            res.status(404).send('Product not found');
+            return;
+        }
+        const totalPrice = products.reduce((total, product) => {
+            return total + product!.Price;
+        }, 0);
+        return { ...order, products: products, totalPrice: totalPrice };
+    });
+    res.render('admin/user', { user: user, orders: ordersWIthProducts });
 });
 router.get('/orders', authorize, (req, res) => {
-    //for examle purpose
-    res.render('admin/orders');
+    const orders = getAllOrders();
+    const renderData =
+        orders.map(order => {
+            const user = getUserbyId(order.UserID);
+            const username = user ? user.Name + " " + user.Surname : 'unknown';
+            return {
+                ...order,
+                username: username
+            }
+        });
+    res.render('admin/orders', { orders: renderData });
 });
 
 router.get("/orders/:id", authorize, (req, res) => {
-    let id:string = req.params.id;
+    let id: string = req.params.id;
     //for example purpose
     res.render('admin/oneorder');
 });
 
-router.get('/products', authorize,  (req, res) => {
-    //for examle purpose
-    res.render('admin/store_resources');
+router.get('/products', authorize, (req, res) => {
+    const products = getAllProducts();
+
+    res.render('admin/store_resources', { products: products });
 });
 
 router.get("/products/new", authorize, (req, res) => {
@@ -42,13 +77,23 @@ router.get("/products/new", authorize, (req, res) => {
 });
 
 router.get("/products/:id", authorize, (req, res) => {
-    let id:string = req.params.id;
-    //for example purpose
-    res.render('admin/show_item');
+    let id: string = req.params.id;
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    const product = getProductbyID(productID);
+    if (!product) {
+        res.status(404).send('Product not found');
+        return;
+    }
+
+    res.render('admin/show_item', { product: product });
 });
 
-router.get("/products/edit/:id", authorize,(req, res) => {
-    let id:string = req.params.id;
+router.get("/products/edit/:id", authorize, (req, res) => {
+    let id: string = req.params.id;
     //for example purpose
     res.render('admin/edit_item');
 });
