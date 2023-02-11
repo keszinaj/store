@@ -47,7 +47,7 @@ function printProducts(data){
         <div class="card card--style">
         <img src="./laptop_ex.webp" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title"><a href="/product/id=${e.ID}" class="text-dark">${e.Name} </a></h5>
+          <h5 class="card-title"><a href="/product/${e.ID}" class="text-dark">${e.Name} </a></h5>
           <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
             <li>
               CPU: ${e.CPU}
