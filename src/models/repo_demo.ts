@@ -343,12 +343,30 @@ export function editUser(new_user: Person) {
 /**
  * Function add order to user
  */
-export function addOrderToUser(order_id:number, user_id:number)
+export function addOrderToUser(user_id:number, order_id:number,)
 {
     let u = getUserbyId(user_id)
     if( u === null){return}
     u.OrderIDs.push(order_id)
 }
+
+/**
+ * 
+ */
+export function addProductToBasket(user_id:number, product_id:number){
+    let u = getUserbyId(user_id)
+    if( u === null){return}
+    u.Basket.push(product_id)
+}
+/**
+ * 
+ */
+export function deleteProductFromBasket(user_id:number, product_id:number){
+    let u = getUserbyId(user_id)
+    if( u === null){return}
+    u.Basket = u.Basket.filter(e => e !== product_id)
+}
+
 
 /**
  * Function returns all orders from db

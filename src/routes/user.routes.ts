@@ -20,7 +20,7 @@ router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 router.get("/product/:id", getProductDetails);
 
 router.get('/basket', authorize,  (req, res) => {
-    //for examle purpose
+    console.log(typeof req.query.id)
     res.render('user/cart');
 });
 
