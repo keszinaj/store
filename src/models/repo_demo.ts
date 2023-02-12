@@ -66,7 +66,7 @@ let users: Person[] = [
         Street: "Warszawska 28",
         Postal_Code: "00-123",
         OrderIDs: [],
-        Basket: []
+        Basket: [1, 2, 3]
     },
     {
         ID: 2,
