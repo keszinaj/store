@@ -15,7 +15,6 @@ export function renderBasket(req, res){
 
     const products = user.Basket.map(id => getProductbyID(id)); 
     const cost = products.reduce((sum, p) => sum + p!.Price, 0);
-    res.render('user/cart');
     res.render('user/cart', { products: products, cost: cost });
 }
 export async function apiPayment(req, res){

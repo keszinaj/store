@@ -8,7 +8,7 @@ import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
 
-import {apiPayment, successPayment} from '../controllers/handle_basket'
+import {renderBasket, apiPayment, successPayment} from '../controllers/handle_basket'
 
 const json = express.json()
 
@@ -19,10 +19,7 @@ router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 
 router.get("/product/:id", getProductDetails);
 
-router.get('/basket', authorize,  (req, res) => {
-    console.log(typeof req.query.id)
-    res.render('user/cart');
-});
+router.get('/basket', authorize,  renderBasket);
 
 router.get('/basket/payment', authorize, apiPayment);
 router.get('/checkout',  authorize, successPayment);
