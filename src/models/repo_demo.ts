@@ -33,7 +33,7 @@ interface Product {
 interface Order {
     ID: number;
     UserID: number;
-    ProductIDs: number[];
+    Products: Product[];
     OrderPlacementDate: Date;
     Status: number;
 }
@@ -224,28 +224,28 @@ let orders: Order[] = [
     {
         ID: 1,
         UserID: 1,
-        ProductIDs: [1, 2, 4],
+        Products: [products[0], products[2], products[3]],
         OrderPlacementDate: new Date("2022-01-16"),
         Status: 0,
     },
     {
         ID: 2,
         UserID: 2,
-        ProductIDs: [3, 5, 6],
+        Products: [products[2], products[4], products[5]],
         OrderPlacementDate: new Date("2022-12-16"),
         Status: 1,
     },
     {
         ID: 3,
         UserID: 3,
-        ProductIDs: [7, 8],
+        Products: [products[6], products[7]],
         OrderPlacementDate: new Date("2023-01-12"),
         Status: 0,
     },
     {
         ID: 4,
         UserID: 1,
-        ProductIDs: [1, 2, 4, 8],
+        Products: [products[0], products[1], products[3], products[7]],
         OrderPlacementDate: new Date("2023-01-16"),
         Status: 0,
     },
