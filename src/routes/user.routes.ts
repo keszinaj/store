@@ -8,7 +8,8 @@ import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
 
-const stripe = require('stripe')("sk_test_51Mae79DsMkUfjELNFGqTadfXlVJo48xS4ekh0R1FhdngnYb1HGdL3xlDWQsK6TK3IxwpX8yPR7v2aVwupj8CnzjC00C5uwJki6")
+import {apiPayment, successPayment} from '../controllers/handle_basket'
+
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -23,48 +24,9 @@ router.get('/basket', authorize,  (req, res) => {
     res.render('user/cart');
 });
 
-import { getUserbyId, getProductbyID } from '../models/repo_demo';
-router.get('/basket/payment', authorize, async (req, res) => {
-    console.log((<any>req).session.user)
-    let user_basket = getUserbyId((<any>req).user)?.Basket;
-    console.log(user_basket)
-    let items = user_basket?.map(id => getProductbyID(id))
-    let cost = 0
-    if(items === undefined || items === null)
-    {
-        res.status(404).send('Payment error');
-        console.log(items)
-        return;
-    }
-    items?.forEach(e=> {if(e!==null){cost = cost + e.Price}})
-    try {
-        const session = await stripe.checkout.sessions.create({
-          payment_method_types: ["card"],
-          mode: "payment",
-          line_items: items.map(item => {
-            
-                return {
-                    price_data: {
-                      currency: "usd",
-                      product_data: {
-                        name: item?.Name,
-                      },
-                      unit_amount: (<any>item).Price * 100,
-                    },
-                    quantity: 1,
-                  }
-           
-        
-          }),
-          success_url: `http://localhost:3000/checkout`,
-          cancel_url: `http://localhost:3000/`,
-        })
-        res.redirect(session.url);
-      } catch (e) {
-        res.status(404).send('Payment error 1');
-      }
-    
-});
+router.get('/basket/payment', authorize, apiPayment);
+router.get('/checkout',  authorize, successPayment);
+
 router.post('/basket', (req, res) => {
     //for examle purpose
     console.log(req.body)
@@ -91,10 +53,7 @@ router.get('/basket/newaddress', authorize, (req, res) => {
     //for examle purpose
     res.render('user/other_adress');
 });
-router.get('/checkout',  authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/bought');
-});
+
 
 router.get('/login', getLogin);
 router.post('/login', loginUser);
