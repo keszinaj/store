@@ -36,20 +36,13 @@ router.get('/user/:id', authorize, (req, res) => {
         return;
     }
     const orders = getOrdersbyUserID(userID);
-    const ordersWIthProducts = orders.map(order => {
-        const products = order.ProductIDs.map(productID => {
-            return getProductbyID(productID);
-        });
-        if (products.some(product => !product)) {
-            res.status(404).send('Product not found');
-            return;
-        }
-        const totalPrice = products.reduce((total, product) => {
+    const ordersWithTotalPrice = orders.map(order => {
+        const totalPrice = order.Products.reduce((total, product) => {
             return total + product!.Price;
         }, 0);
-        return { ...order, products: products, totalPrice: totalPrice };
+        return { ...order, totalPrice: totalPrice };
     });
-    res.render('admin/user', { user: user, orders: ordersWIthProducts });
+    res.render('admin/user', { user: user, orders: ordersWithTotalPrice });
 });
 router.get('/orders', authorize, (req, res) => {
     const orders = getAllOrders();
@@ -78,13 +71,8 @@ router.get("/orders/:id", authorize, (req, res) => {
         return;
     }
     const user = getUserbyId(order.UserID);
-    const products = order.ProductIDs.map(id => getProductbyID(id));
-    if (products.some(p => !p)) {
-        res.status(500).send('Order contains invalid product ID');
-        return;
-    }
-    const totalAmount = products.reduce((sum, p) => sum + p!.Price, 0);
-    res.render('admin/oneorder', { order: order, user: user, products: products, totalAmount: totalAmount });
+    const totalAmount = order.Products.reduce((sum, p) => sum + p!.Price, 0);
+    res.render('admin/oneorder', { order: order, user: user, totalAmount: totalAmount });
 });
 
 router.get('/products', authorize, (req, res) => {
