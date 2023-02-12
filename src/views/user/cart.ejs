@@ -87,25 +87,16 @@
                       <span><strong> $<%= cost %></strong></span>
                     </li>
                   </ul>
-                  <form action="/basket" method="post">
-                  <h6 class="mb-2 pb-1">Address: </h6>
-          
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="checkaddress" id="savedaddress"
-                      value="savedaddress" checked />
-                    <label class="form-check-label" for="savedaddress">Saved Address</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="checkaddress" id="newaddress"
-                      value="newaddress" />
-                    <label class="form-check-label" for="newaddress">New Address</label>
-                  </div>
-      
-                  <a href="/basket/payment" class="btn btn-outline-success btn-lg px-5 mx-5 mt-3">
+                  <p>Item will be sent to the address assigned to your account if you want to change it go to <a href="/account">account settings.</a></p> 
+                  <% if(products.length>0){ %>
+                  <a href="/basket/payment" class="btn btn-outline-success btn-lg px-5 mx-5 mt-3 " disabled>
                     Go to checkout
                   </a>
-                </form>
+                  <%} else{ %>
+                    <a  class="btn btn-outline-success btn-lg px-5 mx-5 mt-3 " disabled>
+                      Go to checkout
+                    </a>
+                    <%} %>
                 </div>
               </div>
             </div>
