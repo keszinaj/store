@@ -24,34 +24,6 @@ router.get('/basket', authorize,  renderBasket);
 router.get('/basket/payment', authorize, apiPayment);
 router.get('/checkout',  authorize, successPayment);
 
-router.post('/basket', (req, res) => {
-    //for examle purpose
-    console.log(req.body)
-    if(req.body !== null)
-    {
-        let checkaddress = (<any>req.body).checkaddress;
-        console.log(checkaddress)
-        if(checkaddress === 'newaddress')
-        {
-            res.redirect('/basket/newaddress')
-
-        }
-        else if(checkaddress === 'savedaddress')
-        {
-            res.redirect('/checkout');
-        }
-    }
-    else{
-        res.render('user/cart');
-    }
-});
-
-router.get('/basket/newaddress', authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/other_adress');
-});
-
-
 router.get('/login', getLogin);
 router.post('/login', loginUser);
 
@@ -80,8 +52,5 @@ router.get('/account/delete', authorize, (req, res) => {
     //for examle purpose
     res.render('user/account_delete');
 });
-
-
-
 
 module.exports = router

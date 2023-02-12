@@ -1,6 +1,10 @@
 import { getUserbyId, getProductbyID, pushNewOrder, getAllOrders, getAllUsers, addOrderToUser, deleteProductFromBasket } from '../models/repo_demo';
+//for payment config
 const stripe = require('stripe')("sk_test_51Mae79DsMkUfjELNFGqTadfXlVJo48xS4ekh0R1FhdngnYb1HGdL3xlDWQsK6TK3IxwpX8yPR7v2aVwupj8CnzjC00C5uwJki6")
 
+/**
+ * Function render basket page
+ */
 export function renderBasket(req, res){
     let idu = parseInt((<any>req).user)
     let user = getUserbyId(idu);
@@ -17,6 +21,10 @@ export function renderBasket(req, res){
     const cost = products.reduce((sum, p) => sum + p!.Price, 0);
     res.render('user/cart', { products: products, cost: cost });
 }
+
+/**
+ * Function handle payment
+ */
 export async function apiPayment(req, res){
     let user_basket = getUserbyId((<any>req).user)?.Basket;
     let items = user_basket?.map(id => getProductbyID(id))
@@ -24,7 +32,6 @@ export async function apiPayment(req, res){
     if(items === undefined || items === null)
     {
         res.status(404).send('Payment error');
-        console.log(items)
         return;
     }
     
@@ -50,8 +57,8 @@ export async function apiPayment(req, res){
           success_url: `http://localhost:3000/checkout?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `http://localhost:3000/`,
         })
-
         res.redirect(session.url);
+
       } catch (e) {
         res.status(404).send('Payment error');
       }
@@ -77,9 +84,6 @@ export async function successPayment(req, res){
         }
         pushNewOrder(order)
         addOrderToUser(user.ID, prod_id)
-        console.log(getAllOrders());
-        console.log(getAllUsers())
-
         res.render('user/bought');
     }
     else{
