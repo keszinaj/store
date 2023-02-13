@@ -8,6 +8,8 @@ import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
 import {getSearchResult} from '../controllers/search_product'
+import {addToCart} from '../controllers/landing_page'
+
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -18,6 +20,7 @@ router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 router.get("/product/:id", getProductDetails);
 router.get("/search",  getSearchResult)
 
+router.post("/addtobasket", authorize, json, addToCart);
 router.get('/basket', authorize,  (req, res) => {
     //for examle purpose
     res.render('user/cart');

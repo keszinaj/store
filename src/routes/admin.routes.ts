@@ -1,8 +1,14 @@
 import express from 'express';
-import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders } from '../models/repo_demo';
+import { getAllProducts, getOrdersbyUserID, getProductbyID, getUserbyId, getOrderByID, getAllUsers, getAllOrders, deleteProduct } from '../models/repo_demo';
+import { editProduct } from '../controllers/edit_product';
 const router = express.Router();
 import authorize from '../middlewares/admin_authorize'
 import { login_user } from '../controllers/admin_login'
+import { addNewProduct } from '../controllers/add_product';
+import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
+const json = express.json()
+
+
 
 router.get('/login', (req, res) => {
     //for examle purpose
@@ -31,20 +37,13 @@ router.get('/user/:id', authorize, (req, res) => {
         return;
     }
     const orders = getOrdersbyUserID(userID);
-    const ordersWIthProducts = orders.map(order => {
-        const products = order.ProductIDs.map(productID => {
-            return getProductbyID(productID);
-        });
-        if (products.some(product => !product)) {
-            res.status(404).send('Product not found');
-            return;
-        }
-        const totalPrice = products.reduce((total, product) => {
+    const ordersWithTotalPrice = orders.map(order => {
+        const totalPrice = order.Products.reduce((total, product) => {
             return total + product!.Price;
         }, 0);
-        return { ...order, products: products, totalPrice: totalPrice };
+        return { ...order, totalPrice: totalPrice };
     });
-    res.render('admin/user', { user: user, orders: ordersWIthProducts });
+    res.render('admin/user', { user: user, orders: ordersWithTotalPrice });
 });
 router.get('/orders', authorize, (req, res) => {
     const orders = getAllOrders();
@@ -73,13 +72,8 @@ router.get("/orders/:id", authorize, (req, res) => {
         return;
     }
     const user = getUserbyId(order.UserID);
-    const products = order.ProductIDs.map(id => getProductbyID(id));
-    if (products.some(p => !p)) {
-        res.status(500).send('Order contains invalid product ID');
-        return;
-    }
-    const totalAmount = products.reduce((sum, p) => sum + p!.Price, 0);
-    res.render('admin/oneorder', { order: order, user: user, products: products, totalAmount: totalAmount });
+    const totalAmount = order.Products.reduce((sum, p) => sum + p!.Price, 0);
+    res.render('admin/oneorder', { order: order, user: user, totalAmount: totalAmount });
 });
 
 router.get('/products', authorize, (req, res) => {
@@ -91,6 +85,8 @@ router.get('/products', authorize, (req, res) => {
 router.get("/products/new", authorize, (req, res) => {
     res.render('admin/new_item');
 });
+
+router.post("/products/new", authorize, json, newProductValidationRules(), addNewProduct);
 
 router.get("/products/:id", authorize, (req, res) => {
     let id: string = req.params.id;
@@ -110,7 +106,31 @@ router.get("/products/:id", authorize, (req, res) => {
 
 router.get("/products/edit/:id", authorize, (req, res) => {
     let id: string = req.params.id;
-    //for example purpose
-    res.render('admin/edit_item');
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    const product = getProductbyID(productID);
+    if (!product) {
+        res.status(404).send('Product not found');
+        return;
+    }
+    res.render('admin/edit_item', { product: product });
 });
+
+router.get("/products/delete/:id", authorize, (req, res) => {
+    let id: string = req.params.id;
+    const productID = parseInt(id);
+    if (isNaN(productID)) {
+        res.status(400).send('Invalid product ID');
+        return;
+    }
+    deleteProduct(productID);
+    res.redirect('/admin/products');
+});
+
+router.post('/products/edit/:id', authorize, json, newProductValidationRules(), editProduct);
+
+
 module.exports = router 

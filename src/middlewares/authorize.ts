@@ -4,7 +4,8 @@ function authorize(req, res, next) {
         req.user = req.session.user
     next();
     } else {
-    res.redirect('/login');
+        req.logged = false;
+        res.redirect('/login');
     }
 }
 
