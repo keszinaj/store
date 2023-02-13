@@ -48,5 +48,9 @@ export const newProductValidationRules = () => {
       .withMessage('Details too long')
       .trim()
       .escape(),
+
+      body('file')
+      .notEmpty()
+      .withMessage('Photo is empty')
   ]
 }

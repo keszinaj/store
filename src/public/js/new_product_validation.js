@@ -6,6 +6,7 @@ const graphics = document.getElementById("graphics");
 const details = document.getElementById("details");
 const price = document.getElementById("price");
 const formerror = document.getElementById("formerror");
+const photo = document.getElementById("file");
 const main = document.getElementById("main");
 
 // TODO: Dodać obsluge zdjec
@@ -36,13 +37,14 @@ function validate() {
     details.value = '';
     return ("Details are too long");
   }
+  if (photo.value === '') {
+    return ("Photo is required");
+  }
 
   return "OK";
 }
-async function postFormDataAsJson(url, formData) {
-
+async function postFormDataAsJson(url, formData, file) {
   const formDataJsonString = JSON.stringify(formData);
-
   const fetchOptions = {
 
     method: "POST",
@@ -52,8 +54,14 @@ async function postFormDataAsJson(url, formData) {
     },
 
     body: formDataJsonString,
-  };
+  }
 
+  const form = new FormData();
+  form.append('file', file)
+  const fileFetchOptions = {
+    method: "POST",
+    body: form,
+  };
   const response = await fetch(url, fetchOptions);
   let jsresponse = await response.json()
   if (!response.ok) {
@@ -61,6 +69,7 @@ async function postFormDataAsJson(url, formData) {
     throw new Error(errorMessage);
   }
   if (jsresponse.errors.length === 0) {
+    await fetch('/admin/products/new_photo', fileFetchOptions);
     main.innerHTML = `
     <div class="alert alert-success text-center" role="alert">
     <h4 class="alert-heading">Success!</h4>
@@ -92,8 +101,10 @@ submit_bt.addEventListener("click", function (e) {
   else {
     formerror.innerHTML = `Sending data`
     formerror.classList.add("alert-info", "alert", "text-center");
-    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details'))
+    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details, #file'))
     data = data.reduce((acc, input) => ({ ...acc, [input.id]: input.value }), {});
-    postFormDataAsJson('/admin/products/new', data);
+    // add file to data
+    const file = document.getElementById('file').files[0];
+    postFormDataAsJson('/admin/products/new', data, file);
   }
 });
