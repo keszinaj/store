@@ -7,6 +7,7 @@
   <% if ( locals.top_message ) { %>
     <%- locals.top_message %>
   <% } %>
+  <div id="frontinfo"></div>
     <!-- Carusel Advert -->
     <main>
       <div class="card--list" id="items">
@@ -32,11 +33,12 @@
                     <div>
                         <%= product.Price %> $
                     </div>
-                    <button type="button" class="btn btn-outline-success w-50"  value="<%= product.ID %>"> Buy </button>
+                    <button type="button" class="btn btn-outline-success w-50 buy"  value="<%= product.ID %>"> Buy </button>
                   </div>
                 </div>
               </div>
             <% }); %>
       </div>
     </main>
+    <script type="text/javascript" src="/js/search_item.js"></script>
     <%- include('./footer') %>
