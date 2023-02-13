@@ -76,7 +76,7 @@ export async function getProductsByName(nameSubstring: string) {
     return await Product.findAll({
         where: {
             name: {
-                [Op.substring]: nameSubstring
+                [Op.iLike]: `%${nameSubstring}%`
             }
         }
     })
