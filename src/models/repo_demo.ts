@@ -1,7 +1,7 @@
 /**
  * defined types
  */
-interface Person{
+interface Person {
     ID: number;
     Name: string;
     Surname: string;
@@ -15,39 +15,35 @@ interface Person{
     Street: string;
     Postal_Code: string;
     OrderIDs: number[];
+    Basket: number[];
 }
 
-interface Product{
+interface Product {
     ID: number;
     Name: string;
     CPU: string;
     Memory: string;
     Graphics: string;
     Price: number;
-    Number_available: number; 
+    Number_available: number;
     Photo_Path: string;
     Details: string;
 }
 
-interface Order{
+interface Order {
     ID: number;
     UserID: number;
-    ProductIDs: number[];
+    Products: Product[];
     OrderPlacementDate: Date;
     Status: number;
 }
 
-interface Basket{
-    ID: number;
-    UserID: number;
-    ProductIDs: number[];
-}
 
-interface Settings{
+
+interface Settings {
     number_of_users: number;
     number_of_products: number;
     number_of_orders: number;
-    number_of_baskets: number;
     admin_login: string;
     admin_psw: string;
 }
@@ -55,7 +51,7 @@ interface Settings{
 /**
  * Fake database
  */
-let users: Person[]=[
+let users: Person[] = [
     {
         ID: 1,
         Name: "Jan",
@@ -63,13 +59,14 @@ let users: Person[]=[
         Email: "jankowal@gmail.com",
         Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "123456789",
-        Birthday:  new Date("1999-01-16"),
+        Birthday: new Date("1999-01-16"),
         Gender: 1,
         Country: "Poland",
         City: "Gdansk",
         Street: "Warszawska 28",
         Postal_Code: "00-123",
-        OrderIDs: []
+        OrderIDs: [],
+        Basket: []
     },
     {
         ID: 2,
@@ -78,13 +75,14 @@ let users: Person[]=[
         Email: "pawmichal@gmail.com",
         Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "123456789",
-        Birthday:  new Date("1990-01-21"),
+        Birthday: new Date("1990-01-21"),
         Gender: 1,
         Country: "Poland",
         City: "Bialystok",
         Street: "Powstancow 28",
         Postal_Code: "01-111",
-        OrderIDs: []
+        OrderIDs: [],
+        Basket: []
     },
     {
         ID: 3,
@@ -93,17 +91,18 @@ let users: Person[]=[
         Email: "majkagrzywa@gmail.com",
         Password_Hash: "$argon2i$v=19$m=16,t=2,p=1$YVNERmFzZmc$v7rRXcRmy/RxEmOGecl3gA", //tojesthaslo
         Phone_number: "987654321",
-        Birthday:  new Date("1999-01-16"),
+        Birthday: new Date("1999-01-16"),
         Gender: 0,
         Country: "Poland",
         City: "Olsztyn",
         Street: "Szczepanskiego 18",
         Postal_Code: "00-000",
-        OrderIDs: []
-    },  
+        OrderIDs: [],
+        Basket: []
+    },
 ]
 
-let products: Product[]=[
+let products: Product[] = [
     {
         ID: 1,
         Name: "HP Victus 15",
@@ -116,7 +115,7 @@ let products: Product[]=[
         Details: `Laptop HP Victus został stworzony do rozgrywek na najwyższym poziomie. 
                   Ta elegancka maszyna może pochwalić się procesorem Intel® Core™ 12. generacji oraz nowoczesną kartą graficzną NVIDIA GeForce RTX. Konstrukcja tego laptopa robi równie duże wrażenie, co jego wydajne podzespoły, oferując ulepszony układ chłodzenia, pełną klawiaturę gamingową oraz kamerę HD z redukcją szumów. Korzystaj z nadzwyczajnej wydajności procesora Intel Core i5, tworząc, edytując i udostępniając treści w sposób szybszy i płynniejszy niż kiedykolwiek przedtem. Wyższa produktywność jest do Twojej dyspozycji podczas obsługi multimediów, gier, filmów w najwyższej rozdzielczości oraz filmów sferycznych. Bez spadków mocy i oczekiwania na reakcję komputera. Jednostka 12. generacji potrafi ponadto inteligentnie przyspieszyć taktowanie zegarów technologią Intel Turbo Boost, zwiększając moc adekwatnie do potrzeb.Wejdź do gry i poczuj smak zwycięstwa dzięki najnowszej platformie RTX z architekturą NVIDIA Ampere. Wyposażono ją w dedykowane rdzenie RT odpowiadające za Ray Tracing oraz rdzenie Tensor na potrzeby przetwarzania SI. Wykorzystując technologię głębokiego, maszynowego uczenia się – DLSS (Deep Learning Super Sampling), procesor graficzny zwiększy częstotliwość generowania klatek przy zachowaniu pięknych, ostrych obrazów w grach.
                   NVIDIA Reflex to najbardziej rewolucyjny zestaw technik GPU, który mierzy i obniża opóźnienie systemowe w grach turniejowych (zwane opóźnieniem „od kliknięcia do wyświetlenia”). Wkrocz do akcji i celuj oraz strzelaj już zawsze z większą precyzją. Bądź stale na pierwszym miejscu. Wydajniejsza karta graficzna to zapewnienie wyższej częstotliwości generowania klatek. Zwiększ swoją szansę na wygraną i zobacz akcję na ekranie szybciej od Twoich przeciwników.`
-        
+
     },
     {
         ID: 2,
@@ -127,7 +126,7 @@ let products: Product[]=[
         Price: 1279,
         Number_available: 100,
         Photo_Path: "/",
-        Details: `Add a touch of brilliance to your life with Zenbook 14 Flip OLED, the slim, light and ultra-versatile convertible laptop with a gorgeous 16:10 4K OLED HDR NanoEdge touchscreen that gives you the deepest blacks and the most vivid colors. Powered by the latest AMD Ryzen™ 9 5900HX processor, Zenbook 14 Flip OLED delivers extreme performance for any task. The precision-engineered 360° ErgoLift hinge lets you work or play in whatever mode you wish — laptop, stand, tent, tablet, or anything in between — and for natural creative input the touchscreen supports a 4096-pressure-level stylus. With Zenbook 14 Flip OLED your productivity can really shine, anywhere.` 
+        Details: `Add a touch of brilliance to your life with Zenbook 14 Flip OLED, the slim, light and ultra-versatile convertible laptop with a gorgeous 16:10 4K OLED HDR NanoEdge touchscreen that gives you the deepest blacks and the most vivid colors. Powered by the latest AMD Ryzen™ 9 5900HX processor, Zenbook 14 Flip OLED delivers extreme performance for any task. The precision-engineered 360° ErgoLift hinge lets you work or play in whatever mode you wish — laptop, stand, tent, tablet, or anything in between — and for natural creative input the touchscreen supports a 4096-pressure-level stylus. With Zenbook 14 Flip OLED your productivity can really shine, anywhere.`
     },
     {
         ID: 3,
@@ -172,7 +171,7 @@ let products: Product[]=[
         Graphics: "AMD Radeon™ Graphics",
         Price: 820,
         Number_available: 100,
-        Photo_Path: "/",
+        Photo_Path: "/Dell_Inspiron_3525",
         Details: `Runs smooth. Looks sharp
 
         Power up: Featuring AMD Ryzen 5000 Series Mobile Processors with Radeon Graphics, experience lightning-fast responsiveness and hyper-efficient battery life that keeps you productive, anywhere.Keeps its cool
@@ -221,65 +220,50 @@ let products: Product[]=[
     },
 ]
 
-let orders:Order[]=[
+let orders: Order[] = [
     {
         ID: 1,
         UserID: 1,
-        ProductIDs: [1, 2, 4],
+        Products: [products[0], products[2], products[3]],
         OrderPlacementDate: new Date("2022-01-16"),
         Status: 0,
     },
     {
         ID: 2,
         UserID: 2,
-        ProductIDs: [3, 5, 6],
+        Products: [products[2], products[4], products[5]],
         OrderPlacementDate: new Date("2022-12-16"),
         Status: 1,
     },
     {
         ID: 3,
         UserID: 3,
-        ProductIDs: [7,8],
+        Products: [products[6], products[7]],
         OrderPlacementDate: new Date("2023-01-12"),
         Status: 0,
     },
     {
         ID: 4,
         UserID: 1,
-        ProductIDs: [1, 2, 4, 8],
+        Products: [products[0], products[1], products[3], products[7]],
         OrderPlacementDate: new Date("2023-01-16"),
         Status: 0,
     },
 ]
 
-let baskets:Basket[]=[
-    {
-        ID: 1,
-        UserID: 1,
-        ProductIDs: [1, 2, 3, 4],
-    },
-    {
-        ID: 2,
-        UserID: 2,
-        ProductIDs: [5, 6, 7, 8],
-    },
-    {
-        ID: 3,
-        UserID: 3,
-        ProductIDs: [3, 4],
-    }
-]
 
-let settings:Settings ={
+
+let settings: Settings = {
     number_of_users: 3,
     number_of_products: 8,
     number_of_orders: 4,
-    number_of_baskets: 3,
     admin_login: "admin",
-    admin_psw: "$argon2i$v=19$m=16,t=2,p=1$YXdkdGZneGM$mjr3iMKplxjkI6867RVLmg",
+    admin_psw: "admin",
 }
-export function get_admin()
+
+export function getAdmin()
 {
+
     return {
         login: settings.admin_login,
         password: settings.admin_psw
@@ -288,51 +272,63 @@ export function get_admin()
 /**
  * Function shows all settings
  */
-export function showSettings(){
+export function showSettings() {
     return settings;
 }
 
 /**
  * Function shows all users
  */
-export function getAllUsers():Person[]{
+export function getAllUsers(): Person[] {
     return users;
 }
 
 /**
  * Function shows one user by ID
  */
-export function getUserbyId(id:number):Person|null{
-    const res =  users.find(u => u.ID === id);
-    if(res !== undefined)
-    {
+export function getUserbyId(id: number): Person | null {
+    const res = users.find(u => u.ID === id);
+    if (res !== undefined) {
         return res;
     }
-    else
-    {
+    else {
         return null;
     }
 }
 /**
  * Function finds user by email
  */
-export function getUserbyEmail(mail:string):Person|null{
-    const res =  users.find(u => u.Email === mail);
-    if(res !== undefined)
-    {
+export function getUserbyEmail(mail: string): Person | null {
+    const res = users.find(u => u.Email === mail);
+    if (res !== undefined) {
         return res;
     }
-    else
-    {
+    else {
         return null;
     }
 }
+
+export const mailexist = function (mail) {
+    return new Promise(function (resolve, reject) {
+
+        const res = users.find(u => u.Email === mail);
+        let odp;
+        if (res !== undefined) {
+            odp = true
+        }
+        else {
+            odp = false
+        }
+        resolve(odp);
+
+    });
+};
 
 
 /**
  * Function adds new user to db
  */
-export function pushNewUser(u:Person){
+export function pushNewUser(u: Person) {
     users.push(u)
     settings.number_of_users += 1;
 }
@@ -340,19 +336,27 @@ export function pushNewUser(u:Person){
 /**
  * Function edits user data
  */
-export function editUser(new_user:Person){
+export function editUser(new_user: Person) {
     let index = users.findIndex(u => u.ID === new_user.ID)
-    if(index !== -1)
-    {
-        users[index]=new_user;
+    if (index !== -1) {
+        users[index] = new_user;
     }
 }
 
+
+
 /**
- * function shows the basket belonging to the user(ID)
+ * Function returns all orders from db
  */
-export function getBasketbyUserID(id:number):Basket|null{
-    const res =  baskets.find(u => u.UserID === id);
+export function getAllOrders(): Order[] {
+    return orders;
+}
+
+/**
+ * Function returns all orders from db
+ */
+export function getOrderByID(id:number):Order|null{
+    const res =  orders.find(o => o.ID === id);
     if(res !== undefined)
     {
         return res;
@@ -364,43 +368,16 @@ export function getBasketbyUserID(id:number):Basket|null{
 }
 
 /**
- * Function edits basket
- */
-export function editBasket(new_basket:Basket){
-    let index = baskets.findIndex(b => b.ID === new_basket.ID)
-    if(index !== -1)
-    {
-        baskets[index]=new_basket;
-    }
-}
-
-/**
- * Function adds new basket
- */
-export function pushNewBasket(b:Basket)
-{
-    baskets.push(b);
-    settings.number_of_baskets += 1;
-}
-
-/**
- * Function returns all orders from db
- */
-export function getAllOrders():Order[]{
-    return orders;
-}
-
-/**
  * Function returns user data
  */
-export function getOrdersbyUserID(id: number):Order[]{
+export function getOrdersbyUserID(id: number): Order[] {
     return orders.filter(o => o.UserID === id)
 }
 
 /**
  * Function adds order to db
  */
-export function pushNewOrder(o: Order){
+export function pushNewOrder(o: Order) {
     orders.push(o);
     settings.number_of_orders += 1
 }
@@ -408,41 +385,77 @@ export function pushNewOrder(o: Order){
 /**
  * Function returns all products from db
  */
-export function getAllProducts(): Product[]
-{
+export function getAllProducts(): Product[] {
     return products;
 }
-
+export function getAllProductsIDs(): Number[]
+{
+    let ids: Number[] = []
+    products.forEach(e => ids.push(e.ID))
+    return ids;
+}
 /**
  * Function returns one product(by id) from db
  */
-export function getProductbyID(id:number):Product|null{
-    const res =  products.find(u => u.ID === id);
-    if(res !== undefined)
-    {
+export function getProductbyID(id: number): Product | null {
+    const res = products.find(u => u.ID === id);
+    if (res !== undefined) {
         return res;
     }
-    else
-    {
+    else {
         return null;
     }
 }
 
 /**
- * Function adds one new product to db.
+ * Function edits product data
  */
-export function pushNewProduct(prod: Product){
+export function pushNewProduct(prod: Product) {
     products.push(prod);
-    settings.number_of_products+=1;
+    settings.number_of_products += 1;
 }
 
 /**
  * Function adds one new product to db.
  */
-export function editProduct(prod: Product){
+export function editProduct(prod: Product) {
     let index = products.findIndex(p => p.ID === prod.ID)
-    if(index !== -1)
-    {
-        products[index]=prod;
+    if (index !== -1) {
+        products[index] = prod;
     }
+}
+
+/**
+ * Function deletes one product from db.
+ */
+export function deleteProduct(prod: Number) {
+    let index = products.findIndex(p => p.ID === prod)
+    if (index !== -1) {
+        const product = products[index];
+        getAllUsers().forEach(u => {
+            let index = u.Basket.findIndex(p => p === product.ID)
+            if (index !== -1) {
+                u.Basket.splice(index, 1);
+            }
+        });
+
+
+        const photoPath = product.Photo_Path;
+        if (photoPath !== "/") {
+            // delete photo file from /public/laptop_img
+        }
+        products.splice(index, 1);
+        settings.number_of_products -= 1;
+    }
+}
+
+export function generateProductID():number{
+    let id = 0;
+    products.forEach(p => {
+        if(p.ID > id)
+        {
+            id = p.ID;
+        }
+    });
+    return id+1;
 }

@@ -1,5 +1,5 @@
 <%- include('./head_v1') %>
-<main class="mx-5 px-5">
+  <main class="mx-5 px-5">
     <div class="p-5 mx-5">
       <table class="table bg-white">
         <thead class="bg-light">
@@ -16,62 +16,20 @@
         <tbody>
 
 
-          <!--One Item-->
-          <tr>
-            <td>
-
-              <p class="mb-1">21374202137420</p>
-
-            </td>
-            <td>
-              <p class="mb-1">Jan</p>
-            </td>
-            <td>
-              <p class="mb-1">Kowalski</p>
-            </td>
-            
-            <td>
-                <p class="mb-1">jankowalski@gmail.com</p>
-            </td>
-            <td>
-                <p class="mb-1">123456789</p>
-            </td>
-            <td>
-                <p class="mb-1">Berlin</p>
-            </td>
-            <td>
-                <a href="/admin/user/1" class="btn btn-sm btn-outline-primary px-4">More</a>
-            </td>
-          </tr>
-          <!-- One Item -->
-          <!--One Item-->
-          <tr>
-            <td>
-
-              <p class="mb-1">21374202137420</p>
-
-            </td>
-            <td>
-              <p class="mb-1">Jan</p>
-            </td>
-            <td>
-              <p class="mb-1">Kowalski</p>
-            </td>
-            
-            <td>
-                <p class="mb-1">jankowalski@gmail.com</p>
-            </td>
-            <td>
-                <p class="mb-1">123456789</p>
-            </td>
-            <td>
-                <p class="mb-1">Berlin</p>
-            </td>
-            <td>
-              <a href="/admin/user/1" class="btn btn-sm btn-outline-primary px-4">More</a>
-            </td>
-          </tr>
-          <!-- One Item -->
+          <% users.forEach(user=> { %>
+            <tr>
+                <%- include('./partial/table_row', {content: user.ID}) %>
+                <%- include('./partial/table_row', {content: user.Name}) %>
+                <%- include('./partial/table_row', {content: user.Surname}) %>
+                <%- include('./partial/table_row', {content: user.Email}) %>
+                <%- include('./partial/table_row', {content: user.Phone_number}) %>
+                <%- include('./partial/table_row', {content: user.City}) %>
+                <% let ref='/admin/user/' + user.ID %>
+                <td>
+                  <a href="<%=ref %>" class="btn btn-sm btn-outline-primary px-4">More</a>
+                </td>
+            </tr>
+            <% }) %>
 
         </tbody>
       </table>
