@@ -5,12 +5,12 @@ const memory = document.getElementById("memory");
 const graphics = document.getElementById("graphics");
 const details = document.getElementById("details");
 const price = document.getElementById("price");
+const available = document.getElementById("available");
 const formerror = document.getElementById("formerror");
 const photo = document.getElementById("file");
 const main = document.getElementById("main");
 //get product ID from url path
 const productID = window.location.pathname.split("/")[4];
-
 
 // TODO: Dodać obsluge zdjec
 
@@ -34,6 +34,11 @@ function validate() {
   if (price.value === '' || price.value.length > 500 || isNaN(price.value) === true) {
     price.value = '';
     return ("Correct price is required");
+  }
+
+  if (available.value === '' || available.value.length > 500 || isNaN(available.value) === true) {
+    available.value = '';
+    return ("Correct amount is required");
   }
 
   if (details.value.length > 10000) {
@@ -100,7 +105,7 @@ submit_bt.addEventListener("click", function (e) {
     formerror.innerHTML = `Sending data`;
     formerror.classList = [];
     formerror.classList.add("alert-info", "alert", "text-center");
-    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details, #file'))
+    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #available, #details, #file'))
     data = data.reduce((acc, input) => ({ ...acc, [input.id]: input.value }), { productID: parseInt(productID) });
     const file = document.getElementById('file').files[0];
     postFormDataAsJson('/admin/products/edit/' + productID, data, file);

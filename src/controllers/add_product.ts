@@ -8,7 +8,7 @@ function addProduct(data) {
   const CPU = data.cpu;
   const Memory = data.memory;
   const Graphics = data.graphics;
-  const Number_available = 0;
+  const Number_available = parseInt(data.available);
   const Photo_Path = data.file.split('\\')[2];
   const id = generateProductID();
   const product = {

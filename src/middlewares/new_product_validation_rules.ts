@@ -43,6 +43,16 @@ export const newProductValidationRules = () => {
       .trim()
       .escape(),
 
+    body('available')
+      .notEmpty()
+      .withMessage('Available amount is empty')
+      .isLength({ min: 0, max: 500 })
+      .withMessage('Available amount too long')
+      .isInt()
+      .withMessage('Available amount must be a number')
+      .trim()
+      .escape(),
+
     body('details')
       .isLength({ min: 0, max: 10000 })
       .withMessage('Details too long')
