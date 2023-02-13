@@ -18,7 +18,7 @@ interface Person {
     Basket: number[];
 }
 
-interface Product {
+export interface Product {
     ID: number;
     Name: string;
     CPU: string;

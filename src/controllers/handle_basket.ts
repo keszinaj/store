@@ -1,4 +1,4 @@
-import { getUserbyId, getProductbyID, pushNewOrder, getAllOrders, getAllUsers, addOrderToUser, deleteProductFromBasket } from '../models/repo_demo';
+import { Product, getUserbyId, getProductbyID, pushNewOrder, getAllOrders, getAllUsers, addOrderToUser, deleteProductFromBasket } from '../models/repo_demo';
 //for payment config
 const stripe = require('stripe')("sk_test_51Mae79DsMkUfjELNFGqTadfXlVJo48xS4ekh0R1FhdngnYb1HGdL3xlDWQsK6TK3IxwpX8yPR7v2aVwupj8CnzjC00C5uwJki6")
 
@@ -74,11 +74,20 @@ export async function successPayment(req, res){
         let user_basket = user.Basket;
         user.Basket = [];
         if(user_basket === undefined){res.status(404).send('Payment error'); return;}
+        let acc:Product[] = []
+        let prods = user_basket.forEach(i =>{
+          let pom = getProductbyID(i);
+          if(pom !== null)
+          {
+            acc.push(pom)
+          }
+        } )
+        if(prods === null){res.status(404).send('Payment error'); return;}
         let prod_id =  Math.floor(Math.random() * 100000)
         let order = {
             ID: prod_id,
             UserID: parseInt((<any>req).user),
-            ProductIDs: user_basket,
+            Products: acc,
             OrderPlacementDate: new Date(),
             Status: 0
         }
