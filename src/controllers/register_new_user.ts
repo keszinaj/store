@@ -23,7 +23,7 @@ async function registerUser(data)
         Street: data.street_and_num,
         Postal_Code: data.zipcode,
         OrderIDs: [],
-        basket: []
+        Basket: []
     }
     pushNewUser(new_user);
 
