@@ -69,7 +69,7 @@ function setButtons(){
     {
         btn_next.classList.remove("disabled")
     }
-    else if(!btn_next.classList.contains("disabled"))
+    else if(allIDs.length <= ip + ni && !btn_next.classList.contains("disabled"))
     {
         btn_next.classList.add("disabled")
     }
