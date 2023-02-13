@@ -7,6 +7,7 @@ const router = express.Router();
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
+import {addToCart} from '../controllers/landing_page'
 
 import {renderBasket, apiPayment, successPayment} from '../controllers/handle_basket'
 
@@ -19,7 +20,10 @@ router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 
 router.get("/product/:id", getProductDetails);
 
+
 router.get('/basket', authorize,  renderBasket);
+router.post("/addtobasket", authorize, json, addToCart);
+
 
 router.get('/basket/payment', authorize, apiPayment);
 router.get('/checkout',  authorize, successPayment);

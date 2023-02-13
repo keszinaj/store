@@ -44,7 +44,7 @@ export const newProductValidationRules = () => {
       .escape(),
 
     body('details')
-      .isLength({ min: 0, max: 500 })
+      .isLength({ min: 0, max: 10000 })
       .withMessage('Details too long')
       .trim()
       .escape(),
