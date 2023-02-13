@@ -14,7 +14,7 @@
         <% products.forEach(product=> { %>
             <!--Item-->
             <div class="card card--style">
-                <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+                <img src="/laptop_img/<%= product.Photo_Path %>" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><a href="/product/<%= product.ID %>" class="text-dark"><%= product.Name %> </a></h5>
                   <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
