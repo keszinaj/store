@@ -24,11 +24,9 @@ export function addToCart(req, res){
   if(p !== null)
   {
     for (let i = 0; i < amount; i++) {
-      p.basket.push(pid)
+      p.Basket.push(pid)
     }
   }
-  console.log(p)
-  console.log(typeof req.session.uid)
   res.status(200).json({ errors: ""}); 
 }
 
