@@ -9,7 +9,7 @@ function addProduct(data) {
   const Memory = data.memory;
   const Graphics = data.graphics;
   const Number_available = 0;
-  const Photo_Path = "/";
+  const Photo_Path = data.file.split('\\')[2];
   const id = generateProductID();
   const product = {
     ID: id,

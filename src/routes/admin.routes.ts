@@ -7,8 +7,17 @@ import { login_user } from '../controllers/admin_login'
 import { addNewProduct } from '../controllers/add_product';
 import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
 const json = express.json()
-
-
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './src/public/laptop_img')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
+router.use(express.urlencoded({ extended: true }));
 
 router.get('/login', (req, res) => {
     //for examle purpose
@@ -87,6 +96,10 @@ router.get("/products/new", authorize, (req, res) => {
 });
 
 router.post("/products/new", authorize, json, newProductValidationRules(), addNewProduct);
+router.post("/products/new_photo", authorize, upload.single('file'), (req, res) => {
+    res.status(201).json({ errors: []});
+});
+
 
 router.get("/products/:id", authorize, (req, res) => {
     let id: string = req.params.id;
