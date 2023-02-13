@@ -1,13 +1,13 @@
 import express from 'express';
 import authorize from '../middlewares/authorize';
 import register from '../controllers/register_new_user'
-import {userValidationRules} from '../middlewares/user_data_validation_rules'
+import {userValidationRules, dataValidationRules, pswValidationRules} from '../middlewares/user_data_validation_rules'
 const router = express.Router();
 
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
-
+import {getProfileSettings, changeAccountData} from '../controllers/user_account'
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -61,11 +61,11 @@ router.get('/logout', logoutUser);
 router.get('/register', (req, res) => {res.render('user/register');});
 router.post('/register', json, userValidationRules(),  register);
 
+import { getUserbyId } from '../models/repo_demo';
+router.get('/account', authorize, getProfileSettings);
+router.post('/account', authorize, json, dataValidationRules(),  changeAccountData);
 
-router.get('/account', authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/account_settings');
-});
+
 
 router.get('/account/changepassword', authorize, (req, res) => {
     //for examle purpose
