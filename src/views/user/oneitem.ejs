@@ -6,12 +6,13 @@
 <main>
     <div class="one_item_top">
         <div>
-            <img src="/laptop_ex.webp" class="rounded" alt="laptop">
+            <% let photoPath='/laptop_img/' + product.photoPath + ".webp" %>
+            <img src="<%= photoPath %>" class="rounded" alt="laptop">
         </div>
         <div class="one_item_card">
             <div class="one_item_name pt-5">
                 <h2>
-                    <%= product.Name %>
+                    <%= product.name %>
                 </h2>
             </div>
             <div class="card border-light mb-5 one_item_card_components" style="max-width: 18rem;">
@@ -19,13 +20,13 @@
                 <div class="card-body text-primary">
                     <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
                         <li>
-                            CPU: <%= product.CPU %>
+                            CPU: <%= product.cpu %>
                         </li>
                         <li>
-                            Memory: <%= product.Memory %>
+                            Memory: <%= product.memory %>
                         </li>
                         <li>
-                            Graphics: <%= product.Graphics %>
+                            Graphics: <%= product.graphics %>
                         </li>
                         <li>
                     </ul>
@@ -34,7 +35,7 @@
 
             <div class="card border-secondary mb-5 one_item_buy_card text-center" style="max-width: 18rem;">
                 <div class="card-body text-secondary">
-                    <h3 class="mt-2 mb-0 card-title text-dark">$<%= product.Price %>
+                    <h3 class="mt-2 mb-0 card-title text-dark">$<%= product.price %>
                     </h3>
                     <form class="form-inline">
                         <select class="custom-select mb-1" id="inlineFormCustomSelectPref">
@@ -62,7 +63,7 @@
     <div class="one_item_more_info">
         <h4>More info</h4>
         <p>
-            <%= product.Details %>
+            <%= product.details %>
         </p>
     </div>
   

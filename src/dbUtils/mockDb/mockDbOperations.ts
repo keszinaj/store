@@ -59,11 +59,17 @@ export async function addOrders(){
 
 export async function addToBasket(user: User, productId: number){
     let product = await getProductById(productId);
+    if (product === null){
+        return Promise.reject(`Can't find product with id ${productId}`);
+    }
     await addProductToBasket(user, product);
 }
 
 export async function removeFromBasket(user: User, productId: number){
     let product = await getProductById(productId);
+    if (product === null){
+        return Promise.reject(`Can't find product with id ${productId}`);
+    }
     await removeProductFromBasket(user, product);
 }
 

@@ -34,5 +34,18 @@ export class Product extends Model {
     usersWhoHaveThisProductInBasket: User[];
 
     @BelongsToMany(() => Order, () => OrderProduct)
-    orders: Order[]
+    orders: Order[];
+
+    public getPartialInfo(){
+        return {
+            id: this.id,
+            name: this.name,
+            cpu: this.cpu,
+            memory: this.memory,
+            graphics: this.graphics,
+            price: this.price,
+            amountAvailable: this.amountAvailable,
+            photoPath: this.photoPath
+        }
+    }
 }
