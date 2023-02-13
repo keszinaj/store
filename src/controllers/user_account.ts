@@ -1,6 +1,6 @@
 const argon2 = require('argon2');
 const {validationResult } = require('express-validator');
-import { getUserbyId, editUser, changePassword} from '../models/repo_demo';
+import { getUserbyId, editUser, changePassword, getOrdersbyUserID} from '../models/repo_demo';
 /**
  * Function return profile settings view
  */
@@ -90,4 +90,25 @@ export async function changePsw(req, res)
     }
     res.status(201).json({ errors: errors.errors});
 
+}
+
+/**
+ * Function render user history
+ *
+*/
+export function renderUserHistory(req, res){
+    let id= (req as any).user;
+    id = parseInt(id);
+    if(isNaN(id)) { res.status(400).send('Server side error'); return;}
+
+    let user = getUserbyId(id);
+    if(user === null){ res.status(400).send('Server side error'); return;}
+    const orders = getOrdersbyUserID(id);
+    const ordersWithTotalPrice = orders.map(order => {
+        const totalPrice = order.Products.reduce((total, product) => {
+            return total + product!.Price;
+        }, 0);
+        return { ...order, totalPrice: totalPrice };
+    });
+    res.render('user/account_history', { orders: ordersWithTotalPrice });
 }

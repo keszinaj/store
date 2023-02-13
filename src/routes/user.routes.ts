@@ -7,7 +7,7 @@ const router = express.Router();
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
-import {getProfileSettings, changeAccountData, changePsw} from '../controllers/user_account'
+import {getProfileSettings, changeAccountData, changePsw, renderUserHistory} from '../controllers/user_account'
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -61,27 +61,19 @@ router.get('/logout', logoutUser);
 router.get('/register', (req, res) => {res.render('user/register');});
 router.post('/register', json, userValidationRules(),  register);
 
-import { getUserbyId } from '../models/repo_demo';
+
 router.get('/account', authorize, getProfileSettings);
 router.post('/account', authorize, json, dataValidationRules(),  changeAccountData);
 
 
 
 router.get('/account/changepassword', authorize, (req, res) => {
-    //for examle purpose
     res.render('user/account_change_password');
 });
 router.post('/account/changepassword', authorize, json, pswValidationRules(),  changePsw);
 
-router.get('/account/history', authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/account_history');
-});
+router.get('/account/history', authorize, renderUserHistory);
 
-router.get('/account/delete', authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/account_delete');
-});
 
 
 
