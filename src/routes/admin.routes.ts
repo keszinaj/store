@@ -74,7 +74,6 @@ router.get('/orders', authorize, async (req, res) => {
             await getProductsInOrder(order);
             return order;
         }));
-    console.log(renderData);
     res.render('admin/orders', { orders: renderData });
 });
 
