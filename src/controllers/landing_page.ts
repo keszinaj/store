@@ -1,4 +1,4 @@
-import {getAllProducts, getProductById} from "../dbUtils/dbQueries";
+import {addProductToBasket, getAllProducts, getProductById, getUserById} from "../dbUtils/dbQueries";
 
 export function getLandingPage(req, res)
 {
@@ -12,32 +12,26 @@ export function getLandingPage(req, res)
   }
 }
 
-export async function sendAllProductsIDs(req, res){
+export async function sendAllProductsIDs(req, res) {
   let allIds: Number[];
   let products = await getAllProducts();
   allIds = products.map(prod => prod.id);
   res.status(200).json({ids: allIds});
+}
 
+export async function addToCart(req, res) {
+  let productId = parseInt(req.body.id);
+  let amount = parseInt(req.body.amount);
+  let userId = req.session.uid;
 
-export function addToCart(req, res){
-
-  let pid = parseInt(req.body.id)
-  let amount = parseInt(req.body.amount)
-  let uid = req.session.uid
-  let p = getUserbyId(uid);
-  if(p !== null)
-  {
+  let user = await getUserById(userId);
+  let product = await getProductById(productId);
+  if(user !== null && product !== null) {
     for (let i = 0; i < amount; i++) {
-      p.Basket.push(pid)
+      await addProductToBasket(user, product);
     }
   }
   res.status(200).json({ errors: ""});
-}
-
-export function sendAllProductsIDs(req, res){
-  let allids: Number[]= [];
-  allids = getAllProductsIDs()
-  res.status(200).json({ids: allids})
 }
 
 export async function sendProductsPartialInfo(req, res){
@@ -54,5 +48,5 @@ export async function sendProductsPartialInfo(req, res){
     }
   });
 
-  res.status(200).json({prod: partialInfoArr})
+  res.status(200).json({prod: partialInfoArr});
 }
