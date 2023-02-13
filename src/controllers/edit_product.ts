@@ -9,7 +9,7 @@ function _editProduct(data) {
   const CPU = data.cpu;
   const Memory = data.memory;
   const Graphics = data.graphics;
-  const Number_available = 0;
+  const Number_available = parseInt(data.available);
   let Photo_Path = data.file ? data.file.split('\\')[2] : null;
   const productID = data.productID;
   const product = getProductbyID(productID);
