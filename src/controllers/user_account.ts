@@ -1,5 +1,6 @@
+const argon2 = require('argon2');
 const {validationResult } = require('express-validator');
-import { getUserbyId, editUser } from '../models/repo_demo';
+import { getUserbyId, editUser, changePassword} from '../models/repo_demo';
 /**
  * Function return profile settings view
  */
@@ -58,6 +59,35 @@ export function changeAccountData(req, res){
         bindData(req.body, user);
       }
 
+    res.status(201).json({ errors: errors.errors});
+
+}
+
+/**
+ * Function change user password
+ */
+export async function changePsw(req, res)
+{
+    let id= (req as any).user;
+    id = parseInt(id);
+    if(isNaN(id)) { res.status(400).send('Server side error'); return;}
+
+    let user = getUserbyId(id);
+    if(user === null){ res.status(400).send('Server side error'); return;}
+    let errors = validationResult(req);
+
+    if (errors.isEmpty()) {
+        let h_psw = user.Password_Hash
+        let psw_input = req.body.old_psw
+        if (await argon2.verify(h_psw, psw_input)) {
+            let p = await argon2.hash(req.body.password)
+            changePassword(id, p);
+        }
+        else{
+            res.status(201).json({ errors: [{msg: "Wrong password"}]});
+            return;
+        }
+    }
     res.status(201).json({ errors: errors.errors});
 
 }

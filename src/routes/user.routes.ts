@@ -7,7 +7,7 @@ const router = express.Router();
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
 import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
-import {getProfileSettings, changeAccountData} from '../controllers/user_account'
+import {getProfileSettings, changeAccountData, changePsw} from '../controllers/user_account'
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -71,6 +71,7 @@ router.get('/account/changepassword', authorize, (req, res) => {
     //for examle purpose
     res.render('user/account_change_password');
 });
+router.post('/account/changepassword', authorize, json, pswValidationRules(),  changePsw);
 
 router.get('/account/history', authorize, (req, res) => {
     //for examle purpose

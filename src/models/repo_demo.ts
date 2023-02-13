@@ -340,6 +340,15 @@ export function editUser(new_user: Person) {
     }
 }
 
+/**
+ * Function edits user password(hash)
+ */
+export function changePassword(id, password)
+{
+    let u = getUserbyId(id)
+    if(u!== null){u.Password_Hash = password}
+
+}
 
 
 /**

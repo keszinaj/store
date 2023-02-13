@@ -19,7 +19,7 @@ function createRequestData() {
     else { data["gender"] = 2 }
     return data;
 }
-
+//
 function validate() {
     if (fname.value === '' || fname.value.length > 500) {
         fname.value = '';
@@ -79,10 +79,10 @@ async function postFormDataAsJson(url, formData) {
         whbody.innerHTML = `
   <div class="container d-flex align-items-center justify-content-center my-5 py-5">
       <div class="rounded border border-success text-center p-5 m-5">
-          <h2>Successful change data.</h2><br> Click "Profile settings" to return to the profile settings.
+          <h2>Successful change data.</h2><br> Click "Store" to return to the store.
           <br>
-          <a href="/account">
-            <button type="button" class="btn btn-outline-primary m-3">Profile settings</button>
+          <a href="/">
+            <button type="button" class="btn btn-outline-primary m-3">Store</button>
           </a>
           </div>
   </div>
