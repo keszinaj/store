@@ -12,7 +12,7 @@ async function addProduct(data) {
     cpu: data.cpu,
     memory: data.memory,
     graphics: data.graphics,
-    amountAvailable: 0,
+    amountAvailable: parseInt(data.available),
     photoPath: data.file.split('\\')[2]
   });
 

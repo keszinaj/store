@@ -17,6 +17,7 @@ async function _editProduct(data) {
     product.cpu = data.cpu;
     product.memory = data.memory;
     product.graphics = data.graphics;
+    product.amountAvailable = parseInt(data.available);
 
     let photoPath = data.file ? data.file.split('\\')[2] : null;
     if (photoPath) {
@@ -40,5 +41,4 @@ export async function editProduct(req, res) {
       await _editProduct(req.body);
     }
     res.status(201).json({ errors: errors.array() });
-  
   }

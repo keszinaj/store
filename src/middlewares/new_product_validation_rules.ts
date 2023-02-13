@@ -1,4 +1,4 @@
-const { check, body } = require('express-validator');
+const { body } = require('express-validator');
 export const newProductValidationRules = () => {
   return [
     body('name')
@@ -40,6 +40,16 @@ export const newProductValidationRules = () => {
       .withMessage('Price too long')
       .isNumeric()
       .withMessage('Price must be a number')
+      .trim()
+      .escape(),
+
+    body('available')
+      .notEmpty()
+      .withMessage('Available amount is empty')
+      .isLength({ min: 0, max: 500 })
+      .withMessage('Available amount too long')
+      .isInt()
+      .withMessage('Available amount must be a number')
       .trim()
       .escape(),
 
