@@ -6,7 +6,7 @@ const info = document.getElementById('frontinfo');
 //global scope
 let allIDs = [] //list of all available item
 let ip = 0; //first item on list
-let ni = 3; //number of items per page
+let ni = 8; //number of items per page
 
 
 async function downloadAllIDs(){

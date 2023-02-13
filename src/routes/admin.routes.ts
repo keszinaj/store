@@ -9,7 +9,7 @@ import {
     getUserById,
     getProductById,
     getOrdersOfUser,
-    getProductsInOrder, getAllOrders, getUserWithOrder, getOrderById, deleteProduct
+    getProductsInOrder, getAllOrders, getUserWithOrder, getOrderById, deleteProduct, saveOrder
 } from "../dbUtils/dbQueries";
 import { addNewProduct } from '../controllers/add_product';
 import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
@@ -95,6 +95,22 @@ router.get("/orders/:id", authorize, async (req, res) => {
     // const user = getUserbyId(order.UserID);
     const totalAmount = products.reduce((sum, p) => sum + p.price, 0);
     res.render('admin/oneorder', { order: order, user: user, totalAmount: totalAmount });
+});
+router.get('/order/updatestatus/:id', authorize, async (req, res) => {
+    let id: string = req.params.id;
+    const orderID = parseInt(id);
+    if (isNaN(orderID)) {
+        res.status(400).send('Invalid order ID');
+        return;
+    }
+    const order = await getOrderById(orderID);
+    if (!order) {
+        res.status(404).send('Order not found');
+        return;
+    }
+    (order.status === 1) ? order.status = 0 : order.status = 1;
+    await saveOrder(order)
+    res.redirect(`/admin/orders/${id}`)
 });
 
 router.get('/products', authorize, async (req, res) => {
