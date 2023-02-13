@@ -258,7 +258,7 @@ let settings: Settings = {
     number_of_products: 8,
     number_of_orders: 4,
     admin_login: "admin",
-    admin_psw: "admin",
+    admin_psw: "$argon2i$v=19$m=16,t=2,p=1$YWRmYWRmYWZkYQ$psZqtzVGEex2A9F89ybQFw",
 }
 
 export function getAdmin()
@@ -367,7 +367,9 @@ export function addProductToBasket(user_id:number, product_id:number){
 export function deleteProductFromBasket(user_id:number, product_id:number){
     let u = getUserbyId(user_id)
     if( u === null){return}
-    u.Basket = u.Basket.filter(e => e !== product_id)
+    const idx = u.Basket.findIndex(e => e === product_id);
+    if(idx < 0){return}
+    u.Basket.splice(idx, 1)
 }
 
 
