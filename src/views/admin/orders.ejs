@@ -17,17 +17,17 @@
 
           <% orders.forEach(order=> { %>
             <tr>
-              <%- include('./partial/table_row', {content: order.ID}) %>
+              <%- include('./partial/table_row', {content: order.id}) %>
                 <%- include('./partial/table_row', {content: order.username}) %>
-                  <%- include('./partial/table_row', {content: order.OrderPlacementDate.toUTCString()}) %>
+                  <%- include('./partial/table_row', {content: order.createdAt.toUTCString()}) %>
 
                     <td>
                       <span class="badge rounded-pill bg-primary">
-                        <%= order.Products.length %>
+                        <%= order.products.length %>
                       </span>
                     </td>
-                    <% let status=order.Status %>
-                      <% if (status==0 ) { %>
+                    <% let status=order.status %>
+                      <% if (status===0) { %>
                         <td>
                           <span class="badge bg-warning text-dark">Pending</span>
                         </td>
@@ -37,7 +37,7 @@
                           </td>
                           <% } %>
                             <td>
-                              <% let ref='/admin/orders/' + order.ID %>
+                              <% let ref='/admin/orders/' + order.id %>
                                 <a href="<%=ref %>" class="btn btn-sm btn-outline-primary px-4">Go</a>
                             </td>
             </tr>

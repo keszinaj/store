@@ -10,30 +10,30 @@
                             <h5 class="card-title">User data</h5>
 
                             <ul class="list-group list-group-flush">
-                                <% let userName=user.Name + " " + user.Surname %>
-                                    <%- include('./partial/user_info_li', {info: "Id" , content: user.ID}) %>
+                                <% let userName=user.name + " " + user.surname %>
+                                    <%- include('./partial/user_info_li', {info: "Id" , content: user.id}) %>
                                         <%- include('./partial/user_info_li', {info: "Name and surname" , content:
                                             userName}) %>
-                                            <%- include('./partial/user_info_li', {info: "Email" , content: user.Email})
+                                            <%- include('./partial/user_info_li', {info: "Email" , content: user.email})
                                                 %>
                                                 <%- include('./partial/user_info_li', {info: "Phone" , content:
-                                                    user.Phone_number}) %>
+                                                    user.phoneNumber}) %>
                                                     <%- include('./partial/user_info_li', {info: "Birthday" , content:
-                                                        user.Birthday.toDateString()}) %>
-                                                        <% let gender=user.Gender==1 ? "Male" : "Female" %>
+                                                        user.birthday.toDateString()}) %>
+                                                        <% let gender=user.gender==1 ? "Male" : "Female" %>
                                                             <%- include('./partial/user_info_li', {info: "Gender" ,
                                                                 content: gender}) %>
                                                                 <%- include('./partial/user_info_li',
-                                                                    {info: "Street and number" , content: user.Street})
+                                                                    {info: "Street and number" , content: user.street})
                                                                     %>
                                                                     <%- include('./partial/user_info_li', {info: "City"
-                                                                        , content: user.City}) %>
+                                                                        , content: user.city}) %>
                                                                         <%- include('./partial/user_info_li',
                                                                             {info: "Zip-Code" , content:
-                                                                            user.Postal_Code}) %>
+                                                                            user.postalCode}) %>
                                                                             <%- include('./partial/user_info_li',
                                                                                 {info: "Country" , content:
-                                                                                user.Country}) %>
+                                                                                user.country}) %>
 
                             </ul>
                         </div>
@@ -53,15 +53,15 @@
                             <!-- Order -->
                             <% orders.forEach(order=> { %>
                                 <div>
-                                    <h4>Order number: <%= order.ID %>
+                                    <h4>Order number: <%= order.id %>
                                     </h4>
-                                    <p><strong>Order date: <%= order.OrderPlacementDate.toUTCString() %></strong></p>
-                                    <% order.Products.forEach(product=> { %>
+                                    <p><strong>Order date: <%= order.createdAt.toUTCString() %></strong></p>
+                                    <% order.products.forEach(product=> { %>
                                         <div class="row">
                                             <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                                 <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                                     data-mdb-ripple-color="light">
-                                                    <% let photoPath='/laptop_img/' + product.Photo_Path + ".webp" %>
+                                                    <% let photoPath='/laptop_img/' + product.photoPath + ".webp" %>
                                                         <img src="<%= photoPath %>" class="w-100" alt="laptop" />
                                                         <a href="#!">
                                                             <div class="mask"
@@ -72,7 +72,7 @@
                                             </div>
                                             <div class="col-lg-5 col-md-6 py-5">
                                                 <p><strong>
-                                                        <%= product.Name %>
+                                                        <%= product.name %>
                                                     </strong></p>
                                             </div>
                                         </div>

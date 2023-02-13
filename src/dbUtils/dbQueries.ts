@@ -6,12 +6,16 @@ export function getAdmin() {
     // TODO: query database for a user and check if he's an admin
     return {
         login: "admin",
-        password: "$argon2i$v=19$m=16,t=2,p=1$YXdkdGZneGM$mjr3iMKplxjkI6867RVLmg"
+        password: "$argon2i$v=19$m=16,t=2,p=1$YXdkdGZneGM$mjr3iMKplxjkI6867RVLmg" //admin
     }
 }
 
 export async function getAllUsers() {
     return await User.findAll();
+}
+
+export async function getUserById(id: number) {
+    return await User.findByPk(id);
 }
 
 export async function getUserByEmail(targetEmail: string) {
@@ -48,6 +52,20 @@ export async function getAllProducts() {
     return await Product.findAll();
 }
 
+export async function getProductsInOrder(order: Order) {
+    const products =  await order.$get("products");
+    order.products = products;
+    return products;
+}
+
+export async function getProductById(productId: number) {
+    return await Product.findOne({
+        where: {
+            id: productId
+        }
+    });
+}
+
 /*
 Saves specified product to the database.
 If the product didn't exist, it creates it with SQL INSERT query.
@@ -57,22 +75,29 @@ export async function saveProduct(product: Product) {
     return await product.save();
 }
 
-export async function getProductById(productId: number) {
-    let product = await Product.findOne({
+export async function deleteProduct(productId: number) {
+    return await Product.destroy({
         where: {
             id: productId
         }
-    });
-
-    if (product === null) {
-        return Promise.reject("Couldn't find any product with specified id");
-    }
-    return product;
+    })
 }
 
 
 export async function getAllOrders() {
     return await Order.findAll();
+}
+
+export async function getOrdersOfUser(user: User) {
+    return await user.$get("orders");
+}
+
+export async function getUserWithOrder(order: Order) {
+    return await order.$get("user");
+}
+
+export async function getOrderById(id: number) {
+    return await Order.findByPk(id);
 }
 
 /*

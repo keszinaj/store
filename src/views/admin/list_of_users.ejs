@@ -24,7 +24,7 @@
                 <%- include('./partial/table_row', {content: user.email}) %>
                 <%- include('./partial/table_row', {content: user.phoneNumber}) %>
                 <%- include('./partial/table_row', {content: user.city}) %>
-                <% let ref='/admin/user/' + user.ID %>
+                <% let ref='/admin/user/' + user.id %>
                 <td>
                   <a href="<%=ref %>" class="btn btn-sm btn-outline-primary px-4">More</a>
                 </td>
