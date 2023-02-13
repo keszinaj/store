@@ -18,7 +18,7 @@ interface Person {
     Basket: number[];
 }
 
-interface Product {
+export interface Product {
     ID: number;
     Name: string;
     CPU: string;
@@ -66,7 +66,7 @@ let users: Person[] = [
         Street: "Warszawska 28",
         Postal_Code: "00-123",
         OrderIDs: [],
-        Basket: []
+        Basket: [1, 2, 3]
     },
     {
         ID: 2,
@@ -343,6 +343,32 @@ export function editUser(new_user: Person) {
     }
 }
 
+/**
+ * Function add order to user
+ */
+export function addOrderToUser(user_id:number, order_id:number,)
+{
+    let u = getUserbyId(user_id)
+    if( u === null){return}
+    u.OrderIDs.push(order_id)
+}
+
+/**
+ * 
+ */
+export function addProductToBasket(user_id:number, product_id:number){
+    let u = getUserbyId(user_id)
+    if( u === null){return}
+    u.Basket.push(product_id)
+}
+/**
+ * 
+ */
+export function deleteProductFromBasket(user_id:number, product_id:number){
+    let u = getUserbyId(user_id)
+    if( u === null){return}
+    u.Basket = u.Basket.filter(e => e !== product_id)
+}
 
 
 /**

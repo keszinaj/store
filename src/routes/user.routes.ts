@@ -9,6 +9,8 @@ import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo} from '../co
 import {getProductDetails} from '../controllers/product_details'
 import {addToCart} from '../controllers/landing_page'
 
+import {renderBasket, apiPayment, successPayment} from '../controllers/handle_basket'
+
 const json = express.json()
 
 router.get('/', getLandingPage);
@@ -18,42 +20,13 @@ router.get('/ppinfo/:arg', sendProductsPartilaInfo);
 
 router.get("/product/:id", getProductDetails);
 
+
+router.get('/basket', authorize,  renderBasket);
 router.post("/addtobasket", authorize, json, addToCart);
-router.get('/basket', authorize,  (req, res) => {
-    //for examle purpose
-    res.render('user/cart');
-});
 
-router.post('/basket', (req, res) => {
-    //for examle purpose
-    console.log(req.body)
-    if(req.body !== null)
-    {
-        let checkaddress = (<any>req.body).checkaddress;
-        console.log(checkaddress)
-        if(checkaddress === 'newaddress')
-        {
-            res.redirect('/basket/newaddress')
 
-        }
-        else if(checkaddress === 'savedaddress')
-        {
-            res.redirect('/checkout');
-        }
-    }
-    else{
-        res.render('user/cart');
-    }
-});
-
-router.get('/basket/newaddress', authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/other_adress');
-});
-router.get('/checkout',  authorize, (req, res) => {
-    //for examle purpose
-    res.render('user/bought');
-});
+router.get('/basket/payment', authorize, apiPayment);
+router.get('/checkout',  authorize, successPayment);
 
 router.get('/login', getLogin);
 router.post('/login', loginUser);
@@ -83,8 +56,5 @@ router.get('/account/delete', authorize, (req, res) => {
     //for examle purpose
     res.render('user/account_delete');
 });
-
-
-
 
 module.exports = router
