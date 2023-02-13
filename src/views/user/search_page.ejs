@@ -1,0 +1,44 @@
+<% if ( locals.logged ) { %>
+    <%- include('./navbar_v1') %>
+  <% } else{ %>
+    <%- include('./navbar_v3') %>
+  <% }%>
+  
+  <% if ( locals.top_message ) { %>
+    <%- locals.top_message %>
+  <% } %>
+  <div id="frontinfo"></div>
+    <!-- Carusel Advert -->
+    <main>
+      <div class="card--list" id="items">
+        <% products.forEach(product=> { %>
+            <!--Item-->
+            <div class="card card--style">
+                <img src="./laptop_ex.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="/product/<%= product.ID %>" class="text-dark"><%= product.Name %> </a></h5>
+                  <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
+                    <li>
+                      CPU: <%= product.CPU %>
+                    </li>
+                    <li>
+                      Memory: <%= product.Memory %>
+                    </li>
+                    <li>
+                      Graphics: <%= product.Graphics %>
+                    </li>
+                    <li>
+                  </ul>
+                  <div class="d-flex justify-content-between align-items-center px-3">
+                    <div>
+                        <%= product.Price %> $
+                    </div>
+                    <button type="button" class="btn btn-outline-success w-50 buy"  value="<%= product.ID %>"> Buy </button>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+      </div>
+    </main>
+    <script type="text/javascript" src="/js/search_item.js"></script>
+    <%- include('./footer') %>
