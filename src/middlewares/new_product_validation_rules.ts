@@ -49,8 +49,5 @@ export const newProductValidationRules = () => {
       .trim()
       .escape(),
 
-      body('file')
-      .notEmpty()
-      .withMessage('Photo is empty')
   ]
 }
