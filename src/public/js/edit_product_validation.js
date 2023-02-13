@@ -6,6 +6,7 @@ const graphics = document.getElementById("graphics");
 const details = document.getElementById("details");
 const price = document.getElementById("price");
 const formerror = document.getElementById("formerror");
+const photo = document.getElementById("file");
 const main = document.getElementById("main");
 //get product ID from url path
 const productID = window.location.pathname.split("/")[4];
@@ -42,7 +43,7 @@ function validate() {
 
   return "OK";
 }
-async function postFormDataAsJson(url, formData) {
+async function postFormDataAsJson(url, formData, file) {
 
   const formDataJsonString = JSON.stringify(formData);
 
@@ -64,6 +65,14 @@ async function postFormDataAsJson(url, formData) {
     throw new Error(errorMessage);
   }
   if (jsresponse.errors.length === 0) {
+    if (file) {
+      const form = new FormData();
+      form.append('file', file)
+      const response = await fetch(url, {
+        method: 'POST',
+        body: form
+      });
+    }
     formerror.innerHTML = "Edit successful";
     formerror.classList = [];
     formerror.classList.add("alert-success", "alert", "text-center");
@@ -91,8 +100,9 @@ submit_bt.addEventListener("click", function (e) {
     formerror.innerHTML = `Sending data`;
     formerror.classList = [];
     formerror.classList.add("alert-info", "alert", "text-center");
-    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details'))
+    let data = Array.from(document.querySelectorAll('#name, #cpu, #memory, #graphics, #price, #details, #file'))
     data = data.reduce((acc, input) => ({ ...acc, [input.id]: input.value }), { productID: parseInt(productID) });
-    postFormDataAsJson('/admin/products/edit/' + productID, data);
+    const file = document.getElementById('file').files[0];
+    postFormDataAsJson('/admin/products/edit/' + productID, data, file);
   }
 });
