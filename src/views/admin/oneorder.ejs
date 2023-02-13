@@ -9,116 +9,64 @@
               <div class="card-header py-3">
                 <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   <h5>Order</h5>
-                  <span class="badge bg-warning text-dark">Pending</span>
+                  <% let status=order.Status %>
+                    <%if (status==0 ) { %>
+                      <span class="badge bg-warning text-dark">Pending</span>
+                      <% } else if (status==1 ) { %>
+                        <span class="badge bg-success">Done</span>
+                        <% } %>
                 </div>
               </div>
               <div class="card-body">
+                <% order.Products.forEach(product=> { %>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
 
-                <!-- Single item -->
-                <div class="row">
-                  <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                      <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                        <% let photoPath='/laptom_img/' + product.Photo_Path + ".webp" %>
+                          <img src="<%=photoPath %>" class="w-100" alt="laptop" />
+                          <a href="#!">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                          </a>
+                      </div>
 
-                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                      <img src="/laptop_ex.webp" class="w-100" alt="laptop" />
-                      <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                      </a>
                     </div>
 
-                  </div>
+                    <div class="col-lg-5 col-md-6 py-5">
 
-                  <div class="col-lg-5 col-md-6 py-5">
+                      <p><strong>
+                          <%= product.Name %>
+                        </strong></p>
 
-                    <p><strong>Lenovo Best Model</strong></p>
-
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 position-relative">
-
-                    <p class="position-absolute bottom-0 end-0 py-5 px-5">
-                      <strong>$1700.99</strong>
-                    </p>
-
-                  </div>
-                </div>
-
-                <hr class="my-4" />
-
-                <!-- Single item -->
-
-
-                <!-- Single item -->
-                <div class="row">
-                  <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-
-                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                      <img src="/laptop_ex.webp" class="w-100" alt="laptop" />
-                      <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                      </a>
                     </div>
 
+                    <div class="col-lg-4 col-md-6 position-relative">
+
+                      <p class="position-absolute bottom-0 end-0 py-5 px-5">
+                        <strong>
+                          $<%= product.Price %>
+                        </strong>
+                      </p>
+
+                    </div>
                   </div>
 
-                  <div class="col-lg-5 col-md-6 py-5">
+                  <hr class="my-4" />
 
-                    <p><strong>Lenovo Best Model</strong></p>
+                  <% }) %>
 
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 position-relative">
-
-                    <p class="position-absolute bottom-0 end-0 py-5 px-5">
-                      <strong>$1700.99</strong>
-                    </p>
-
-                  </div>
-                </div>
-                <!-- Single item -->
-
-                <hr class="my-4" />
-
-                <!-- Single item -->
-                <div class="row">
-                  <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-
-                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                      <img src="/laptop_ex.webp" class="w-100" alt="laptop" />
-                      <a href="#!">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                      </a>
+                    <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                      <div>
+                        <strong>Total amount</strong>
+                        <strong>
+                          <p class="mb-0">(including VAT)</p>
+                        </strong>
+                      </div>
+                      <span><strong>
+                          $<%= totalAmount %>
+                        </strong></span>
                     </div>
 
-                  </div>
-
-                  <div class="col-lg-5 col-md-6 py-5">
-
-                    <p><strong>Lenovo Best Model</strong></p>
-
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 position-relative">
-
-
-                    <p class="position-absolute bottom-0 end-0 py-5 px-5">
-                      <strong>$1700.99</strong>
-                    </p>
-
-                  </div>
-                </div>
-                <!-- Single item -->
-
-                <hr class="my-4" />
-                <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                  <div>
-                    <strong>Total amount</strong>
-                    <strong>
-                      <p class="mb-0">(including VAT)</p>
-                    </strong>
-                  </div>
-                  <span><strong>$10000</strong></span>
-                </div>
-                
               </div>
             </div>
           </div>
@@ -126,7 +74,7 @@
 
           <!-- Right Panel -->
           <div class="col-md-6">
-             <!-- Action Panel -->
+            <!-- Action Panel -->
             <div class="card mb-4">
               <div class="card-header py-3">
                 <h5 class="mb-0">Action</h5>
@@ -134,7 +82,7 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush ">
                   <li class="list-group-item d-flex justify-content-center  px-0">
-                    <button type="button" class="btn btn-lg btn-outline-warning px-4">Cange status</button>
+                    <button type="button" class="btn btn-lg btn-outline-warning px-4">Change status</button>
                   </li>
                   <li class="list-group-item d-flex justify-content-center  px-0">
                     <button type="button" class="btn btn-lg btn-outline-info px-4">Contact client</button>
@@ -143,7 +91,7 @@
               </div>
             </div>
             <!-- Action Panel -->
-            
+
             <!-- CLient Data Panel -->
             <div class="card mb-4">
               <div class="card-header py-3">
@@ -152,50 +100,23 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush">
 
-                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                    Name
-                    <span>Jan Kowalski</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Email
-                    <span>jankowalski@gmailc.com</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Telefon
-                    <span>123456789</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Phone
-                    <span>123456789</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Birthday
-                    <span>12/12/2000</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Gender
-                    <span>Male</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Street an dnumber
-                    <span>Adama Mickiewicza 12</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    City
-                    <span>Gdansk</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Zio-Code
-                    <span>12-123</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Country
-                    <span>USA</span>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Total amount
-                    <span>$10000</span>
-                  </li>
+                  <% let userName=user.Name + " " + user.Surname %>
+                    <%- include('./partial/user_info_li', {info: "Name" , content: userName}) %>
+                      <%- include('./partial/user_info_li', {info: "Email" , content: user.Email}) %>
+                        <%- include('./partial/user_info_li', {info: "Phone" , content: user.Phone_number}) %>
+                          <%- include('./partial/user_info_li', {info: "Phone" , content: user.Birthday.toDateString()})
+                            %>
+                            <% let gender=user.Gender==1 ? "Male" : "Female" %>
+                              <%- include('./partial/user_info_li', {info: "Gender" , content: gender}) %>
+                                <%- include('./partial/user_info_li', {info: "Street and number" , content:
+                                  user.Street}) %>
+                                  <%- include('./partial/user_info_li', {info: "City" , content: user.City}) %>
+                                    <%- include('./partial/user_info_li', {info: "Zio-Code" , content:
+                                      user.Postal_Code}) %>
+                                      <%- include('./partial/user_info_li', {info: "Country" , content: user.Country})
+                                        %>
+                                        <%- include('./partial/user_info_li', {info: "Total amount" , content: "$" +
+                                          totalAmount}) %>
                 </ul>
               </div>
             </div>
