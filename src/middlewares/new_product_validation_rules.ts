@@ -48,5 +48,6 @@ export const newProductValidationRules = () => {
       .withMessage('Details too long')
       .trim()
       .escape(),
+
   ]
 }

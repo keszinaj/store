@@ -7,6 +7,18 @@ import { login_user } from '../controllers/admin_login'
 import { addNewProduct } from '../controllers/add_product';
 import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
 const json = express.json()
+const fs = require('fs');
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './src/public/laptop_img')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
+router.use(express.urlencoded({ extended: true }));
 
 
 
@@ -87,6 +99,10 @@ router.get("/products/new", authorize, (req, res) => {
 });
 
 router.post("/products/new", authorize, json, newProductValidationRules(), addNewProduct);
+router.post("/products/new_photo", authorize, upload.single('file'), (req, res) => {
+    res.status(201).json({ errors: [] });
+});
+
 
 router.get("/products/:id", authorize, (req, res) => {
     let id: string = req.params.id;
@@ -125,6 +141,17 @@ router.get("/products/delete/:id", authorize, (req, res) => {
     if (isNaN(productID)) {
         res.status(400).send('Invalid product ID');
         return;
+    }
+    const product = getProductbyID(productID);
+    if (product) {
+        const photoPath = product.Photo_Path;
+        fs.unlink("./src/public/laptop_img/" + photoPath, (err) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+        }
+        )
     }
     deleteProduct(productID);
     res.redirect('/admin/products');
