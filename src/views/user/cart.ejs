@@ -14,7 +14,7 @@
                   <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                     <!-- Image -->
                     <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                      <img src="/laptop_ex.webp" class="w-100" alt="laptop" />
+                      <img src="/laptop_img/<%= product.photoPath %>" class="w-100" alt="laptop" />
                       <a href="#!">
                         <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                       </a>
@@ -25,7 +25,7 @@
                   <div class="col-lg-5 col-md-6 py-5">
                     <!-- Data -->
                     <p><strong>
-                        <%= product.Name %>
+                        <%= product.name %>
                       </strong></p>
 
                     <!-- Data -->
@@ -36,10 +36,10 @@
 
                     <!-- Price -->
                     <p class="position-absolute bottom-0 end-0 py-5 px-5">
-                      <strong>$ <%= product.Price %></strong>
+                      <strong>$ <%= product.price %></strong>
                     </p>
                     <!-- Price -->
-                    <a type="button" href="/basket?id=<%= product.ID %>"
+                    <a type="button" href="/basket?id=<%= product.id %>"
                       class="btn btn-outline-danger mx-4 position-absolute bottom-0 end-0" title="Remove item"
                       style="width: 4rem">
                       <i class="fa fa-trash"></i>
@@ -89,7 +89,7 @@
               </ul>
               <p>Item will be sent to the address assigned to your account if you want to change it go to <a
                   href="/account">account settings.</a></p>
-              <% if(products.length>0){ %>
+              <% if(products.length > 0){ %>
                 <a href="/basket/payment" class="btn btn-outline-success btn-lg px-5 mx-5 mt-3 " disabled>
                   Go to checkout
                 </a>

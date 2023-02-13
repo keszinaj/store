@@ -1,8 +1,8 @@
 import {
     addProductToBasket, clearBasket,
     createNewOrder,
-    getAllProducts, getProductById,
-    getUserByEmail, removeProductFromBasket,
+    getAllProducts, getProductById, getProductsInBasket,
+    getUserByEmail, removeProductIdFromBasket,
     saveProduct,
     saveUser
 } from "../dbQueries";
@@ -65,13 +65,7 @@ export async function addToBasket(user: User, productId: number){
     await addProductToBasket(user, product);
 }
 
-export async function removeFromBasket(user: User, productId: number){
-    let product = await getProductById(productId);
-    if (product === null){
-        return Promise.reject(`Can't find product with id ${productId}`);
-    }
-    await removeProductFromBasket(user, product);
-}
+
 
 
 export async function testBasket(){
@@ -80,14 +74,14 @@ export async function testBasket(){
     await addToBasket(user, 2);
     await addToBasket(user, 4);
     await addToBasket(user, 5);
-    let basket1 = await user.$get('productsInBasket').then(prods => prods.map(prod => prod.name));
+    let basket1 = await getProductsInBasket(user).then(prods => prods.map(prod => prod.name));
     console.log(`\nBasket after add: ${basket1}\n`);
 
-    await removeFromBasket(user, 4);
-    let basket2 = await user.$get('productsInBasket').then(prods => prods.map(prod => prod.name));
+    await removeProductIdFromBasket(user, 4);
+    let basket2 = await getProductsInBasket(user).then(prods => prods.map(prod => prod.name));
     console.log(`\nBasket after remove: ${basket2}\n`);
 
     await clearBasket(user);
-    let basket3 = await user.$get('productsInBasket').then(prods => prods.map(prod => prod.name));
+    let basket3 = await getProductsInBasket(user).then(prods => prods.map(prod => prod.name));
     console.log(`\nBasket after clear: ${basket3}\n`);
 }

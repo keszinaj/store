@@ -8,8 +8,7 @@
 <main>
     <div class="one_item_top">
         <div>
-            <% let photoPath='/laptop_img/' + product.photoPath + ".webp" %>
-            <img src="<%= photoPath %>" class="rounded" alt="laptop">
+            <img src="/laptop_img/<%= product.photoPath %>" class="rounded" alt="laptop">
         </div>
         <div class="one_item_card">
             <div class="one_item_name pt-5">
@@ -48,7 +47,7 @@
                             <option value="4">4</option>
                             <option value="5">5</option>
                         </select>
-                        <button type="submit" id="buy-btn" class="btn px-5 mx-2 my-5 btn-outline-success btn-lg" value="1">Buy</button>
+                        <button type="submit" id="buy-btn" class="btn px-5 mx-2 my-5 btn-outline-success btn-lg" value="<%=product.id%>>">Buy</button>
 
                     </form>
                     <div class="text-muted">

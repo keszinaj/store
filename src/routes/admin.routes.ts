@@ -13,6 +13,7 @@ import {
 } from "../dbUtils/dbQueries";
 import { addNewProduct } from '../controllers/add_product';
 import { newProductValidationRules } from '../middlewares/new_product_validation_rules';
+import {Order} from "../models/order.model";
 const json = express.json()
 const fs = require('fs');
 const multer = require("multer");
@@ -26,6 +27,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 router.use(express.urlencoded({ extended: true }));
+
 
 
 router.get('/login', (req, res) => {
@@ -58,16 +60,7 @@ router.get('/user/:id', authorize, async (req, res) => {
         return;
     }
     const orders = await getOrdersOfUser(user);
-    const ordersWithTotalPrice = await Promise.all(
-        orders.map(async order => {
-            const products = await getProductsInOrder(order);
-            const totalPrice = products.reduce((total, product) => {
-                return total + product.price;
-            }, 0);
-            order['totalPrice'] = totalPrice;
-            return order;
-    }));
-    console.log(ordersWithTotalPrice);
+    const ordersWithTotalPrice = await Order.getOrdersWithTotalPrice(orders);
     res.render('admin/user', { user: user, orders: ordersWithTotalPrice });
 });
 
@@ -159,20 +152,18 @@ router.get("/products/delete/:id", authorize, async (req, res) => {
         res.status(400).send('Invalid product ID');
         return;
     }
-    await deleteProduct(productID);
-    // TODO:
-    const product = getProductbyID(productID);
+
+    const product = await getProductById(productID);
     if (product) {
-        const photoPath = product.Photo_Path;
+        const photoPath = product.photoPath;
         fs.unlink("./src/public/laptop_img/" + photoPath, (err) => {
             if (err) {
                 console.error(err)
                 return
             }
-        }
-        )
+        });
     }
-    deleteProduct(productID);
+    await deleteProduct(productID);
     res.redirect('/admin/products');
 });
 

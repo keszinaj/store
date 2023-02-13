@@ -13,7 +13,7 @@ async function addProduct(data) {
     memory: data.memory,
     graphics: data.graphics,
     amountAvailable: 0,
-    photoPath: data.file.split('\\')[2];,
+    photoPath: data.file.split('\\')[2]
   });
 
   await saveProduct(product);

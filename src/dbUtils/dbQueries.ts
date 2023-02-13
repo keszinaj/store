@@ -1,6 +1,7 @@
 import {User} from "../models/user.model";
 import {Product} from "../models/product.model";
 import {Order, OrderStatus} from "../models/order.model";
+import {Op} from "sequelize";
 
 export function getAdmin() {
     // TODO: query database for a user and check if he's an admin
@@ -48,6 +49,11 @@ export async function saveUser(user: User) {
     await user.save();
 }
 
+export async function changeUserPassword(user: User, newPasswordHash: string) {
+    user.passwordHash = newPasswordHash;
+    await saveUser(user);
+}
+
 export async function getAllProducts() {
     return await Product.findAll();
 }
@@ -64,6 +70,16 @@ export async function getProductById(productId: number) {
             id: productId
         }
     });
+}
+
+export async function getProductsByName(nameSubstring: string) {
+    return await Product.findAll({
+        where: {
+            name: {
+                [Op.substring]: nameSubstring
+            }
+        }
+    })
 }
 
 /*
@@ -127,12 +143,25 @@ export async function createNewOrder(user: User, products: Product[]) {
 }
 
 
+export async function getProductsInBasket(user: User) {
+    return await user.$get('productsInBasket');
+}
+
 export async function addProductToBasket(user: User, product: Product) {
     await user.$add("productsInBasket", product);
 }
 
 export async function clearBasket(user: User) {
     await user.$set("productsInBasket", []);
+}
+
+
+export async function removeProductIdFromBasket(user: User, productId: number){
+    let product = await getProductById(productId);
+    if (product === null){
+        return Promise.reject(`Can't find product with id ${productId}`);
+    }
+    await removeProductFromBasket(user, product);
 }
 
 export async function removeProductFromBasket(user: User, product: Product) {

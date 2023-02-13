@@ -25,7 +25,7 @@ async function _editProduct(data) {
                 console.error(err);
                 return;
             }
-        }
+        });
     } else {
         photoPath = product.photoPath;
     }

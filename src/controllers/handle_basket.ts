@@ -1,24 +1,35 @@
-import { Product, getUserbyId, getProductbyID, pushNewOrder, getAllOrders, getAllUsers, addOrderToUser, deleteProductFromBasket } from '../models/repo_demo';
+import {
+    clearBasket,
+    createNewOrder,
+    getProductsInBasket,
+    removeProductIdFromBasket
+} from "../dbUtils/dbQueries";
+import {tryGetUser} from "./utils";
+
 //for payment config
 const stripe = require('stripe')("sk_test_51Mae79DsMkUfjELNFGqTadfXlVJo48xS4ekh0R1FhdngnYb1HGdL3xlDWQsK6TK3IxwpX8yPR7v2aVwupj8CnzjC00C5uwJki6")
 
 /**
  * Function render basket page
  */
-export function renderBasket(req, res){
-    let idu = parseInt((<any>req).user)
-    let user = getUserbyId(idu);
-    if(user === null){res.status(404).send('Server error'); return;}
+export async function renderBasket(req, res){
+    const user = await tryGetUser(req, res);
+    if (user === null) {
+        return;
+    }
    
     //handle delete button
     if(typeof req.query.id === 'string')
     {
-        let idp = parseInt(req.query.id);
-        deleteProductFromBasket(user.ID, idp);
+        let productId = parseInt(req.query.id);
+        await removeProductIdFromBasket(user, productId);
     }
 
-    const products = user.Basket.map(id => getProductbyID(id)); 
-    const cost = products.reduce((sum, p) => sum + p!.Price, 0);
+    const products = await getProductsInBasket(user);
+    const cost = products.reduce(
+        (sum, product) => sum + product.price,
+        0);
+
     res.render('user/cart', { products: products, cost: cost });
 }
 
@@ -26,34 +37,42 @@ export function renderBasket(req, res){
  * Function handle payment
  */
 export async function apiPayment(req, res){
-    let user_basket = getUserbyId((<any>req).user)?.Basket;
-    let items = user_basket?.map(id => getProductbyID(id))
+    const user = await tryGetUser(req, res);
+    if (user === null) {
+        return;
+    }
+    const products = await getProductsInBasket(user);
 
-    if(items === undefined || items === null)
+    if(products === undefined || products === null)
     {
         res.status(404).send('Payment error');
         return;
     }
     
-    let cost = 0
-    items.forEach(e=> {if(e!==null){cost = cost + e.Price}})
+    let cost = 0;
+    products.forEach(product => {
+        if (product !== null) {
+            cost += product.price
+        }
+    });
 
     try {
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ["card"],
           mode: "payment",
-          line_items: items.map(item => {
+          line_items: products.map(product => {
                 return {
                     price_data: {
                       currency: "usd",
                       product_data: {
-                        name: item?.Name,
+                        name: product.name,
                       },
-                      unit_amount: (<any>item).Price * 100,
+                      unit_amount: product.price * 100,
                     },
                     quantity: 1,
                   }
           }),
+          // TODO: To trzeba zmienić z localhosta na coś bardziej uniwersalnego
           success_url: `http://localhost:3000/checkout?session_id={CHECKOUT_SESSION_ID}`,
           cancel_url: `http://localhost:3000/`,
         })
@@ -67,32 +86,21 @@ export async function apiPayment(req, res){
 export async function successPayment(req, res){
     const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
     //for security reasons
-    if(session.payment_status === 'paid')
-    {
-        let user = getUserbyId((<any>req).user);
-        if(user === null){res.status(404).send('Payment error'); return;}
-        let user_basket = user.Basket;
-        user.Basket = [];
-        if(user_basket === undefined){res.status(404).send('Payment error'); return;}
-        let acc:Product[] = []
-        let prods = user_basket.forEach(i =>{
-          let pom = getProductbyID(i);
-          if(pom !== null)
-          {
-            acc.push(pom)
-          }
-        } )
-        if(prods === null){res.status(404).send('Payment error'); return;}
-        let prod_id =  Math.floor(Math.random() * 100000)
-        let order = {
-            ID: prod_id,
-            UserID: parseInt((<any>req).user),
-            Products: acc,
-            OrderPlacementDate: new Date(),
-            Status: 0
+    if(session.payment_status === 'paid') {
+        const user = await tryGetUser(req, res, 'Payment error', 404);
+        if (!user) {
+            return;
         }
-        pushNewOrder(order)
-        addOrderToUser(user.ID, prod_id)
+
+        const productsInBasket = await getProductsInBasket(user);
+        if (productsInBasket.length === 0) {
+            res.status(404).send('Payment error');
+            return;
+        }
+
+        await createNewOrder(user, productsInBasket);
+        await clearBasket(user);
+
         res.render('user/bought');
     }
     else{

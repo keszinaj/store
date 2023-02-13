@@ -81,7 +81,7 @@ function printProducts(data){
     let html_view = data.map(e=>{
         return `
         <div class="card card--style">
-        <img src="./laptop_img/${e.photoPath}.webp" class="card-img-top" alt="...">
+        <img src="./laptop_img/${e.photoPath}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><a href="/product/${e.id}" class="text-dark">${e.name} </a></h5>
           <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">

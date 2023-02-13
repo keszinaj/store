@@ -19,16 +19,16 @@
                                     <% orders.forEach(order=> { %>
                                         <!-- Order -->
                                         <div>
-                                            <h4>Order number: <%= order.ID %>
+                                            <h4>Order number: <%= order.id %>
                                             </h4>
-                                            <p><strong>Order date: <%= order.OrderPlacementDate.toJSON().slice(0,10) %>
+                                            <p><strong>Order date: <%= order.createdAt.toJSON().slice(0,10) %>
                                                         </strong></p>
-                                            <% order.Products.forEach(product=> { %>
+                                            <% order.products.forEach(product=> { %>
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                                                         <div class="bg-image hover-overlay hover-zoom ripple rounded"
                                                             data-mdb-ripple-color="light">
-                                                            <img src="/laptop_ex.webp" class="w-100" alt="laptop" />
+                                                            <img src="/laptop_img/<%= product.photoPath %>" class="w-100" alt="laptop" />
                                                                 <a href="#!">
                                                                     <div class="mask"
                                                                         style="background-color: rgba(251, 251, 251, 0.2)">
@@ -38,7 +38,7 @@
                                                     </div>
                                                     <div class="col-lg-5 col-md-6 py-5">
                                                         <p><strong>
-                                                                <%= product.Name %>
+                                                                <%= product.name %>
                                                             </strong></p>
                                                     </div>
                                                 </div>
