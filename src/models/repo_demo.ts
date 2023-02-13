@@ -344,6 +344,16 @@ export function editUser(new_user: Person) {
 }
 
 /**
+
+ * Function edits user password(hash)
+ */
+export function changePassword(id, password)
+{
+    let u = getUserbyId(id)
+    if(u!== null){u.Password_Hash = password}
+
+}
+/**
  * Function add order to user
  */
 export function addOrderToUser(user_id:number, order_id:number,)
@@ -365,12 +375,13 @@ export function addProductToBasket(user_id:number, product_id:number){
  * 
  */
 export function deleteProductFromBasket(user_id:number, product_id:number){
-    let u = getUserbyId(user_id)
-    if( u === null){return}
-    const idx = u.Basket.findIndex(e => e === product_id);
-    if(idx < 0){return}
-    u.Basket.splice(idx, 1)
+   let u = getUserbyId(user_id)
+   if( u === null){return}
+   const idx = u.Basket.findIndex(e => e === product_id);
+   if(idx < 0){return}
+   u.Basket.splice(idx, 1)
 }
+
 
 
 /**

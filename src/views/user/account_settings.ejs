@@ -1,5 +1,5 @@
 <%- include('./navbar_v2') %>
-<main>
+<main id="main">
     <section class="h-100 gradient-custom">
         <div class="container py-5">
             <div class="row mx-5">
@@ -14,19 +14,22 @@
                         <div class="card-header py-3" style="background-color: white;">
                             <h5 class="mb-0">Profile settings</h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id ="body-set">
+                            <div class="row">
+                                <p class="" id="formerror"></p>
+                              </div>
                             <form>
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="firstName"
-                                                class="form-control form-control-lg" placeholder="Jan"/>
+                                                class="form-control form-control-lg" value="<%= user.Name %>"/>
                                             <label class="form-label" for="firstName">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="lastName" class="form-control form-control-lg" placeholder="Kowalki" />
+                                            <input type="text" id="lastName" class="form-control form-control-lg" value="<%= user.Surname %>" />
                                             <label class="form-label" for="lastName">Last Name</label>
                                         </div>
                                     </div>
@@ -36,7 +39,7 @@
                                     <div class="col-md-6 mb-4 pb-2">
                     
                                       <div class="form-outline">
-                                        <input type="email" id="emailAddress" class="form-control form-control-lg" placeholder="kowal@gmail.com"/>
+                                        <input type="email" id="emailAddress" class="form-control form-control-lg" value="<%= user.Email %>"/>
                                         <label class="form-label" for="emailAddress">Email</label>
                                       </div>
                     
@@ -44,7 +47,7 @@
                                     <div class="col-md-6 mb-4 pb-2">
                     
                                       <div class="form-outline">
-                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" placeholder="123456789"/>
+                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" value="<%= user.Phone_number %>"/>
                                         <label class="form-label" for="phoneNumber">Phone Number</label>
                                       </div>
                     
@@ -55,25 +58,28 @@
                                     <div class="col-md-6 mb-4 d-flex align-items-center">
                                         <div class="form-outline datepicker w-100">
                                             <input type="date" class="form-control form-control-lg"
-                                                id="birthdayDate" />
+                                                id="birthdayDate" value="<%= user.Birthday.toJSON().slice(0,10) %>"/>
                                             <label for="birthdayDate" class="form-label">Birthday</label>
                                         </div>
                                     </div>
+                                    <% let active_gender = ['','','',''];
+                                    active_gender[user.Gender] = 'checked'
+                                  %>
                                     <div class="col-md-6 mb-4">
                                         <h6 class="mb-2 pb-1">Gender: </h6>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="femaleGender" value="option1" checked />
+                                                id="femaleGender" value="option1" <%= active_gender[0] %> />
                                             <label class="form-check-label" for="femaleGender">Female</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="maleGender" value="option2" />
+                                                id="maleGender" value="option2" <%= active_gender[1] %>/>
                                             <label class="form-check-label" for="maleGender">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="otherGender" value="option3" />
+                                                id="otherGender" value="option3" <%= active_gender[2] %>/>
                                             <label class="form-check-label" for="otherGender">Other</label>
                                         </div>
                                     </div>
@@ -82,13 +88,13 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="street_and_num"
-                                                class="form-control form-control-lg" placeholder="Gdzies 28"/>
+                                                class="form-control form-control-lg" value="<%= user.Street %>"/>
                                             <label class="form-label" for="street_and_num">Street and number</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="city" class="form-control form-control-lg" placeholder="Gdansk" />
+                                            <input type="text" id="city" class="form-control form-control-lg" value="<%= user.City %>" />
                                             <label class="form-label" for="city">City</label>
                                         </div>
                                     </div>
@@ -96,19 +102,19 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="zipcode" placeholder="123456" class="form-control form-control-lg" />
+                                            <input type="text" id="zipcode" value="<%= user.Postal_Code %>" class="form-control form-control-lg" />
                                             <label class="form-label" for="zipcode">Zip-Code</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="country" class="form-control form-control-lg" placeholder="Polska"/>
+                                            <input type="text" id="country" class="form-control form-control-lg" value="<%= user.Country %>"/>
                                             <label class="form-label" for="country">Country</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mt-4 pt-2">
-                                    <input class="btn btn-outline-info btn-lg" type="submit" value="Submit Changes" />
+                                    <input class="btn btn-outline-info btn-lg" type="submit" id="submit_btn" value="Submit Changes" />
                                 </div>
                             </form>
                         </div>
@@ -118,4 +124,5 @@
         </div>
     </section>
 </main>
+<script type="text/javascript" src="/js/profile_settings_validation.js"></script>
 <%- include('./footer') %>

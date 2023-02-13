@@ -4,10 +4,10 @@ import { mailexist} from '../models/repo_demo'
 /**
  * validation rules
  */
-export const userValidationRules = () => {
-    return [
-    
-     body('password')
+export const pswValidationRules = () =>
+{
+  return [
+    body('password')
     .notEmpty()
     .withMessage('Password is empty')
     .isLength({ min: 5, max: 50 })
@@ -17,8 +17,12 @@ export const userValidationRules = () => {
     .matches(/(.*[A-Z].*)/ || /(.*[a-z].*)/)
     .withMessage('Password must contail an uppercase and lowercase letter.')
     .matches(/(?=.*\W)/)
-    .withMessage('Passwords must have one special character'),
+    .withMessage('Passwords must have one special character')
+  ]
+}
 
+export const dataValidationRules= ()=>{
+  return [
     body("emailAddress")
     .notEmpty()
     .withMessage('Email is empty')
@@ -108,5 +112,8 @@ export const userValidationRules = () => {
     .withMessage('Street and number too long')
     .trim()
     .escape(),
-
-    ]}
+  ]
+}
+export const userValidationRules = () => {
+  return pswValidationRules().concat(dataValidationRules());    
+}
