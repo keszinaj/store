@@ -82,10 +82,10 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush ">
                   <li class="list-group-item d-flex justify-content-center  px-0">
-                    <button type="button" class="btn btn-lg btn-outline-warning px-4">Change status</button>
+                    <a type="button" href="/admin/order/updatestatus/<%= order.id %>" class="btn btn-lg btn-outline-warning px-4">Change status</a>
                   </li>
                   <li class="list-group-item d-flex justify-content-center  px-0">
-                    <button type="button" class="btn btn-lg btn-outline-info px-4">Contact client</button>
+                    <a type="button" href="mailto:<%= user.email %>" class="btn btn-lg btn-outline-info px-4">Contact client</a>
                   </li>
                 </ul>
               </div>

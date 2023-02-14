@@ -151,4 +151,36 @@ export const mockProducts = [
         See the most portable Surface touchscreen 2-in-1 in action, and discover the perfect way to tackle everyday tasks, run your favourite apps, jot down ideas, and enjoy a little down time. Built for everyone, ready anywhere
         Browse, work, play, learn and binge watch anywhere on a high-res 10.5” PixelSense™ touchscreen with adjustable Kickstand. Our most portable Surface PC is optimised for note-taking, sketching and touch with Windows 11, and is an outstanding 2-in-1 value that can replace both your tablet and laptop. Available with optional LTE Advanced1 for hassle-free connectivity.`
     }),
+    Product.build({
+        name: "MSI Thin GF63",
+        cpu: "Intel Pentium Gold 6500Y",
+        memory: "16gb",
+        graphics: "NVIDIA GeForce RTX 3050 Ti ",
+        price: 512,
+        amountAvailable: 100,
+        photoPath: "MSI_Thin_GF63.webp",
+        details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Molestie nunc non blandit massa. Fermentum iaculis eu non diam. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Sollicitudin aliquam ultrices sagittis orci. Velit egestas dui id ornare arcu odio. A diam maecenas sed enim ut sem viverra. Vel pretium lectus quam id leo in vitae turpis. Amet tellus cras adipiscing enim eu. Rhoncus urna neque viverra justo. Varius duis at consectetur lorem donec. Nulla aliquet porttitor lacus luctus accumsan.`
+    }),
+    Product.build({
+        name: "Acer Nitro 5",
+        cpu: "Intel Core i5-11400H",
+        memory: "16gb",
+        graphics: "NVIDIA GeForce RTX 3060",
+        price: 634,
+        amountAvailable: 100,
+        photoPath: "Acer_Nitro_5.webp",
+        details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Molestie nunc non blandit massa. Fermentum iaculis eu non diam. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Sollicitudin aliquam ultrices sagittis orci. Velit egestas dui id ornare arcu odio. A diam maecenas sed enim ut sem viverra. Vel pretium lectus quam id leo in vitae turpis. Amet tellus cras adipiscing enim eu. Rhoncus urna neque viverra justo. Varius duis at consectetur lorem donec. Nulla aliquet porttitor lacus luctus accumsan.`
+    }),
+    Product.build({
+        name: "Lenovo IdeaPad Gaming 3-15",
+        cpu: "AMD Ryzen™ 5 5600H",
+        memory: "16gb",
+        graphics: "NVIDIA GeForce GTX 1650",
+        price: 499,
+        amountAvailable: 100,
+        photoPath: "Lenovo_IdeaPad_Gaming.webp",
+        details: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Molestie nunc non blandit massa. Fermentum iaculis eu non diam. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Sollicitudin aliquam ultrices sagittis orci. Velit egestas dui id ornare arcu odio. A diam maecenas sed enim ut sem viverra. Vel pretium lectus quam id leo in vitae turpis. Amet tellus cras adipiscing enim eu. Rhoncus urna neque viverra justo. Varius duis at consectetur lorem donec. Nulla aliquet porttitor lacus luctus accumsan.`
+    }),
+
+
 ]
