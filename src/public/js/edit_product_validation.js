@@ -73,7 +73,7 @@ async function postFormDataAsJson(url, formData, file) {
     if (file) {
       const form = new FormData();
       form.append('file', file)
-      const response = await fetch(url, {
+      const response = await fetch('/admin/products/new_photo', {
         method: 'POST',
         body: form
       });
