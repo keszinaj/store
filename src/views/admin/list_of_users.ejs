@@ -18,13 +18,13 @@
 
           <% users.forEach(user=> { %>
             <tr>
-                <%- include('./partial/table_row', {content: user.ID}) %>
-                <%- include('./partial/table_row', {content: user.Name}) %>
-                <%- include('./partial/table_row', {content: user.Surname}) %>
-                <%- include('./partial/table_row', {content: user.Email}) %>
-                <%- include('./partial/table_row', {content: user.Phone_number}) %>
-                <%- include('./partial/table_row', {content: user.City}) %>
-                <% let ref='/admin/user/' + user.ID %>
+                <%- include('./partial/table_row', {content: user.id}) %>
+                <%- include('./partial/table_row', {content: user.name}) %>
+                <%- include('./partial/table_row', {content: user.surname}) %>
+                <%- include('./partial/table_row', {content: user.email}) %>
+                <%- include('./partial/table_row', {content: user.phoneNumber}) %>
+                <%- include('./partial/table_row', {content: user.city}) %>
+                <% let ref='/admin/user/' + user.id %>
                 <td>
                   <a href="<%=ref %>" class="btn btn-sm btn-outline-primary px-4">More</a>
                 </td>

@@ -1,12 +1,14 @@
-var http = require('http');
+const http = require('http');
 const express = require('express');
-var bodyParser = require('body-parser')
-var usersRouter = require('./routes/user.routes');
-var adminRouter = require('./routes/admin.routes');
+const bodyParser = require('body-parser')
+const usersRouter = require('./routes/user.routes');
+const adminRouter = require('./routes/admin.routes');
 const sessions = require('express-session');
-import session_settings from './config/session_setup';
 
-var app = express();
+import session_settings from './config/session_setup';
+import {syncDb, testConnectionToDb} from "./dbUtils/dbConnection";
+
+const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
@@ -26,7 +28,15 @@ app.use((req,res,next) => {
 });
    
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(3000, async function () {
+    // This is here only to test if database connection is setup correctly.
+    // It can be safely removed.
+    await testConnectionToDb();
+
+    // This synchronizes the db to reflect the structure of javascript models.
+    // It has to run every time we change anything in one of the models.
+    await syncDb();
+});
 
 
 

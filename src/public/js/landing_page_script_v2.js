@@ -25,8 +25,8 @@ function setBuyButton(){
   document.querySelectorAll('.buy').forEach(item => {
     item.addEventListener('click', async e => {
         e.preventDefault();
-        try { 
-            const formDataJsonString = JSON.stringify({amount: "1", id: item.value});    
+        try {
+            const formDataJsonString = JSON.stringify({amount: "1", id: item.value});
             const response = await fetch('/addtobasket', {
                 method: "POST",
               headers: {
@@ -69,7 +69,7 @@ function setButtons(){
     {
         btn_next.classList.remove("disabled")
     }
-    else if(!btn_next.classList.contains("disabled"))
+    else if(allIDs.length <= ip + ni && !btn_next.classList.contains("disabled"))
     {
         btn_next.classList.add("disabled")
     }
@@ -81,26 +81,26 @@ function printProducts(data){
     let html_view = data.map(e=>{
         return `
         <div class="card card--style">
-        <img src="./laptop_img/${e.Photo_Path}" class="card-img-top" alt="...">
+        <img src="./laptop_img/${e.photoPath}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title"><a href="/product/${e.ID}" class="text-dark">${e.Name} </a></h5>
+          <h5 class="card-title"><a href="/product/${e.id}" class="text-dark">${e.name} </a></h5>
           <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
             <li>
-              CPU: ${e.CPU}
+              CPU: ${e.cpu}
             </li>
             <li>
-              Memory: ${e.Memory}
+              Memory: ${e.memory}
             </li>
             <li>
-              Graphics: ${e.Graphics}
+              Graphics: ${e.graphics}
             </li>
             <li>
           </ul>
           <div class="d-flex justify-content-between align-items-center px-3">
             <div>
-            ${e.Price} $
+            ${e.price} $
             </div>
-            <button type="button" class="btn btn-outline-success w-50 buy"  value="${e.ID}"> Buy </button>
+            <button type="button" class="btn btn-outline-success w-50 buy"  value="${e.id}"> Buy </button>
           </div>
         </div>
       </div>

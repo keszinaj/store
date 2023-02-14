@@ -1,5 +1,6 @@
+import {isEmailUsed} from "../dbUtils/dbQueries";
+
 const { check, body } = require('express-validator');
-import { mailexist} from '../models/repo_demo'
 
 /**
  * validation rules
@@ -33,7 +34,7 @@ export const dataValidationRules= ()=>{
     .trim()
     .escape()
     .custom(value => {
-        return mailexist(value).then(user => {
+        return isEmailUsed(value).then(user => {
           if (user) {
            return Promise.reject('E-mail already in use');
           }

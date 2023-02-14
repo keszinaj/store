@@ -1,28 +1,22 @@
-const { validationResult } = require('express-validator');
-import { generateProductID, pushNewProduct } from "../models/repo_demo";
+import {Product} from "../models/product.model";
+import {saveProduct} from "../dbUtils/dbQueries";
 
-function addProduct(data) {
-  const Name = data.name;
-  const Price = parseFloat(data.price);
-  const Details = data.details;
-  const CPU = data.cpu;
-  const Memory = data.memory;
-  const Graphics = data.graphics;
-  const Number_available = parseInt(data.available);
-  const Photo_Path = data.file.split('\\')[2];
-  const id = generateProductID();
-  const product = {
-    ID: id,
-    Name: Name,
-    Price: Price,
-    Details: Details,
-    CPU: CPU,
-    Memory: Memory,
-    Graphics: Graphics,
-    Number_available: Number_available,
-    Photo_Path: Photo_Path
-  };
-  pushNewProduct(product);
+const { validationResult } = require('express-validator');
+
+async function addProduct(data) {
+  const product = Product.build({
+    id: data.productID,
+    name: data.name,
+    price: parseFloat(data.price),
+    details: data.details,
+    cpu: data.cpu,
+    memory: data.memory,
+    graphics: data.graphics,
+    amountAvailable: parseInt(data.available),
+    photoPath: data.file.split('\\')[2]
+  });
+
+  await saveProduct(product);
 }
 
 export async function addNewProduct(req, res) {

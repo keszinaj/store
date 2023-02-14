@@ -14,26 +14,26 @@
         <% products.forEach(product=> { %>
             <!--Item-->
             <div class="card card--style">
-                <img src="/laptop_img/<%= product.Photo_Path %>" class="card-img-top" alt="...">
+                <img src="/laptop_img/<%= product.photoPath %>" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title"><a href="/product/<%= product.ID %>" class="text-dark"><%= product.Name %> </a></h5>
+                  <h5 class="card-title"><a href="/product/<%= product.id %>" class="text-dark"><%= product.name %> </a></h5>
                   <ul class="text-muted p-0" style="list-style-type: none; font-size: 0.8rem;">
                     <li>
-                      CPU: <%= product.CPU %>
+                      CPU: <%= product.cpu %>
                     </li>
                     <li>
-                      Memory: <%= product.Memory %>
+                      Memory: <%= product.memory %>
                     </li>
                     <li>
-                      Graphics: <%= product.Graphics %>
+                      Graphics: <%= product.graphics %>
                     </li>
                     <li>
                   </ul>
                   <div class="d-flex justify-content-between align-items-center px-3">
                     <div>
-                        <%= product.Price %> $
+                        <%= product.price %> $
                     </div>
-                    <button type="button" class="btn btn-outline-success w-50 buy"  value="<%= product.ID %>"> Buy </button>
+                    <button type="button" class="btn btn-outline-success w-50 buy"  value="<%= product.id %>"> Buy </button>
                   </div>
                 </div>
               </div>

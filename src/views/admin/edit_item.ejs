@@ -18,20 +18,20 @@
                     <label for="name" class="form-label">
                         <h5>Name:</h5>
                     </label>
-                    <input type="text" class="form-control" id="name" value="<%= product.Name %>" name="name">
+                    <input type="text" class="form-control" id="name" value="<%= product.name %>" name="name">
                 </div>
                 <h5>Components</h5>
                 <div class="mb-3 mt-3">
                     <label for="cpu" class="form-label">CPU:</label>
-                    <input type="text" class="form-control" id="cpu" value="<%= product.CPU %>" name="cpu">
+                    <input type="text" class="form-control" id="cpu" value="<%= product.cpu %>" name="cpu">
                 </div>
                 <div class="mb-3">
                     <label for="memory" class="form-label">Memory:</label>
-                    <input type="text" class="form-control" id="memory" value="<%= product.Memory %>" name="memory">
+                    <input type="text" class="form-control" id="memory" value="<%= product.memory %>" name="memory">
                 </div>
                 <div class="mb-3">
                     <label for="graphics" class="form-label">Graphics:</label>
-                    <input type="text" class="form-control" id="graphics" value="<%= product.Graphics %>"
+                    <input type="text" class="form-control" id="graphics" value="<%= product.graphics %>"
                         name="graphics">
                 </div>
 
@@ -39,20 +39,20 @@
                     <label for="price" class="form-label">
                         <h5>Price:</h5>
                     </label>
-                    <input type="number" class="form-control" id="price" value="<%= product.Price %>" name="price">
+                    <input type="number" class="form-control" id="price" value="<%= product.price %>" name="price">
                 </div>
                 <div class="mb-3">
                     <label for="available" class="form-label">
                         <h5>Available amount:</h5>
                     </label>
-                    <input type="number" class="form-control" id="available" value="<%= product.Number_available %>" name="available">
+                    <input type="number" class="form-control" id="available" value="<%= product.amountAvailable %>" name="available">
                 </div>
                 <div class="mb-3 mt-3">
                     <label for="details" class="form-label">
                         <h5>Additional text:</h5>
                     </label>
                     <textarea type="text" class="form-control" id="details" name="details"
-                        rows="6"><%= product.Details %></textarea>
+                        rows="6"><%= product.details %></textarea>
                 </div>
                 <div class="d-flex justify-content-center my-5 bg-white py-4">
                     <button type="submit" class="btn btn-outline-primary w-25 mx-1 btn-lg" id="submit-btn">Edit</button>

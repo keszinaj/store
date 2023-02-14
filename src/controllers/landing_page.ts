@@ -1,5 +1,4 @@
-import {getAllProductsIDs, getUserbyId, getProductbyID} from '../models/repo_demo';
-
+import {addProductToBasket, getAllProducts, getProductById, getUserById} from "../dbUtils/dbQueries";
 
 export function getLandingPage(req, res)
 {
@@ -13,48 +12,41 @@ export function getLandingPage(req, res)
   }
 }
 
+export async function sendAllProductsIDs(req, res) {
+  let allIds: Number[];
+  let products = await getAllProducts();
+  allIds = products.map(prod => prod.id);
+  res.status(200).json({ids: allIds});
+}
 
+export async function addToCart(req, res) {
+  let productId = parseInt(req.body.id);
+  let amount = parseInt(req.body.amount);
+  let userId = req.session.uid;
 
-export function addToCart(req, res){
-    
-  let pid = parseInt(req.body.id)
-  let amount = parseInt(req.body.amount)
-  let uid = req.session.uid
-  let p = getUserbyId(uid);
-  if(p !== null)
-  {
+  let user = await getUserById(userId);
+  let product = await getProductById(productId);
+  if(user !== null && product !== null) {
     for (let i = 0; i < amount; i++) {
-      p.Basket.push(pid)
+      await addProductToBasket(user, product);
     }
   }
-  res.status(200).json({ errors: ""}); 
+  res.status(200).json({ errors: ""});
 }
 
-export function sendAllProductsIDs(req, res){
-  let allids: Number[]= [];
-  allids = getAllProductsIDs()
-  res.status(200).json({ids: allids})
-}
+export async function sendProductsPartialInfo(req, res){
+  let idsArr: number[] = JSON.parse(req.params.arg).split("_");
+  let products = await Promise.all(
+      idsArr.map(async id => await getProductById(id))
+  );
 
-export function sendProductsPartilaInfo(req, res){
-  let tab_of_ids = JSON.parse(req.params.arg).split("_")
-  let tab_of_pd: {}[] = []
-  tab_of_ids.forEach(e=> {
-    let i = parseInt(e);
-    let p = getProductbyID(i)
-    let pd = {}
-    if( p !== null)
-    {
-      for (const [key, value] of Object.entries(p)) {
-        if(key !== 'Details')
-        {
-          pd[key] = value;
-        }
-      }
-      tab_of_pd.push(pd)
+  let partialInfoArr: {}[] = [];
+  products.forEach( product => {
+    if( product !== null) {
+      let productPartialInfo = product.getPartialInfo();
+      partialInfoArr.push(productPartialInfo);
     }
+  });
 
-  })
-  res.status(200).json({prod: tab_of_pd})
-
+  res.status(200).json({prod: partialInfoArr});
 }

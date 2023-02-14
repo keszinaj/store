@@ -1,5 +1,6 @@
-import {getProductbyID} from '../models/repo_demo'
-export function getProductDetails(req, res)
+import {getProductById} from "../dbUtils/dbQueries";
+
+export async function getProductDetails(req, res)
 {
   let id: string = req.params.id;
     const productID = parseInt(id);
@@ -7,7 +8,7 @@ export function getProductDetails(req, res)
         res.status(400).send('Invalid product ID');
         return;
     }
-    const product = getProductbyID(productID);
+    const product = await getProductById(productID);
     if (!product) {
         res.status(404).send('Product not found');
         return;

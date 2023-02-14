@@ -1,5 +1,5 @@
 const argon2 = require('argon2');
-import {getAdmin} from '../models/repo_demo';
+import {getAdmin} from '../dbUtils/dbQueries';
 
 
 export async function login_user(req, res){

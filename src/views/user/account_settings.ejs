@@ -23,13 +23,13 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="firstName"
-                                                class="form-control form-control-lg" value="<%= user.Name %>"/>
+                                                class="form-control form-control-lg" value="<%= user.name %>"/>
                                             <label class="form-label" for="firstName">First Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="lastName" class="form-control form-control-lg" value="<%= user.Surname %>" />
+                                            <input type="text" id="lastName" class="form-control form-control-lg" value="<%= user.surname %>" />
                                             <label class="form-label" for="lastName">Last Name</label>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                     <div class="col-md-6 mb-4 pb-2">
                     
                                       <div class="form-outline">
-                                        <input type="email" id="emailAddress" class="form-control form-control-lg" value="<%= user.Email %>"/>
+                                        <input type="email" id="emailAddress" class="form-control form-control-lg" value="<%= user.email %>"/>
                                         <label class="form-label" for="emailAddress">Email</label>
                                       </div>
                     
@@ -47,7 +47,7 @@
                                     <div class="col-md-6 mb-4 pb-2">
                     
                                       <div class="form-outline">
-                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" value="<%= user.Phone_number %>"/>
+                                        <input type="tel" id="phoneNumber" class="form-control form-control-lg" value="<%= user.phoneNumber %>"/>
                                         <label class="form-label" for="phoneNumber">Phone Number</label>
                                       </div>
                     
@@ -58,12 +58,12 @@
                                     <div class="col-md-6 mb-4 d-flex align-items-center">
                                         <div class="form-outline datepicker w-100">
                                             <input type="date" class="form-control form-control-lg"
-                                                id="birthdayDate" value="<%= user.Birthday.toJSON().slice(0,10) %>"/>
+                                                id="birthdayDate" value="<%= user.birthday.toJSON().slice(0,10) %>"/>
                                             <label for="birthdayDate" class="form-label">Birthday</label>
                                         </div>
                                     </div>
                                     <% let active_gender = ['','','',''];
-                                    active_gender[user.Gender] = 'checked'
+                                    active_gender[user.gender] = 'checked'
                                   %>
                                     <div class="col-md-6 mb-4">
                                         <h6 class="mb-2 pb-1">Gender: </h6>
@@ -88,13 +88,13 @@
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
                                             <input type="text" id="street_and_num"
-                                                class="form-control form-control-lg" value="<%= user.Street %>"/>
+                                                class="form-control form-control-lg" value="<%= user.street %>"/>
                                             <label class="form-label" for="street_and_num">Street and number</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="city" class="form-control form-control-lg" value="<%= user.City %>" />
+                                            <input type="text" id="city" class="form-control form-control-lg" value="<%= user.city %>" />
                                             <label class="form-label" for="city">City</label>
                                         </div>
                                     </div>
@@ -102,13 +102,13 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="zipcode" value="<%= user.Postal_Code %>" class="form-control form-control-lg" />
+                                            <input type="text" id="zipcode" value="<%= user.postalCode %>" class="form-control form-control-lg" />
                                             <label class="form-label" for="zipcode">Zip-Code</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="country" class="form-control form-control-lg" value="<%= user.Country %>"/>
+                                            <input type="text" id="country" class="form-control form-control-lg" value="<%= user.country %>"/>
                                             <label class="form-label" for="country">Country</label>
                                         </div>
                                     </div>

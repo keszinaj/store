@@ -5,7 +5,7 @@ import {userValidationRules, dataValidationRules, pswValidationRules} from '../m
 const router = express.Router();
 
 import {loginUser, getLogin, logoutUser} from '../controllers/handle_login';
-import {getLandingPage, sendAllProductsIDs, sendProductsPartilaInfo, addToCart} from '../controllers/landing_page'
+import {getLandingPage, sendAllProductsIDs, sendProductsPartialInfo, addToCart} from '../controllers/landing_page'
 import {getProductDetails} from '../controllers/product_details'
 
 import {getProfileSettings, changeAccountData, changePsw, renderUserHistory} from '../controllers/user_account'
@@ -18,7 +18,7 @@ const json = express.json()
 
 router.get('/', getLandingPage);
 router.get('/allproducts', sendAllProductsIDs);
-router.get('/ppinfo/:arg', sendProductsPartilaInfo);
+router.get('/ppinfo/:arg', sendProductsPartialInfo);
 
 
 router.get("/product/:id", getProductDetails);

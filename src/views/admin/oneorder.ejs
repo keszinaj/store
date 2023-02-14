@@ -9,21 +9,21 @@
               <div class="card-header py-3">
                 <div class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   <h5>Order</h5>
-                  <% let status=order.Status %>
-                    <%if (status==0 ) { %>
+                  <% let status = order.status %>
+                    <%if (status === 0) { %>
                       <span class="badge bg-warning text-dark">Pending</span>
-                      <% } else if (status==1 ) { %>
+                      <% } else if (status === 1 ) { %>
                         <span class="badge bg-success">Done</span>
                         <% } %>
                 </div>
               </div>
               <div class="card-body">
-                <% order.Products.forEach(product=> { %>
+                <% order.products.forEach(product=> { %>
                   <div class="row">
                     <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
 
                       <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                        <% let photoPath='/laptop_img/' + product.Photo_Path %>
+                        <% let photoPath='/laptop_img/' + product.photoPath %>
                           <img src="<%=photoPath %>" class="w-100" alt="laptop" />
                           <a href="#!">
                             <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
@@ -35,7 +35,7 @@
                     <div class="col-lg-5 col-md-6 py-5">
 
                       <p><strong>
-                          <%= product.Name %>
+                          <%= product.name %>
                         </strong></p>
 
                     </div>
@@ -44,7 +44,7 @@
 
                       <p class="position-absolute bottom-0 end-0 py-5 px-5">
                         <strong>
-                          $<%= product.Price %>
+                          $<%= product.price %>
                         </strong>
                       </p>
 
@@ -100,20 +100,20 @@
               <div class="card-body">
                 <ul class="list-group list-group-flush">
 
-                  <% let userName=user.Name + " " + user.Surname %>
+                  <% let userName=user.name + " " + user.surname %>
                     <%- include('./partial/user_info_li', {info: "Name" , content: userName}) %>
-                      <%- include('./partial/user_info_li', {info: "Email" , content: user.Email}) %>
-                        <%- include('./partial/user_info_li', {info: "Phone" , content: user.Phone_number}) %>
-                          <%- include('./partial/user_info_li', {info: "Phone" , content: user.Birthday.toDateString()})
+                      <%- include('./partial/user_info_li', {info: "Email" , content: user.email}) %>
+                        <%- include('./partial/user_info_li', {info: "Phone" , content: user.phoneNumber}) %>
+                          <%- include('./partial/user_info_li', {info: "Phone" , content: user.birthday.toDateString()})
                             %>
-                            <% let gender=user.Gender==1 ? "Male" : "Female" %>
+                            <% let gender=user.gender==1 ? "Male" : "Female" %>
                               <%- include('./partial/user_info_li', {info: "Gender" , content: gender}) %>
                                 <%- include('./partial/user_info_li', {info: "Street and number" , content:
-                                  user.Street}) %>
-                                  <%- include('./partial/user_info_li', {info: "City" , content: user.City}) %>
+                                  user.street}) %>
+                                  <%- include('./partial/user_info_li', {info: "City" , content: user.city}) %>
                                     <%- include('./partial/user_info_li', {info: "Zio-Code" , content:
-                                      user.Postal_Code}) %>
-                                      <%- include('./partial/user_info_li', {info: "Country" , content: user.Country})
+                                      user.postalCode}) %>
+                                      <%- include('./partial/user_info_li', {info: "Country" , content: user.country})
                                         %>
                                         <%- include('./partial/user_info_li', {info: "Total amount" , content: "$" +
                                           totalAmount}) %>
